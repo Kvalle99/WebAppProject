@@ -7,3 +7,19 @@ img {
   height: 100px;
   margin-bottom: -5px;
 }
+
+#acc {
+  width: 65px;
+  height: 65px;
+}
+
+#searchBarStyle {
+  width: 500px;
+  height: 50px;
+  border-color: black;
+  border-width: 2px;
+}
+
+.navBarStyle {
+  color: rgb(34, 177, 76);
+}
