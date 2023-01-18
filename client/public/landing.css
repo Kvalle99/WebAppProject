@@ -16,9 +16,21 @@ img {
 }
 
 .resizeImg:hover {
-    width: 110%;
+    width: 102%;
 }
 
 a {
     font-size: 30px;
 }
+
+#animatedLogo {
+    animation-name: cycle;
+    animation-duration: 4s;
+    animation-iteration-count: infinite; 
+  } 
+  
+  @keyframes cycle {
+    from {padding-top: 0px;}
+    50% {padding-top: 50px;}
+    to {padding-top: 0px;}
+  }
