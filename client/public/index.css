@@ -1,63 +1,125 @@
-.html, body {
-    margin: 0px;
-    height:100vh;
-    display: flex;
-}
-
-
-
 /* Clear floats after the columns */
 .row-1:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .row-1 {
-    height: 100%;
-    display: flex;
+  margin-top: 10px;
+  height: 100vh;
+  display: flex;
 }
 
 .column {
-    float: left;
+  float: left;
 }
-  
+
 .left {
-    height: 100%; 
-    border-right: 1px solid #dee2e6;
-    width: 20%;
-    margin-right: 15px;
+  height: 100%;
+  border-right: 1px solid #dee2e6;
+  width: 20%;
+  /*   margin-right: 15px; */
 }
-  
+
 .right {
-    width: 80%;
-    margin-left: 15px;
+  width: 80%;
+  /*  margin-right: 600px; */
+  margin-left: 15px;
+  padding-left: 0px;
 }
 
 .list-group-item {
-    height: 80px;
-    line-height: 60px;
-    text-align: left;
-    display:table-cell;
-    vertical-align: middle;
+  height: 80px;
+  line-height: 60px;
+  text-align: left;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .list-group-item:last-child {
-    border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
 }
 
 .list-group-item:hover {
-    background-color: #dee2e6;
+  background-color: #dee2e6;
 }
 
 .sidenav {
-    height: 100vh;
-    width: 160px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: inherit;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
+  height: 100vh;
+  width: 20%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+#logo {
+  width: 100px;
+  height: 100px;
+}
+
+.navbar {
+  height: 100px;
+  margin-bottom: -5px;
+}
+
+#acc {
+  width: 65px;
+  height: 65px;
+}
+
+#searchBarStyle {
+  width: 500px;
+  height: 50px;
+  border-color: black;
+  border-width: 2px;
+}
+
+.navBarStyle {
+  color: rgb(34, 177, 76);
+}
+
+.card-img-top {
+  height: 100%;
+  width: 110%;
+  border-radius: 15px;
+  margin-left: -11px;
+}
+
+.card {
+  width: 36rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.card img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.card:hover h2 {
+  display: none;
+}
+
+.card:hover #biggertext {
+  display: block;
+  transition: 0.7s;
+}
+
+#biggertext {
+  display: none;
+}
+
+.card-flexbox {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 36rem);
+  grid-gap: 4rem;
+  justify-content: space-evenly;
+}

@@ -2,7 +2,7 @@
 <html lang="en" , xmlns="HTTP:http://www.w3.org/1999/xhtml">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Bootstrap demo</title>
     <link
@@ -14,53 +14,117 @@
     <link href="main.css" rel="stylesheet" />
   </head>
 
-
   <body>
-    <div class="row-1" style="height: 100%;">
+    <div>
+      <nav class="navbar navbar-expand-lg bg-success">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img
+              src=".\images\logo.png"
+              class="rounded-circle"
+              alt="Logo"
+              id="logo"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarTogglerDemo02"
+            aria-controls="navbarTogglerDemo02"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-center"
+            id="searchBar"
+          >
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                id="searchBarStyle"
+              />
+              <button class="btn btn-outline-success" type="submit">
+                Search
+              </button>
+            </form>
+          </div>
+          <div>
+            <a href="#">
+              <img src="./images/accountIcon.png" alt="Account" id="acc" />
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="row"></div>
+
+    <div class="row-1 justify-content-center">
       <div class="column left">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Choose destination</li>
-          <li class="list-group-item">Duration</li>
-          <li class="list-group-item">Accomodation</li>
-          <li class="list-group-item">Activities</li>
-          <li class="list-group-item" id="last-child">yo</li>
+          <li class="list-group-item" role="button">Choose destination</li>
+          <li class="list-group-item" role="button">Duration</li>
+          <li class="list-group-item" role="button">Accomodation</li>
+          <li class="list-group-item" role="button">Activities</li>
+          <li class="list-group-item" id="last-child" role="button">yo</li>
         </ul>
       </div>
       <div class="column right">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam interdum tincidunt bibendum. Donec sodales felis varius
-        nisl ornare viverra. Phasellus vitae sollicitudin nisl. Nulla eu nisi lectus. Proin porta mattis dignissim. Quisque
-        fringilla vitae eros eget consectetur. Fusce et feugiat ante. Aliquam dolor urna, accumsan sit amet gravida et, gravida
-        quis dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Proin eget
-        malesuada purus. Etiam lacinia erat id ex ultrices, imperdiet faucibus dui vehicula. Vivamus sed ultrices orci. Aliquam
-        dui enim, aliquet nec sapien porttitor, laoreet mollis sapien.
-        
-        Praesent ante orci, ornare id fermentum ut, ultrices ac lectus. Suspendisse aliquam dui sed molestie auctor. Aenean
-        fermentum, orci vel pellentesque varius, augue ligula tempus massa, nec lobortis urna sapien pellentesque lorem.
-        Praesent lorem urna, convallis id venenatis sit amet, feugiat et leo. Phasellus faucibus ipsum vel massa vulputate,
-        rhoncus euismod justo porta. Donec sit amet justo vitae metus iaculis aliquam. Maecenas vestibulum sem ac feugiat
-        hendrerit. Integer enim nisi, elementum eget consequat nec, ultricies quis lectus. Aenean accumsan metus et magna
-        molestie elementum. Praesent sed pretium orci. Suspendisse vel leo non arcu iaculis condimentum. Maecenas lorem lorem,
-        lobortis a dolor nec, tristique gravida diam.
-        
-        Donec commodo, metus quis gravida sollicitudin, est nisi iaculis felis, id imperdiet velit quam sit amet lacus. Donec
-        fermentum ligula eget pellentesque imperdiet. Donec vestibulum libero vitae lacus interdum convallis. Cras elementum,
-        nibh eget rutrum commodo, ex neque sodales risus, eget vestibulum risus justo vitae ipsum. Praesent tellus eros,
-        imperdiet non arcu vitae, porttitor venenatis mi. Duis aliquam arcu vitae justo euismod porta. Fusce vulputate volutpat
-        odio, at bibendum mi facilisis finibus. Vestibulum pretium nunc odio, id molestie nisi rutrum eu.
-        
-        Donec egestas nibh risus, vitae pharetra diam pharetra eget. Sed pharetra ligula sed congue tincidunt. Nunc mattis
-        tellus in cursus fermentum. Curabitur feugiat euismod ex vitae placerat. Curabitur at urna eget nisi molestie luctus
-        vehicula sed magna. Aenean ornare dictum nibh eget imperdiet. Mauris sagittis dignissim accumsan. Etiam dolor lectus,
-        auctor at libero vel, feugiat auctor nisl. Curabitur laoreet risus nulla, at viverra tellus ultricies nec.
-        
-        Nam tincidunt quam quis velit vehicula, at efficitur ipsum vulputate. Pellentesque odio turpis, ultricies ut commodo
-        nec, fringilla nec nibh. Nulla feugiat facilisis eleifend. Integer placerat felis arcu, sed porttitor tortor congue sed.
-        Donec nibh tellus, blandit at porta ac, malesuada at nulla. Vestibulum commodo, ipsum non sagittis interdum, lectus est
-        tempor tortor, id sagittis massa erat eu urna. Vivamus vel diam ac mi porttitor pharetra. Etiam non tempor orci. Cras
-        eget varius orci, id pretium nisi. Pellentesque ante magna, posuere ut eros non, tincidunt convallis dui. Donec molestie
-        ornare ipsum nec tincidunt. Phasellus magna arcu, suscipit eu magna et, dapibus imperdiet tellus. Proin eget auctor
-        nibh. Cras ut arcu in arcu venenatis pulvinar et sit amet lacus. Vivamus eget ante quis lacus hendrerit mattis et
-        elementum urna.
+        <div class="card-flexbox">
+          <div class="card bg-dark text-black" role="button">
+            <img src="./images/cities/rome.jpg" class="card-img" alt="Rome" />
+            <div class="card-img-overlay">
+              <h2 class="card-title">Rome</h2>
+              <h1 class="card-title" id="biggertext">Rome</h1>
+            </div>
+          </div>
+
+          <div class="card bg-dark text-black" role="button">
+            <img src="./images/cities/paris.jpg" class="card-img" alt="Paris" />
+            <div class="card-img-overlay">
+              <h2 class="card-title">Paris</h2>
+              <h1 class="card-title" id="biggertext">Paris</h1>
+            </div>
+          </div>
+
+          <div class="card bg-dark text-black" role="button">
+            <img
+              src="./images/cities/prague.jpg"
+              class="card-img"
+              alt="Prague"
+            />
+            <div class="card-img-overlay">
+              <h2 class="card-title">Prague</h2>
+              <h1 class="card-title" id="biggertext">Prague</h1>
+            </div>
+          </div>
+
+          <div class="card bg-dark text-black" role="button">
+            <img src="./images/cities/rio.jpg" class="card-img" alt="Rio" />
+            <div class="card-img-overlay">
+              <h2 class="card-title">Rio de Janeiro</h2>
+              <h1 class="card-title" id="biggertext">Rio de Janeiro</h1>
+            </div>
+          </div>
+
+          <div class="card bg-dark text-black" role="button">
+            <img
+              src="./images/cities/newyork.jpg"
+              class="card-img"
+              alt="NewYork"
+            />
+            <div class="card-img-overlay">
+              <h2 class="card-title">New York</h2>
+              <h1 class="card-title" id="biggertext">New York</h1>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <script
@@ -68,7 +132,5 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
-
-
   </body>
 </html>
