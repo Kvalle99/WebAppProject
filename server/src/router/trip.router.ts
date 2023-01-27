@@ -1,5 +1,5 @@
 import express, {Request,Response} from "express";
-import { TripService } from "../service/tripservice";
+import { TripService } from "../service/trip.service";
 
 const tripService = new TripService();
 
