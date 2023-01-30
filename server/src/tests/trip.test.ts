@@ -1,4 +1,3 @@
-import { Trip } from "../model/trip";
 import { TripService } from "../service/trip.service";
 
 test("Change hotel test", async () => {
