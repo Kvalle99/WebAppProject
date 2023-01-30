@@ -1,5 +1,5 @@
 import { Activity } from "../model/activity";
-import { Date } from "../model/date";
+import { ourDate } from "../model/date";
 import { Trip } from "../model/trip";
 import { ITripService } from "./itripservice";
 
@@ -7,8 +7,8 @@ export class TripService implements ITripService {
   //will be collected from database later
   trip = new Trip(
     "new york",
-    new Date(BigInt(2023), BigInt(11), BigInt(11)),
-    new Date(BigInt(2023), BigInt(11), BigInt(19)),
+    new ourDate(BigInt(2023), BigInt(11), BigInt(11)),
+    new ourDate(BigInt(2023), BigInt(11), BigInt(19)),
     "hotel",
     []
   );
@@ -23,11 +23,11 @@ export class TripService implements ITripService {
     this.trip.hotel = hotel;
   }
 
-  async changeStartDate(newDate: Date) {
+  async changeStartDate(newDate: ourDate) {
     this.trip.startDate = newDate;
   }
 
-  async changeEndDate(newDate: Date) {
+  async changeEndDate(newDate: ourDate) {
     this.trip.endDate = newDate;
   }
 

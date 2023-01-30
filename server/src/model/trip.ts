@@ -1,17 +1,17 @@
 import { Activity } from "./activity";
-import { Date } from "./date";
+import { ourDate } from "./date";
 
 export class Trip {
   destination: string;
-  startDate: Date;
-  endDate: Date;
+  startDate: ourDate;
+  endDate: ourDate;
   hotel: string;
   activities: Activity[];
 
   constructor(
     destination: string,
-    startDate: Date,
-    endDate: Date,
+    startDate: ourDate,
+    endDate: ourDate,
     hotel: string,
     activities: Activity[]
   ) {

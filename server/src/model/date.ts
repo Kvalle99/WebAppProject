@@ -1,4 +1,4 @@
-export class Date {
+export class ourDate {
   year: bigint;
   month: bigint;
   day: bigint;

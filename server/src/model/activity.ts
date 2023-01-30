@@ -1,15 +1,16 @@
+import { ourDate } from "./date";
 export class Activity {
     name : string;
     description : string;
     ratings: number[] = []; 
     averageRating: number = 0; 
-  startDate: Date;
-  endDate: Date;
+  startDate: ourDate;
+  endDate: ourDate;
     constructor(
         name: string,
         description: string,
-        startDate: Date,
-        endDate: Date
+        startDate: ourDate,
+        endDate: ourDate
       ) {
         this.name = name;
         this.description = description;
