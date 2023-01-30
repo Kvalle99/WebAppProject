@@ -1,5 +1,5 @@
 import { Activity } from "../model/activity";
-import { Date } from "../model/Date";
+import { Date } from "../model/date";
 import { Trip } from "../model/trip";
 import { ITripService } from "./itripservice";
 

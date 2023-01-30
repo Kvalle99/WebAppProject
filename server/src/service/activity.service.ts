@@ -7,10 +7,18 @@ export class ActivityService implements IActivityService {
   constructor() {}
 
   async getDescription(): Promise<string> {
-    return this.activity.description;
+    return this.activity.getDescription();
   }
 
   async changeDescription(description: string) {
-    this.activity.description = description;
+    this.activity.changeDescription(description);
+  }
+
+  async addNewRating(rating: number) {
+    this.activity.addNewRating(rating);
+  }
+
+  async getRating(): Promise<number> {
+    return this.activity.getAverageRating();
   }
 }
