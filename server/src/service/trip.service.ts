@@ -3,19 +3,15 @@ import { Trip } from "../model/trip";
 import { ITripService } from "./itripservice";
 
 export class TripService implements ITripService {
-    trip! : Trip;
+  trip = new Trip("new york", "startdate", "enddate", "hotel", []);
 
-    constructor (){
-        this.trip = new Trip('new york', 'startdate', 'enddate', 'hotel', [])
-    }
+  constructor() {}
 
-    async getHotel(): Promise<string> {
-        return this.trip.hotel;
-    }
+  async getHotel(): Promise<string> {
+    return this.trip.hotel;
+  }
 
-    async changeHotel(hotel: string) {
-        this.trip.hotel=hotel;
-    }
-
-
+  async changeHotel(hotel: string) {
+    this.trip.hotel = hotel;
+  }
 }
