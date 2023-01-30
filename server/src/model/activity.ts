@@ -1,9 +1,18 @@
 export class Activity {
-    name : string;
-    description : string;
+  name: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
 
-    constructor(name : string, description : string) {
-        this.name = name;
-        this.description = description;
-    }
+  constructor(
+    name: string,
+    description: string,
+    startDate: Date,
+    endDate: Date
+  ) {
+    this.name = name;
+    this.description = description;
+    this.startDate = startDate;
+    this.endDate = endDate;
+  }
 }
