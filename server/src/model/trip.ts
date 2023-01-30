@@ -1,5 +1,5 @@
 import { Activity } from "./activity";
-import { Date } from "./Date";
+import { Date } from "./date";
 
 export class Trip {
   destination: string;
