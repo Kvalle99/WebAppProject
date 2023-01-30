@@ -1,12 +1,10 @@
-import { Trip } from "../model/trip";
 import { SuperTest } from "supertest";
 import { app } from "../start";
-
-const request = require("supertest");
+import request from "supertest";
 
 test("End-to-end test", async () => {
     const desc = "TestHotel";
-    const res1 = await request.get("/getHotel");
+    const res1 = await request(app).get("/hotel");
     expect(res1.statusCode).toEqual(200);
     /*
     expect(res1.body.description).toEqual(desc);

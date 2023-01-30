@@ -5,7 +5,7 @@ const tripService = new TripService();
 
 export const TripRouter = express.Router();
 
-TripRouter.get("/getHotel", async (
+TripRouter.get("/hotel", async (
     req: Request<{}, {}, {}>,
     res: Response<string>
 ) => {
