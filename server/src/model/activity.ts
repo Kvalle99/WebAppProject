@@ -2,12 +2,20 @@ export class Activity {
     name : string;
     description : string;
     ratings: number[] = []; 
-    averageRating: number = 0; //Should be undefined if the activity has not been rated. 
-
-    constructor(name : string, description : string) {
+    averageRating: number = 0; 
+  startDate: Date;
+  endDate: Date;
+    constructor(
+        name: string,
+        description: string,
+        startDate: Date,
+        endDate: Date
+      ) {
         this.name = name;
         this.description = description;
-    }
+        this.startDate = startDate;
+        this.endDate = endDate;
+      }
 
     getDescription(): string {
         return this.description;

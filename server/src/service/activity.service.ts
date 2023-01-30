@@ -1,8 +1,11 @@
 import { Activity } from "../model/activity";
 import { IActivityService } from "./iactivityservice";
+import { Date } from "../model/date";
 
 export class ActivityService implements IActivityService {
-  activity: Activity = new Activity("Gå på museum", "Shit va mysigt!")
+    startDate = new Date(BigInt(2023), BigInt(12), BigInt(12))
+    endDate = new Date(BigInt(2023), BigInt(12), BigInt(12))
+  activity: Activity = new Activity("Gå på museum", "Shit va mysigt!", this.startDate, this.endDate)
 
   constructor() {}
 
