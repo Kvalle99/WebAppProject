@@ -10,7 +10,7 @@ export class TripService implements ITripService {
     "new york",
     new ourDate(BigInt(2023), BigInt(11), BigInt(11)),
     new ourDate(BigInt(2023), BigInt(11), BigInt(19)),
-    "hotel",
+    "testHotel",
     []
   );
 
@@ -22,14 +22,17 @@ export class TripService implements ITripService {
 
   async changeHotel(hotel: string) {
     this.trip.hotel = hotel;
+    return true;
   }
 
   async changeStartDate(newDate: ourDate) {
     this.trip.startDate = newDate;
+    return true;
   }
 
   async changeEndDate(newDate: ourDate) {
     this.trip.endDate = newDate;
+    return true;
   }
 
   async getActivities(): Promise<Activity[]> {
@@ -38,9 +41,11 @@ export class TripService implements ITripService {
 
   async addActivities(activity: Activity) {
     this.trip.addActivity(activity);
+    return true;
   }
 
   async removeActivities(activity: Activity) {
     this.trip.removeActivity(activity);
+    return true;
   }
 }
