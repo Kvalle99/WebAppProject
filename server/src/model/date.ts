@@ -1,12 +1,20 @@
 export class ourDate {
-  year: bigint;
-  month: bigint;
-  day: bigint;
+  year!: bigint;
+  month!: bigint;
+  day!: bigint;
 
   constructor(year: bigint, month: bigint, day: bigint) {
-    this.year = year;
-    this.month = month;
-    this.day = day;
+    try {
+      if (month < 13 && month > 0 && day < 32 && day > 0) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
+      } else {
+        throw new Error("Wrong date format");
+      }
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   getDate(): string {
