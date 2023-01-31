@@ -15,10 +15,12 @@ export class ActivityService implements IActivityService {
 
   async changeDescription(description: string) {
     this.activity.changeDescription(description);
+    return true;
   }
 
   async addNewRating(rating: number) {
     this.activity.addNewRating(rating);
+    return true;
   }
 
   async getRating(): Promise<number> {
