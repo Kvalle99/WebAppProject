@@ -16,3 +16,16 @@ TripRouter.get(
     }
   }
 );
+
+TripRouter.put("/changeHotel", async (
+  req: Request<{}, {}, { hotel : string }>,
+  res: Response<boolean>
+) => {
+  try {
+      const hotel = req.body.hotel;
+      const success = await tripService.changeHotel(hotel);
+      res.status(200).send(success);
+  } catch (e: any) {
+      res.status(500).send(e.message);
+  }
+})
