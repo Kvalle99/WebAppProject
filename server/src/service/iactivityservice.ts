@@ -4,4 +4,6 @@ export interface IActivityService {
 
     // Returns the description of an activity
     getDescription() : Promise<string>;
+
+    addNewRating(newRating: bigint): Promise<void>;
 }

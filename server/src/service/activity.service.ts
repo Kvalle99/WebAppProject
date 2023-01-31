@@ -3,8 +3,8 @@ import { IActivityService } from "./iactivityservice";
 import { ourDate } from "../model/date";
 
 export class ActivityService implements IActivityService {
-    startDate = new ourDate(BigInt(2023), BigInt(12), BigInt(12))
-    endDate = new ourDate(BigInt(2023), BigInt(12), BigInt(12))
+  startDate = new ourDate(BigInt(2023), BigInt(12), BigInt(12))
+  endDate = new ourDate(BigInt(2023), BigInt(12), BigInt(12))
   activity: Activity = new Activity("Gå på museum", "Shit va mysigt!", this.startDate, this.endDate)
 
   constructor() {}
@@ -17,7 +17,7 @@ export class ActivityService implements IActivityService {
     this.activity.changeDescription(description);
   }
 
-  async addNewRating(rating: number) {
+  async addNewRating(rating: bigint) {
     this.activity.addNewRating(rating);
   }
 

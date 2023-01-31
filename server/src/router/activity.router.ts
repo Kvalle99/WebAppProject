@@ -16,3 +16,15 @@ ActivityRouter.get("/getDescription", async (
         res.status(500).send(e.message);
     }
 });
+
+ActivityRouter.get("/getRating", async (
+    req: Request<{},{},{}>,
+    res: Response<string>
+) => {
+    try {
+        const rating = await activityService.getRating();
+        res.status(200).send(rating.toLocaleString());
+    } catch (e: any) {
+        res.status(500).send(e.message)
+    }
+});
