@@ -2,6 +2,7 @@ import { Activity } from "./activity";
 import { ourDate } from "./date";
 
 export class Trip {
+  id: string;
   destination: string;
   startDate: ourDate;
   endDate: ourDate;
@@ -9,12 +10,14 @@ export class Trip {
   activities: Activity[];
 
   constructor(
+    id: string,
     destination: string,
     startDate: ourDate,
     endDate: ourDate,
     hotel: string,
     activities: Activity[]
   ) {
+    this.id = id;
     this.destination = destination;
     this.startDate = startDate;
     this.endDate = endDate;

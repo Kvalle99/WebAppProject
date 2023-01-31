@@ -6,6 +6,7 @@ import { ITripService } from "./itripservice";
 export class TripService implements ITripService {
   //will be collected from database later
   trip = new Trip(
+    "6845198231",
     "new york",
     new ourDate(BigInt(2023), BigInt(11), BigInt(11)),
     new ourDate(BigInt(2023), BigInt(11), BigInt(19)),
