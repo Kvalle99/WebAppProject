@@ -3,7 +3,7 @@ import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import jwt_decode from "jwt-decode";
 
-export class userService {
+export class UserService {
   //this will not be safe just a proof of concept
   keyString = "6173646667686A6B6CF6706F697579746676626E6D2C6CF6706F6975680A";
 
