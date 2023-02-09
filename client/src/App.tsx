@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Destinations from "./Destinations/destinations";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <div className="row">
           <div className="col">
             <h1>Welcome to Plan Parrot!</h1>
+            <Destinations></Destinations>
           </div>
         </div>
         <div className="row">
