@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
 import Destinations from "./Destinations/destinations";
+import AccomodationView from "./views/plan-view/AccomodationView";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Destinations/>
+    <Destinations />
   </React.StrictMode>
 );
 
