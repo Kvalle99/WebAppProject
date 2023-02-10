@@ -5,66 +5,14 @@ import Destinations from "./Destinations/destinations";
 
 import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
+import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 
 function App() {
   return (
-    <div
-      className="App"
-      style={{
-        backgroundImage: "url('./images/landingBg.jpg')",
-        backgroundSize: "cover",
-      }}
-    >
-      <script>var Alert = ReactBootstrap.Alert;</script>
-      <div className="container text-center">
-        <div className="row">
-          <div className="col">
-            <h1>Welcome to Plan Parrot!</h1>
-            <Destinations></Destinations>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <img
-              src={require("./images/landingLogo.png")}
-              width="150"
-              id="animatedLogo"
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <a href="#" className="animatedText">
-              Explore
-            </a>
-          </div>
-          <div className="col">
-            <a href="#" className="animatedText">
-              Plan
-            </a>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <a href="explore.html">
-              <img
-                src={require("./images/landingExploreImage.jpg")}
-                width="480"
-                className="resizeImg"
-              />
-            </a>
-          </div>
-          <div className="col">
-            <a href="index.html">
-              <img
-                src={require("./images/landingPlanImage.jpg")}
-                width="480"
-                className="resizeImg"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
+    <div className="App">
+      <Navbar />
+      <PlanSidenav />
+      <CalendarComponent />
 
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"

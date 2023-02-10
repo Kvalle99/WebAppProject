@@ -6,7 +6,6 @@ interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = () => (
   <div className={"Navbar"}>
-    <link rel="stylesheet" href="/Navbar.module.css" />
     <nav className="navbar navbar-expand-lg bg-success">
       <a className="navbar-brand" href="/">
         <img

@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import SidenavListitem from "../sidenav-listitem/sidenav-listitem";
-import styles from "./plan-sidenav.module.css";
+import "./plan-sidenav.module.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 interface PlanSidenavProps {}
 
