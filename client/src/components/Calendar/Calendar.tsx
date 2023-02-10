@@ -32,7 +32,7 @@ function CalendarComponent() {
           </div>
         </div>
         <button type="button" className="btn btn-success">
-          Success
+          Save!
         </button>
       </div>
     </div>
