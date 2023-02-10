@@ -8,16 +8,14 @@ import Navbar from "./components/Navbar/Navbar";
 import Destinations from "./Destinations/destinations";
 import AccomodationView from "./views/plan-view/AccomodationView";
 
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 
 root.render(
   <React.StrictMode>
-
-    <Destinations />
-
+    <Navbar />
+    <CalendarComponent />
   </React.StrictMode>
 );
 
