@@ -1,9 +1,10 @@
 #logo {
-  width: 100px;
-  height: 100px;
+  width: 65px;
+  height: 65px;
 }
 
 .navbar {
+  position: absolute;
   height: 100px;
   margin-bottom: -5px;
 }
@@ -13,8 +14,10 @@
   height: 65px;
 }
 
-img {
-  height: 60px;
+#logo {
+  height: 65px;
+  width: 65px;
+  border-style: none;
 }
 
 #searchBarStyle {

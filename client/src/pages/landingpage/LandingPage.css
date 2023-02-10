@@ -1,0 +1,28 @@
+.LandingPage img {
+  height: 400px;
+  border-radius: 5%;
+}
+
+.LandingPage .resizeImg:hover {
+  height: 102%;
+  width: 102%;
+}
+
+.LandingPage #animatedLogo {
+  height: 100px;
+  animation-name: cycle;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes cycle {
+  from {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(45px);
+  }
+  to {
+    transform: translateY(0px);
+  }
+}

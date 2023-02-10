@@ -85,6 +85,10 @@
   margin: 0 auto 20px;
 }
 
+button {
+  margin-top: 5px;
+}
+
 .month .content {
   display: flex;
   flex-direction: row;

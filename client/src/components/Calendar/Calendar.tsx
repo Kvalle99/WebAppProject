@@ -2,7 +2,6 @@ import React, { Component, FC, useState } from "react";
 import "./Calendar.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function CalendarComponent() {
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(
@@ -32,6 +31,9 @@ function CalendarComponent() {
             />
           </div>
         </div>
+        <button type="button" className="btn btn-success">
+          Success
+        </button>
       </div>
     </div>
   );
