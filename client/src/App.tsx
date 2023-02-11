@@ -19,12 +19,15 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-        <div className="row justify-content-center">
-        <div className="col-3">
-          <PlanSidenav changeView={changeView} />
-        </div>
-        <div className="col-9">
-          <Planner viewToCShow={currentView} />
+      <div className="container-fluid" style={{maxWidth: '1080 ', margin: '0 auto'}}>
+        <div className="row">
+          <div className="col-3">
+            <PlanSidenav changeView={changeView} />
+          </div>
+          <div className="col-9">
+            <div className="mt-2"></div> 
+            <Planner viewToCShow={currentView} />
+          </div>
         </div>
       </div>
       <script

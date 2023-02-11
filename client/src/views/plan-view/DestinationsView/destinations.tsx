@@ -9,37 +9,82 @@ export default function Destinations() {
       <div>
           <div className="row">
             <div className="col">
-              <DestinationCard />
+              <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
           </div>
           <div className="mt-2"></div> 
           <div className="row">
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
           </div>
           <div className="mt-2"></div>
           <div className="row">
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
             <div className="col">
-              <DestinationCard />
+            <DestinationCard
+                destinationName = {"Good city"}
+                destinationDescription = {"You should go here"}
+                destinationPicture = {"./SampleCity.jpg"}
+                destinationActivities = {["One activity", "Another activity", "Boring activity"]}
+                />
             </div>
           </div>
         </div>
