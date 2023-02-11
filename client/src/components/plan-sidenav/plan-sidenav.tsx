@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 interface PlanSidenavProps {}
 
 /* const PlanSidenav: FC<PlanSidenavProps> = () => (
-  <div className={styles.PlanSidenav}>PlanSidenav Component</div>
+  <div classNameName={styles.PlanSidenav}>PlanSidenav Component</div>
 ); */
 
 function PlanSidenav() {

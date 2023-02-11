@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Destinations from "./Destinations/destinations";
+import Destinations from "./views/plan-view/DestinationsView/destinations";
 import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
