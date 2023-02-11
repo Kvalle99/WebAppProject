@@ -38,7 +38,7 @@ const Navbar: FC<NavbarProps> = () => (
             aria-label="Search"
             id="searchBarStyle"
           />
-          <button className="btn btn-outline-success" type="submit">
+          <button className="btn btn-light" type="submit">
             Search
           </button>
         </form>

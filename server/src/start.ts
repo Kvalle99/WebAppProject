@@ -7,5 +7,5 @@ export const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/hotel", TripRouter);
+app.use("/trip", TripRouter);
 app.use("/activity", ActivityRouter);

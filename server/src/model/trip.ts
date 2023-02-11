@@ -3,19 +3,19 @@ import { ourDate } from "./date";
 
 export class Trip {
   id: string;
-  destination: string;
-  startDate: ourDate;
-  endDate: ourDate;
-  hotel: string;
+  destination?: string;
+  startDate?: ourDate;
+  endDate?: ourDate;
+  hotel?: string;
   activities: Activity[];
 
   constructor(
     id: string,
-    destination: string,
-    startDate: ourDate,
-    endDate: ourDate,
-    hotel: string,
-    activities: Activity[]
+    activities: Activity[],
+    destination?: string,
+    startDate?: ourDate,
+    endDate?: ourDate,
+    hotel?: string
   ) {
     this.id = id;
     this.destination = destination;
@@ -26,11 +26,11 @@ export class Trip {
   }
 
   removeActivity(activity: Activity) {
-    var index = this.activities.indexOf(activity);
-    this.activities.splice(index, 1);
+    var index = this.activities!.indexOf(activity);
+    this.activities!.splice(index, 1);
   }
 
   addActivity(activity: Activity) {
-    this.activities.push(activity);
+    this.activities!.push(activity);
   }
 }

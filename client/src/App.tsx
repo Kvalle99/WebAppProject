@@ -1,25 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Destinations from "./Destinations/destinations";
-
 import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
+import axios from "axios";
 
 function App() {
+  const [testHook, changeHook] = useState(0);
+
+  const id = "6845191";
+  getTrip(id);
+
   return (
     <div className="App">
       <Navbar />
       <PlanSidenav />
-      <CalendarComponent />
-
+      <button onClick={() => changeHook(1)}> test</button>
+      <CalendarComponent test={testHook} testFunc={changePlace} />
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       ></script>
     </div>
   );
+
+  function changePlace() {
+    console.log("hello");
+  }
+
+  function getTrip(myId: string) {
+    const res = axios
+      .post("http://localhost:8080/trip/getTrip", { id: myId })
+      .then((res) => console.log(res));
+  }
 }
 
 export default App;

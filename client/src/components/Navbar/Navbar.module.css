@@ -30,6 +30,10 @@ img {
   border-width: 2px;
 }
 
+.btn {
+  height: 50px;
+}
+
 .navBarStyle {
   color: rgb(34, 177, 76);
 }

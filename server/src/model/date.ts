@@ -1,9 +1,9 @@
 export class ourDate {
-  year!: bigint;
-  month!: bigint;
-  day!: bigint;
+  year!: number;
+  month!: number;
+  day!: number;
 
-  constructor(year: bigint, month: bigint, day: bigint) {
+  constructor(year: number, month: number, day: number) {
     try {
       if (month < 13 && month > 0 && day < 32 && day > 0) {
         this.year = year;
@@ -27,15 +27,15 @@ export class ourDate {
     );
   }
 
-  getYear(): bigint {
+  getYear(): number {
     return this.year;
   }
 
-  getMonth(): bigint {
+  getMonth(): number {
     return this.month;
   }
 
-  getDay(): bigint {
+  getDay(): number {
     return this.day;
   }
 }
