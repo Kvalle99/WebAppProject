@@ -5,9 +5,6 @@ import "./AccomodationView.css";
 function AccomodationView() {
   return (
     <div className="row-1 justify-content-center">
-      <div className="column left">
-        <PlanSidenav />
-      </div>
       <div className="column right">
         <AccomodationCard
           accomodationName={"Hotel 1"}
