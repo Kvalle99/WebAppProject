@@ -1,6 +1,6 @@
 import CalendarComponent from "../components/Calendar/Calendar";
-import Destinations from "../Destinations/destinations";
 import AccomodationView from "./plan-view/AccomodationView";
+import Destinations from "./plan-view/DestinationsView/destinations";
 
 interface PlanneProps {
   viewToCShow: string;
