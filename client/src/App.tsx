@@ -6,19 +6,21 @@ import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
+import Planner from "./views/Planner";
 
 function App() {
   const [testHook, changeHook] = useState(0);
 
+  const [currentView, setView] = useState("Destination");
+  //my current trip, for now atleast
   const id = "6845191";
   getTrip(id);
 
   return (
     <div className="App">
       <Navbar />
-      <PlanSidenav />
-      <button onClick={() => changeHook(1)}> test</button>
-      <CalendarComponent test={testHook} testFunc={changePlace} />
+      <PlanSidenav changeView={changeView} />
+      <Planner viewToCShow={currentView} />
       <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
@@ -26,8 +28,9 @@ function App() {
     </div>
   );
 
-  function changePlace() {
-    console.log("hello");
+  function changeView(view: string) {
+    console.log("new view: ", view);
+    setView(view);
   }
 
   function getTrip(myId: string) {
