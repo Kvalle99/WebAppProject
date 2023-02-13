@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Destinations from "./views/plan-view/DestinationsView/destinations";
 import AccomodationView from "./views/plan-view/AccomodationView";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

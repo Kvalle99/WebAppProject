@@ -8,25 +8,30 @@ import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
 
+//my current trip, for now atleast
+const id = "6845191";
+var myTrip: any;
+getTrip(id);
+
 function App() {
-  const [testHook, changeHook] = useState(0);
-
-  const [currentView, setView] = useState("Destination");
-  //my current trip, for now atleast
+  //var myTrip: any;
   const id = "6845191";
-  getTrip(id);
-
+  //const [testHook, changeHook] = useState(0);
+  const [currentView, setView] = useState("Destination");
   return (
     <div className="App">
       <Navbar />
-      <div className="container-fluid" style={{maxWidth: '1080 ', margin: '0 auto'}}>
+      <div
+        className="container-fluid"
+        style={{ maxWidth: "1080 ", margin: "0 auto" }}
+      >
         <div className="row">
           <div className="col-3">
             <PlanSidenav changeView={changeView} />
           </div>
           <div className="col-9">
-            <div className="mt-2"></div> 
-            <Planner viewToCShow={currentView} />
+            <div className="mt-2"></div>
+            <Planner tripId={id} viewToCShow={currentView} />
           </div>
         </div>
       </div>
@@ -38,15 +43,22 @@ function App() {
   );
 
   function changeView(view: string) {
-    console.log("new view: ", view);
+    //console.log("new view: ", view);
     setView(view);
   }
+}
 
-  function getTrip(myId: string) {
-    const res = axios
-      .post("http://localhost:8080/trip/getTrip", { id: myId })
-      .then((res) => console.log(res));
-  }
+function getTrip(myId: string) {
+  console.log("Call backend");
+  const res = axios
+    .post("http://localhost:8080/trip/getTrip", { id: myId })
+    .then((res) => {
+      myTrip = res.data;
+      //setTrip(res.data);
+      console.log("myTrip: ");
+      //console.log(myTrip);
+      console.log(res.data);
+    });
 }
 
 export default App;
