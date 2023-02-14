@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import AccomodationCard from "../../components/accomodationCard/accomodationCard";
 import "./AccomodationView.css";
 
@@ -15,13 +16,19 @@ interface accomodationViewProps {
 }
 
 var accomodationList: Accomodation[];
-getAccomodations();
+//getAccomodations();
 
 function AccomodationView(props: accomodationViewProps) {
   //console.log(accomodationList);
+  const [accomodations, setAccomodations] = useState<Accomodation[] | null>(
+    null
+  );
+  useEffect(() => {
+    getAccomodations();
+  }, []);
   return (
     <ul>
-      {accomodationList.map((accomodation) => (
+      {accomodations?.map((accomodation) => (
         <li>
           <AccomodationCard
             accomodationName={accomodation.name}
@@ -47,6 +54,14 @@ function AccomodationView(props: accomodationViewProps) {
       .then((res) => {
         console.log(res.status);
       });
+  }
+  async function getAccomodations() {
+    const res = await axios
+      .get("http://localhost:8080/accomodation/getAccomodations", {})
+      .then((res) => {
+        setAccomodations(res.data);
+      });
+    return;
   }
 }
 
@@ -86,14 +101,5 @@ function AccomodationView(props: accomodationViewProps) {
       </div>
     </div>
   ); */
-
-async function getAccomodations() {
-  const res = await axios
-    .get("http://localhost:8080/accomodation/getAccomodations", {})
-    .then((res) => {
-      accomodationList = res.data;
-    });
-  return;
-}
 
 export default AccomodationView;
