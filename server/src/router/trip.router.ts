@@ -31,6 +31,28 @@ TripRouter.post(
   }
 );
 
+TripRouter.post(
+  "/saveDates",
+  async (
+    req: Request<{}, {}, { id: string; startDate: number; endDate: number }>,
+    res: Response<Trip>
+  ) => {
+    try {
+      console.log("recieved dates:");
+      console.log(req.body.startDate);
+      console.log(req.body.endDate);
+      await tripService.changeDates(
+        req.body.id,
+        new Date(req.body.startDate * 1000),
+        new Date(req.body.endDate * 1000)
+      );
+      res.status(200).send();
+    } catch (e: any) {
+      res.status(406).send();
+    }
+  }
+);
+
 TripRouter.put(
   "/changeHotel",
   async (

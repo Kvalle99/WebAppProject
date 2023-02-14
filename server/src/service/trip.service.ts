@@ -1,5 +1,4 @@
 import { Activity } from "../model/activity";
-import { ourDate } from "../model/date";
 import { Trip } from "../model/trip";
 import { ITripService } from "./itripservice";
 
@@ -9,8 +8,8 @@ export class TripService implements ITripService {
     "11111111",
     [],
     "Paris",
-    new ourDate(2024, 1, 7),
-    new ourDate(2024, 2, 5),
+    new Date(2024, 1, 7),
+    new Date(2024, 2, 5),
     "OuiOui hotel"
   );
 
@@ -19,24 +18,24 @@ export class TripService implements ITripService {
       "6845198231",
       [],
       "new york",
-      new ourDate(2023, 11, 11),
-      new ourDate(2023, 11, 19),
+      new Date(2023, 11, 11),
+      new Date(2023, 11, 19),
       "testHotel"
     ),
     new Trip(
       "6845191",
       [],
       "Chiang Mai",
-      new ourDate(2023, 10, 24),
-      new ourDate(2023, 11, 5),
+      new Date(2023, 10, 24),
+      new Date(2023, 11, 5),
       "kvalles place"
     ),
     new Trip(
       "11111111",
       [],
       "Paris",
-      new ourDate(2024, 1, 7),
-      new ourDate(2024, 2, 5),
+      new Date(2024, 1, 7),
+      new Date(2024, 2, 5),
       "OuiOui hotel"
     ),
   ];
@@ -51,7 +50,7 @@ export class TripService implements ITripService {
       //console.log("in list: ", this.tripList[i].id);
       //console.log("myId: ", myId);
       if (myId == this.tripList[i].id) {
-        console.log("found it!");
+        //console.log("found it!");
         return this.tripList[i];
       }
     }
@@ -74,16 +73,24 @@ export class TripService implements ITripService {
     return true;
   }
 
-  async changeStartDate(myId: string, newDate: ourDate) {
+  async changeDates(myId: string, startDate: Date, endDate: Date) {
     var myTrip: Trip | null = this.findTrip(myId);
+    //console.log(myTrip);
+    //console.log("startdate:", startDate);
     if (myTrip) {
-      myTrip.startDate = newDate;
+      myTrip.startDate = startDate;
+      //console.log(endDate.getDay());
+      console.log("new startDate:");
+      console.log(myTrip.startDate);
+      myTrip.endDate = endDate;
+      console.log("new endDate:");
+      console.log(myTrip.endDate);
       return true;
     }
     return false;
   }
 
-  async changeEndDate(myId: string, newDate: ourDate) {
+  async changeEndDate(myId: string, newDate: Date) {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
       myTrip.endDate = newDate;

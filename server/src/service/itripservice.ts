@@ -8,9 +8,9 @@ export interface ITripService {
   // Returns list of all activities planned
   getHotel(): Promise<string>;
 
-  changeStartDate(id: string, newDate: ourDate): Promise<boolean>;
+  changeDates(id: string, startDate: Date, endDate: Date): Promise<boolean>;
 
-  changeEndDate(id: string, newDate: ourDate): Promise<boolean>;
+  changeEndDate(id: string, newDate: Date): Promise<boolean>;
 
   getActivities(id: string): Promise<Activity[]>;
 

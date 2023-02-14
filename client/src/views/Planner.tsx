@@ -28,6 +28,7 @@ function Planner(props: PlanneProps) {
       <CalendarComponent
         startDate={myTrip.startDate}
         endDate={myTrip.endDate}
+        saveDates={saveDates}
       />
     );
   }
@@ -39,15 +40,32 @@ function Planner(props: PlanneProps) {
 }
 
 function getTrip(myId: string) {
-  console.log("Call planner backend");
+  //console.log("Call planner backend");
   const res = axios
     .post("http://localhost:8080/trip/getTrip", { id: myId })
     .then((res) => {
       myTrip = res.data;
       //setTrip(res.data);
-      console.log("myTrip: ");
+      //console.log("myTrip: ");
       //console.log(myTrip);
-      console.log(res.data);
+      //console.log(res.data);
+    });
+}
+
+function saveDates(newStartDate: Date, newEndDate: Date) {
+  console.log("saves dates");
+  console.log(newEndDate);
+  newStartDate.setHours(1);
+  newEndDate.setHours(1);
+  const res = axios
+    .post("http://localhost:8080/trip/saveDates", {
+      id: myTrip.id,
+      startDate: parseInt((newStartDate.getTime() / 1000).toFixed(0)),
+      endDate: parseInt((newEndDate.getTime() / 1000).toFixed(0)),
+    })
+    .then((res) => {
+      //setTrip(res.data);
+      console.log(res.status);
     });
 }
 

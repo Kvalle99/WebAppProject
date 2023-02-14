@@ -4,8 +4,8 @@ import { ourDate } from "./date";
 export class Trip {
   id: string;
   destination?: string;
-  startDate?: ourDate;
-  endDate?: ourDate;
+  startDate?: Date;
+  endDate?: Date;
   hotel?: string;
   activities: Activity[];
 
@@ -13,8 +13,8 @@ export class Trip {
     id: string,
     activities: Activity[],
     destination?: string,
-    startDate?: ourDate,
-    endDate?: ourDate,
+    startDate?: Date,
+    endDate?: Date,
     hotel?: string
   ) {
     this.id = id;

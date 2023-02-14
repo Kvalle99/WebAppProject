@@ -4,29 +4,18 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 interface calProps {
-  startDate?: any;
-  endDate?: any;
+  startDate?: Date;
+  endDate?: Date;
+  saveDates: Function;
 }
 
 function CalendarComponent(props: calProps) {
   var startDate: Date = new Date();
   var endDate: Date = new Date();
 
-  if (props.startDate)
-    startDate = new Date(
-      props.startDate.year,
-      //month is indexed from zero
-      props.startDate.month - 1,
-      props.startDate.day
-    );
+  if (props.startDate) startDate = new Date(props.startDate);
 
-  if (props.endDate)
-    endDate = new Date(
-      props.endDate.year,
-      //month is indexed from zero
-      props.endDate.month - 1,
-      props.endDate.day
-    );
+  if (props.endDate) endDate = new Date(props.endDate);
 
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(
     startDate
@@ -55,11 +44,24 @@ function CalendarComponent(props: calProps) {
             />
           </div>
         </div>
-        <button type="button" className="btn btn-success">
+        <button
+          type="button"
+          className="btn btn-success"
+          onClick={() => saveChanges()}
+        >
           Save!
         </button>
       </div>
     </div>
   );
+
+  function saveChanges() {
+    console.log("dates to send:");
+    console.log(selectedStartDate);
+    console.log(selectedEndDate);
+
+    props.saveDates(selectedStartDate, selectedEndDate);
+  }
 }
+
 export default CalendarComponent;
