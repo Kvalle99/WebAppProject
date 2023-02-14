@@ -15,9 +15,6 @@ interface accomodationViewProps {
   tripId?: string;
 }
 
-var accomodationList: Accomodation[];
-//getAccomodations();
-
 function AccomodationView(props: accomodationViewProps) {
   //console.log(accomodationList);
   const [accomodations, setAccomodations] = useState<Accomodation[] | null>(

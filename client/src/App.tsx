@@ -8,14 +8,8 @@ import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
 
-//my current trip, for now atleast
-const id = "6845191";
-var myTrip: any;
-getTrip(id);
-
 function App() {
   //var myTrip: any;
-  const id = "6845191";
   //const [testHook, changeHook] = useState(0);
   const [currentView, setView] = useState("Destination");
   return (
@@ -31,7 +25,7 @@ function App() {
           </div>
           <div className="col-9">
             <div className="mt-2"></div>
-            <Planner tripId={id} viewToShow={currentView} />
+            <Planner viewToShow={currentView} />
           </div>
         </div>
       </div>
@@ -46,14 +40,6 @@ function App() {
     //console.log("new view: ", view);
     setView(view);
   }
-}
-
-function getTrip(myId: string) {
-  const res = axios
-    .post("http://localhost:8080/trip/getTrip", { id: myId })
-    .then((res) => {
-      myTrip = res.data;
-    });
 }
 
 export default App;

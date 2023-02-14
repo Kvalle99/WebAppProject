@@ -12,7 +12,6 @@ interface PlanSidenavProps {
 ); */
 
 function PlanSidenav(props: PlanSidenavProps) {
-  console.log("in sidenav func");
   return (
     <ul className="list-group list-group-flush">
       <SidenavListitem

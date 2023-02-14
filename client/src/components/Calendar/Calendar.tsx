@@ -1,12 +1,20 @@
-import React, { Component, FC, useImperativeHandle, useState } from "react";
+import React, {
+  Component,
+  FC,
+  useEffect,
+  useImperativeHandle,
+  useState,
+} from "react";
 import "./Calendar.module.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 
 interface calProps {
+  tripId: string;
   startDate?: Date;
   endDate?: Date;
-  saveDates: Function;
+  update: Function;
 }
 
 function CalendarComponent(props: calProps) {
@@ -14,7 +22,6 @@ function CalendarComponent(props: calProps) {
   var endDate: Date = new Date();
 
   if (props.startDate) {
-    console.log("startdate to redner, befor offset: ", props.startDate);
     startDate = new Date(props.startDate);
     startDate.setMonth(startDate.getMonth() - 1);
   }
@@ -70,12 +77,22 @@ function CalendarComponent(props: calProps) {
     //to revert the zero indeation of date-picker
     sDate.setMonth(sDate.getMonth() + 1);
     eDate.setMonth(eDate.getMonth() + 1);
+    saveDates(sDate, eDate);
+  }
 
-    console.log("dates to send:");
-    console.log(sDate);
-    console.log(eDate);
-
-    props.saveDates(sDate, eDate);
+  function saveDates(newStartDate: Date, newEndDate: Date) {
+    //"hack to fix the changing of time zones between server and client", Common problem  with date-class and this was the first solution we found
+    newStartDate.setHours(1);
+    newEndDate.setHours(1);
+    const res = axios
+      .post("http://localhost:8080/trip/saveDates", {
+        id: props.tripId,
+        startDate: parseInt((newStartDate.getTime() / 1000).toFixed(0)),
+        endDate: parseInt((newEndDate.getTime() / 1000).toFixed(0)),
+      })
+      .then((res) => {
+        props.update();
+      });
   }
 }
 

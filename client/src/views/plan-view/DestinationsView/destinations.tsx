@@ -9,10 +9,10 @@ interface Destination {
 
 interface destProps {
   tripId?: string;
+  update: Function;
 }
 
 function Destinations(props: destProps) {
-  //console.log(destinationList);
   const [dest, setDest] = useState<Destination[] | null>(null);
   useEffect(() => {
     getDestinations();
@@ -48,13 +48,12 @@ function Destinations(props: destProps) {
   }
 
   function changeDestination(name: string) {
-    console.log("change to: ", name);
     const res = axios
       .post("http://localhost:8080/trip/changeDestination", {
         id: props.tripId,
         destinationName: name,
       })
-      .then((res) => {});
+      .then(() => props.update());
   }
 }
 
