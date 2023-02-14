@@ -4,19 +4,14 @@ import CalendarComponent from "../components/Calendar/Calendar";
 import AccomodationView from "./plan-view/AccomodationView";
 import Destinations from "./plan-view/DestinationsView/destinations";
 
-interface PlanneProps {
+interface PlannerProps {
   // set to optional so the component doesn´t break if  no trip has been created
   viewToShow: string;
 }
 
-//my current trip, for now atleast
 const TripId = "6845191";
-//var myTrip: any;
-//getTrip(TripId);
 
-//var myTrip: any;
-
-function Planner(props: PlanneProps) {
+function Planner(props: PlannerProps) {
   const [myTrip, setTrip] = useState<any | null>(null);
 
   useEffect(() => {
