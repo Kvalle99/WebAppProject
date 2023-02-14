@@ -4,14 +4,7 @@ import { ITripService } from "./itripservice";
 
 export class TripService implements ITripService {
   //will be collected from database later
-  trip = new Trip(
-    "11111111",
-    [],
-    "Paris",
-    new Date(2024, 1, 7),
-    new Date(2024, 2, 5),
-    "OuiOui hotel"
-  );
+ 
 
   tripList = [
     new Trip(
@@ -61,9 +54,6 @@ export class TripService implements ITripService {
     return this.findTrip(myId);
   }
 
-  async getHotel(): Promise<string> {
-    return this.trip.hotel!;
-  }
 
   async changeHotel(id: string, hotel: string) {
     var myTrip: Trip | null = this.findTrip(id);
@@ -95,9 +85,6 @@ export class TripService implements ITripService {
     return false;
   }
 
-  async getActivities(): Promise<Activity[]> {
-    return this.trip.activities!;
-  }
 
   async addActivities(myId: string, activity: Activity) {
     var myTrip: Trip | null = this.findTrip(myId);

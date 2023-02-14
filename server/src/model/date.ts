@@ -1,3 +1,4 @@
+//class not used in current version, uses built in Date instead
 export class ourDate {
   year!: number;
   month!: number;

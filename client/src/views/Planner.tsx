@@ -13,8 +13,8 @@ interface PlanneProps {
 var myTrip: any;
 
 function Planner(props: PlanneProps) {
-  console.log("planner:");
-  console.log(props.tripId);
+  //console.log("planner:");
+  //console.log(props.tripId);
   //const [currentTrip, setTrip] = useState<any>(null);
 
   if (props.tripId) getTrip(props.tripId);
@@ -63,7 +63,7 @@ function saveDates(newStartDate: Date, newEndDate: Date) {
       endDate: parseInt((newEndDate.getTime() / 1000).toFixed(0)),
     })
     .then((res) => {
-      console.log(res.status);
+      //console.log(res.status);
     });
 }
 

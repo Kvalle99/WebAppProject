@@ -1,9 +1,43 @@
+import axios from "axios";
 import AccomodationCard from "../../components/accomodationCard/accomodationCard";
-import PlanSidenav from "../../components/plan-sidenav/plan-sidenav";
 import "./AccomodationView.css";
 
+export interface Accomodation {
+  name: string;
+  rating: number;
+  price: number;
+  description: string;
+  //TODO: add Destination object as city, instead of "City" (city),
+  city: string;
+}
+
+var accomodationList: Accomodation[];
+getAccomodations();
+
 function AccomodationView() {
+  console.log(accomodationList);
+
+  console.log(accomodationList);
   return (
+    <ul>
+      {" "}
+      {accomodationList.map((accomodation) => (
+        <li>
+          <AccomodationCard
+            accomodationName={accomodation.name}
+            accomodationStars={accomodation.rating}
+            accomodationPriceFrom={accomodation.price}
+            accomodationCity={accomodation.city}
+            accomodationDescription={accomodation.description}
+            accomodationImgSrc={"hotel1.jpg"}
+          />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**  return (
     <div className="row-1 justify-content-center">
       <div className="column right">
         <AccomodationCard
@@ -38,7 +72,16 @@ function AccomodationView() {
         />
       </div>
     </div>
-  );
+  ); */
+
+function getAccomodations() {
+  const res = axios
+    .get("http://localhost:8080/accomodation/getAccomodations", {})
+    .then((res) => {
+      //console.log(res.data);
+      accomodationList = res.data;
+    });
+  return;
 }
 
 export default AccomodationView;

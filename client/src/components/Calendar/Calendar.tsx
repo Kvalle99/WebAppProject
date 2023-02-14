@@ -44,7 +44,7 @@ function CalendarComponent(props: calProps) {
               onChange={(date) => date && setSelectedStartDate(date)}
             />
           </div>
-          <div className="col-2">
+          <div className="col-2 test">
             <h5>Enter Date</h5>
             <DatePicker
               selected={selectedEndDate}

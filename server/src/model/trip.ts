@@ -2,6 +2,7 @@ import { Activity } from "./activity";
 import { ourDate } from "./date";
 
 export class Trip {
+  //TODO: replace hotel with Accomodation object, and destianation with Destinaiton-object
   id: string;
   destination?: string;
   startDate?: Date;
