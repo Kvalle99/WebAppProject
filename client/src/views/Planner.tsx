@@ -34,7 +34,7 @@ function Planner(props: PlanneProps) {
   }
 
   if (props.viewToCShow === "Accomodation") {
-    return <AccomodationView />;
+    return <AccomodationView tripId={myTrip.id} />;
   }
   return <></>;
 }

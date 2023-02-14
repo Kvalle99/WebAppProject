@@ -9,6 +9,7 @@ interface AccomodationCardProps {
   accomodationDescription: string;
   accomodationCity: string;
   accomodationImgSrc: string;
+  changeBooking: Function;
 }
 
 /* const AccomodationCard: FC<AccomodationCardProps> = () => (
@@ -36,7 +37,13 @@ function AccomodationCard(props: AccomodationCardProps) {
               />
             </div>
             <div className="card-body">
-              <h4 className="card-title">{props.accomodationName}</h4>
+              <div className="d-flex justify-content-between align-items-center mb-3">
+                <h4 className="card-title">{props.accomodationName}</h4>
+
+                <button className="btn btn-success" onClick={updateHotel}>
+                  Choose
+                </button>
+              </div>
               <p>{props.accomodationCity}</p>
               <p className="card-text">{props.accomodationDescription}</p>
             </div>
@@ -45,6 +52,10 @@ function AccomodationCard(props: AccomodationCardProps) {
       </div>
     </div>
   );
+
+  function updateHotel() {
+    props.changeBooking(props.accomodationName);
+  }
 }
 
 export default AccomodationCard;

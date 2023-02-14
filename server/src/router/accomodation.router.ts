@@ -1,8 +1,10 @@
 import express, { Request, Response } from "express";
 import { Accomodation } from "../model/accomodation";
 import { AccomodationService } from "../service/accomodation.service";
+import { TripService } from "../service/trip.service";
 
 const accomodationService = new AccomodationService();
+const tripService = new TripService();
 export const AccomodationRouter = express.Router();
 
 AccomodationRouter.get(

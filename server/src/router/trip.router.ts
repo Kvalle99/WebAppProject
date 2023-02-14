@@ -22,7 +22,7 @@ TripRouter.post(
   "/saveDates",
   async (
     req: Request<{}, {}, { id: string; startDate: number; endDate: number }>,
-    res: Response<Trip>
+    res: Response
   ) => {
     try {
       await tripService.changeDates(
@@ -37,16 +37,16 @@ TripRouter.post(
   }
 );
 
-TripRouter.put(
-  "/changeHotel",
+TripRouter.post(
+  "/changeAccomodations",
   async (
-    req: Request<{}, {}, { hotel: string; id: string }>,
+    req: Request<{}, {}, { id: string; accomodationName: string }>,
     res: Response<boolean>
   ) => {
     try {
-      const hotel = req.body.hotel;
-      const id = req.body.id;
-      const success = await tripService.changeHotel(id, hotel);
+      const hotel: string = req.body.accomodationName;
+      const id: string = req.body.id;
+      const success = await tripService.changeAccomodation(id, hotel);
       res.status(200).send(success);
     } catch (e: any) {
       res.status(500).send(e.message);

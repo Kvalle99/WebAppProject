@@ -10,17 +10,16 @@ export interface Accomodation {
   //TODO: add Destination object as city, instead of "City" (city),
   city: string;
 }
-
+interface accomodationViewProps {
+  tripId?: string;
+}
 var accomodationList: Accomodation[];
 getAccomodations();
 
-function AccomodationView() {
-  console.log(accomodationList);
-
-  console.log(accomodationList);
+function AccomodationView(props: accomodationViewProps) {
+  //console.log(accomodationList);
   return (
     <ul>
-      {" "}
       {accomodationList.map((accomodation) => (
         <li>
           <AccomodationCard
@@ -30,11 +29,26 @@ function AccomodationView() {
             accomodationCity={accomodation.city}
             accomodationDescription={accomodation.description}
             accomodationImgSrc={"hotel1.jpg"}
+            changeBooking={changeAccomodation}
           />
         </li>
       ))}
     </ul>
   );
+
+  function changeAccomodation(name: string) {
+    console.log("change to: ", name);
+    const res = axios
+      .post("http://localhost:8080/trip/changeAccomodations", {
+        //TODO: get the trip id
+        id: props.tripId,
+        accomodationName: name,
+      })
+      .then((res) => {
+        console.log("acc change status: ");
+        console.log(res.status);
+      });
+  }
 }
 
 /**  return (
@@ -74,11 +88,23 @@ function AccomodationView() {
     </div>
   ); */
 
+function changeAccomodation(name: string) {
+  console.log("change to: ", name);
+  const res = axios
+    .post("http://localhost:8080/trip/changeAccomodations", {
+      //TODO: get the trip id
+      accomodationName: name,
+    })
+    .then((res) => {
+      console.log("acc change status: ");
+      console.log(res.status);
+    });
+}
+
 function getAccomodations() {
   const res = axios
     .get("http://localhost:8080/accomodation/getAccomodations", {})
     .then((res) => {
-      //console.log(res.data);
       accomodationList = res.data;
     });
   return;

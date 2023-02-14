@@ -12,6 +12,7 @@ it("It should mount", () => {
       accomodationDescription={""}
       accomodationCity={""}
       accomodationImgSrc={""}
+      changeBooking={() => {}}
     />,
     div
   );
