@@ -13,9 +13,17 @@ function CalendarComponent(props: calProps) {
   var startDate: Date = new Date();
   var endDate: Date = new Date();
 
-  if (props.startDate) startDate = new Date(props.startDate);
+  if (props.startDate) {
+    console.log("startdate to redner, befor offset: ", props.startDate);
+    startDate = new Date(props.startDate);
+    startDate.setMonth(startDate.getMonth() - 1);
+  }
 
-  if (props.endDate) endDate = new Date(props.endDate);
+  if (props.endDate) {
+    //datepicker is zero-indexed and dates are not
+    endDate = new Date(props.endDate);
+    endDate.setMonth(endDate.getMonth() - 1);
+  }
 
   const [selectedStartDate, setSelectedStartDate] = useState<Date | null>(
     startDate
@@ -56,11 +64,18 @@ function CalendarComponent(props: calProps) {
   );
 
   function saveChanges() {
-    console.log("dates to send:");
-    console.log(selectedStartDate);
-    console.log(selectedEndDate);
+    var sDate: Date = new Date(selectedStartDate!);
+    var eDate: Date = new Date(selectedEndDate!);
 
-    props.saveDates(selectedStartDate, selectedEndDate);
+    //to revert the zero indeation of date-picker
+    sDate.setMonth(sDate.getMonth() + 1);
+    eDate.setMonth(eDate.getMonth() + 1);
+
+    console.log("dates to send:");
+    console.log(sDate);
+    console.log(eDate);
+
+    props.saveDates(sDate, eDate);
   }
 }
 

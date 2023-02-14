@@ -75,16 +75,12 @@ export class TripService implements ITripService {
 
   async changeDates(myId: string, startDate: Date, endDate: Date) {
     var myTrip: Trip | null = this.findTrip(myId);
-    //console.log(myTrip);
-    //console.log("startdate:", startDate);
+    console.log("new dates:");
+    console.log(startDate);
+    console.log(endDate);
     if (myTrip) {
       myTrip.startDate = startDate;
-      //console.log(endDate.getDay());
-      console.log("new startDate:");
-      console.log(myTrip.startDate);
       myTrip.endDate = endDate;
-      console.log("new endDate:");
-      console.log(myTrip.endDate);
       return true;
     }
     return false;

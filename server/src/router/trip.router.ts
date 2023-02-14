@@ -38,9 +38,6 @@ TripRouter.post(
     res: Response<Trip>
   ) => {
     try {
-      console.log("recieved dates:");
-      console.log(req.body.startDate);
-      console.log(req.body.endDate);
       await tripService.changeDates(
         req.body.id,
         new Date(req.body.startDate * 1000),

@@ -53,8 +53,7 @@ function getTrip(myId: string) {
 }
 
 function saveDates(newStartDate: Date, newEndDate: Date) {
-  console.log("saves dates");
-  console.log(newEndDate);
+  //"hack to fix the changing of time zones between server and client"
   newStartDate.setHours(1);
   newEndDate.setHours(1);
   const res = axios
@@ -64,7 +63,6 @@ function saveDates(newStartDate: Date, newEndDate: Date) {
       endDate: parseInt((newEndDate.getTime() / 1000).toFixed(0)),
     })
     .then((res) => {
-      //setTrip(res.data);
       console.log(res.status);
     });
 }
