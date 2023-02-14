@@ -53,6 +53,14 @@ export class TripService implements ITripService {
     return this.findTrip(myId);
   }
 
+  async changeDestination(id: string, destination: string) {
+    var myTrip: Trip | null = this.findTrip(id);
+    if (myTrip) {
+      myTrip.destination = destination;
+      console.log("new dest: ", myTrip.destination);
+    }
+    return true;
+  }
   async getAccomodation(id: string) {
     return this.findTrip(id).hotel;
   }

@@ -53,3 +53,19 @@ TripRouter.post(
     }
   }
 );
+TripRouter.post(
+  "/changeDestination",
+  async (
+    req: Request<{}, {}, { id: string; destinationName: string }>,
+    res: Response<boolean>
+  ) => {
+    try {
+      const dest: string = req.body.destinationName;
+      const id: string = req.body.id;
+      const success = await tripService.changeDestination(id, dest);
+      res.status(200).send(success);
+    } catch (e: any) {
+      res.status(500).send(e.message);
+    }
+  }
+);

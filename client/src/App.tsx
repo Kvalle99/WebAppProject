@@ -31,7 +31,7 @@ function App() {
           </div>
           <div className="col-9">
             <div className="mt-2"></div>
-            <Planner tripId={id} viewToCShow={currentView} />
+            <Planner tripId={id} viewToShow={currentView} />
           </div>
         </div>
       </div>
@@ -49,15 +49,10 @@ function App() {
 }
 
 function getTrip(myId: string) {
-  console.log("Call backend");
   const res = axios
     .post("http://localhost:8080/trip/getTrip", { id: myId })
     .then((res) => {
       myTrip = res.data;
-      //setTrip(res.data);
-      console.log("myTrip: ");
-      //console.log(myTrip);
-      console.log(res.data);
     });
 }
 

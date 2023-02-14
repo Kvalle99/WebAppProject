@@ -1,41 +1,46 @@
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
 interface DestinationCardProps {
-  destinationName : string;
-  destinationDescription : string;
-  destinationPicture : string;
-  destinationActivities : string[];
+  destinationName: string;
+  destinationDescription: string;
+  destinationPicture: string;
+  destinationActivities: string[];
+  changeDest: Function;
 }
 
-function DestinationCard(props : DestinationCardProps) {
+function DestinationCard(props: DestinationCardProps) {
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img className="img-fluid" variant="top" width="200" src={require("./SampleCity.jpg")} />
+    <Card style={{ width: "18rem" }}>
+      <Card.Img
+        className="img-fluid"
+        variant="top"
+        width="200"
+        src={require("./SampleCity.jpg")}
+      />
       <Card.Body>
         <Card.Title>{props.destinationName}</Card.Title>
         <Card.Text>
           {props.destinationDescription}
           <ul>
-            <li>
-              {props.destinationActivities[0]}
-            </li>
-            <li>
-            {props.destinationActivities[1]}
-            </li>
-            <li>
-            {props.destinationActivities[2]}
-            </li>
+            <li>{props.destinationActivities[0]}</li>
+            <li>{props.destinationActivities[1]}</li>
+            <li>{props.destinationActivities[2]}</li>
           </ul>
         </Card.Text>
-        <Button variant="primary">Go here</Button>
+        <Button variant="primary" onClick={() => newDestination()}>
+          Go here
+        </Button>
       </Card.Body>
     </Card>
   );
+
+  function newDestination() {
+    props.changeDest(props.destinationName);
+  }
 }
 
 export default DestinationCard;
-
 
 /*
 import React from 'react'

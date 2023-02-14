@@ -13,6 +13,7 @@ export interface Accomodation {
 interface accomodationViewProps {
   tripId?: string;
 }
+
 var accomodationList: Accomodation[];
 getAccomodations();
 
@@ -40,12 +41,10 @@ function AccomodationView(props: accomodationViewProps) {
     console.log("change to: ", name);
     const res = axios
       .post("http://localhost:8080/trip/changeAccomodations", {
-        //TODO: get the trip id
         id: props.tripId,
         accomodationName: name,
       })
       .then((res) => {
-        console.log("acc change status: ");
         console.log(res.status);
       });
   }
@@ -88,21 +87,8 @@ function AccomodationView(props: accomodationViewProps) {
     </div>
   ); */
 
-function changeAccomodation(name: string) {
-  console.log("change to: ", name);
-  const res = axios
-    .post("http://localhost:8080/trip/changeAccomodations", {
-      //TODO: get the trip id
-      accomodationName: name,
-    })
-    .then((res) => {
-      console.log("acc change status: ");
-      console.log(res.status);
-    });
-}
-
-function getAccomodations() {
-  const res = axios
+async function getAccomodations() {
+  const res = await axios
     .get("http://localhost:8080/accomodation/getAccomodations", {})
     .then((res) => {
       accomodationList = res.data;
