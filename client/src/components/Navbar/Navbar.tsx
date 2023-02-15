@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "react-bootstrap/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.js";
@@ -13,6 +13,7 @@ import {
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 interface NavbarProps {
+  chooseTrip: Function;
   trips: string[];
 }
 
@@ -36,7 +37,7 @@ function NavbarComponent(props: NavbarProps) {
         <Dropdown.Menu>
           <ul>
             {props.trips.map((trip) => (
-              <Dropdown.Item key={trip} onClick={() => ({})}>
+              <Dropdown.Item key={trip} onClick={() => chooseTrip(trip)}>
                 {trip}
               </Dropdown.Item>
             ))}
@@ -70,6 +71,10 @@ function NavbarComponent(props: NavbarProps) {
       </Nav>
     </Navbar>
   );
+
+  function chooseTrip(trip: string) {
+    props.chooseTrip(trip);
+  }
 }
 
 export default NavbarComponent;

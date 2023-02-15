@@ -7,7 +7,12 @@ export interface ITripService {
 
   // Returns list of all activities planned
 
-  changeDates(id: string, startDate: Date, endDate: Date): Promise<boolean>;
+  changeDates(
+    userId: number,
+    tripId: string,
+    startDate: Date,
+    endDate: Date
+  ): Promise<boolean>;
 
   changeEndDate(id: string, newDate: Date): Promise<boolean>;
 

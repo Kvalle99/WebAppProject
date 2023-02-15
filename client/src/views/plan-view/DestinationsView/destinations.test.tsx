@@ -18,7 +18,7 @@ test("Should send GET to localhost", async () => {
     ],
   });
   let testUpdate = false;
-  render(<Destinations update={() => {}} />);
+  render(<Destinations changeDest={() => {}} />);
   expect(mockedAxios.get).toHaveBeenCalledWith(
     "http://localhost:8080/destination/getDestinations"
   );
@@ -41,7 +41,9 @@ test("Destination change, the change call to backend should be executed", async 
     status: 200,
   });
   let newDest = "";
-  render(<Destinations update={(newName: string) => (newDest = newName)} />);
+  render(
+    <Destinations changeDest={(newName: string) => (newDest = newName)} />
+  );
   const button = await screen.findByRole("changeDest");
   act(() => {
     fireEvent.click(button);

@@ -11,10 +11,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 
 interface calProps {
-  tripId: string;
   startDate?: Date;
   endDate?: Date;
-  update: Function;
+  saveDates: Function;
 }
 
 function CalendarComponent(props: calProps) {
@@ -77,22 +76,7 @@ function CalendarComponent(props: calProps) {
     //to revert the zero indeation of date-picker
     sDate.setMonth(sDate.getMonth() + 1);
     eDate.setMonth(eDate.getMonth() + 1);
-    saveDates(sDate, eDate);
-  }
-
-  function saveDates(newStartDate: Date, newEndDate: Date) {
-    //"hack to fix the changing of time zones between server and client", Common problem  with date-class and this was the first solution we found
-    newStartDate.setHours(1);
-    newEndDate.setHours(1);
-    const res = axios
-      .post("http://localhost:8080/trip/saveDates", {
-        id: props.tripId,
-        startDate: parseInt((newStartDate.getTime() / 1000).toFixed(0)),
-        endDate: parseInt((newEndDate.getTime() / 1000).toFixed(0)),
-      })
-      .then((res) => {
-        props.update();
-      });
+    props.saveDates(sDate, eDate);
   }
 }
 

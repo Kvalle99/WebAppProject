@@ -24,12 +24,17 @@ TripRouter.post(
 TripRouter.post(
   "/saveDates",
   async (
-    req: Request<{}, {}, { id: string; startDate: number; endDate: number }>,
+    req: Request<
+      {},
+      {},
+      { userId: number; tripId: string; startDate: number; endDate: number }
+    >,
     res: Response
   ) => {
     try {
       await tripService.changeDates(
-        req.body.id,
+        req.body.userId,
+        req.body.tripId,
         new Date(req.body.startDate * 1000),
         new Date(req.body.endDate * 1000)
       );

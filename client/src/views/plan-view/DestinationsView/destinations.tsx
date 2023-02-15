@@ -3,27 +3,29 @@ import React, { useEffect, useState } from "react";
 import DestinationCard from "../../../components/DestinationCard/DestinationCard";
 
 interface Destination {
-  name: string;
+  city: string;
   country: string;
 }
 
 interface destProps {
-  tripId?: string;
-  update: Function;
+  //tripId?: string;
+  changeDest: Function;
 }
 
 function Destinations(props: destProps) {
   const [dest, setDest] = useState<Destination[] | null>(null);
+
   useEffect(() => {
     getDestinations();
   }, []);
 
+  console.log(dest);
   return (
     <div className="col-lg-4">
       {dest?.map((destination) => (
         <div>
           <DestinationCard
-            destinationName={destination.name}
+            destinationName={destination.city}
             destinationDescription={"You should go here"}
             destinationPicture={"./SampleCity.jpg"}
             destinationActivities={[
@@ -31,7 +33,7 @@ function Destinations(props: destProps) {
               "Another activity",
               "Boring activity",
             ]}
-            changeDest={changeDestination}
+            changeDest={props.changeDest}
           />
         </div>
       ))}
@@ -39,21 +41,13 @@ function Destinations(props: destProps) {
   );
 
   function getDestinations() {
+    console.log("getting dests");
     const dest = axios
       .get("http://localhost:8080/destination/getDestinations")
       .then((res) => {
         setDest(res.data);
       });
     return;
-  }
-
-  function changeDestination(name: string) {
-    const res = axios
-      .post("http://localhost:8080/trip/changeDestination", {
-        id: props.tripId,
-        destinationName: name,
-      })
-      .then(() => props.update());
   }
 }
 

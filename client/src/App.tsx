@@ -11,6 +11,8 @@ function App() {
   //const [testHook, changeHook] = useState(0);
   const [currentView, setView] = useState("Destination");
   const [myTrips, setTrips] = useState<string[]>([]);
+  const [choosenTrip, setChoosenTrip] = useState<string>("");
+  const [myTrip, setTrip] = useState<any | null>(null);
 
   const userId = 11; //to be set at log-in wit token later on
 
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavbarComponent trips={myTrips} />
+      <NavbarComponent chooseTrip={changeTrip} trips={myTrips} />
       <div
         className="container-fluid"
         style={{ maxWidth: "1080 ", margin: "0 auto" }}
@@ -31,7 +33,12 @@ function App() {
           </div>
           <div className="col-9">
             <div className="mt-2"></div>
-            <Planner viewToShow={currentView} />
+            <Planner
+              myId={userId}
+              currentTrip={myTrip}
+              viewToShow={currentView}
+              updateTrip={updateTrip}
+            />
           </div>
         </div>
       </div>
@@ -47,17 +54,32 @@ function App() {
     setView(view);
   }
 
-  function addTrips(trips: string[]) {
-    setTrips(trips);
+  function changeTrip(trip: string) {
+    //setChoosenTrip(trip);
+    getTrip(userId, trip);
+  }
+
+  function getTrip(myId: number, tripId: string) {
+    const res = axios
+      .post("http://localhost:8080/trip/getTrip", {
+        myId: myId,
+        tripId: tripId,
+      })
+      .then((res) => {
+        setTrip(res.data);
+      });
   }
 
   function getMyTrips(myId: number) {
     const res = axios
       .post("http://localhost:8080/trip/getMyTrips", { id: myId })
       .then((res) => {
-        console.log("got Trips: ", res.data);
         setTrips(res.data);
+        getTrip(userId, res.data[0]);
       });
+  }
+  function updateTrip() {
+    getTrip(userId, myTrip.id);
   }
 }
 
