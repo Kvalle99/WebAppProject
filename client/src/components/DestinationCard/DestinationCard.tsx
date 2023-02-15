@@ -28,7 +28,11 @@ function DestinationCard(props: DestinationCardProps) {
             <li>{props.destinationActivities[2]}</li>
           </ul>
         </Card.Text>
-        <Button variant="primary" onClick={() => newDestination()}>
+        <Button
+          variant="primary"
+          role="changeDest"
+          onClick={() => newDestination()}
+        >
           Go here
         </Button>
       </Card.Body>

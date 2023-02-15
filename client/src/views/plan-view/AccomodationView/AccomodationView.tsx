@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import AccomodationCard from "../../components/accomodationCard/accomodationCard";
+import AccomodationCard from "../../../components/accomodationCard/accomodationCard";
 import "./AccomodationView.css";
 
 export interface Accomodation {
@@ -26,7 +26,7 @@ function AccomodationView(props: accomodationViewProps) {
   return (
     <ul>
       {accomodations?.map((accomodation) => (
-        <li>
+        <li key={accomodation.name}>
           <AccomodationCard
             accomodationName={accomodation.name}
             accomodationStars={accomodation.rating}
@@ -42,7 +42,7 @@ function AccomodationView(props: accomodationViewProps) {
   );
 
   function changeAccomodation(name: string) {
-    console.log("change to: ", name);
+    //console.log("change to: ", name);
     const res = axios
       .post("http://localhost:8080/trip/changeAccomodations", {
         id: props.tripId,
@@ -54,7 +54,7 @@ function AccomodationView(props: accomodationViewProps) {
   }
   async function getAccomodations() {
     const res = await axios
-      .get("http://localhost:8080/accomodation/getAccomodations", {})
+      .get("http://localhost:8080/accomodation/getAccomodations")
       .then((res) => {
         setAccomodations(res.data);
       });

@@ -1,6 +1,5 @@
 import { Activity } from "../model/activity";
 import { IActivityService } from "./iactivityservice";
-import { ourDate } from "../model/date";
 
 export class ActivityService implements IActivityService {
   activities: Activity[] = [

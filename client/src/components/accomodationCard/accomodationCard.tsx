@@ -8,7 +8,7 @@ interface AccomodationCardProps {
   accomodationPriceFrom: number;
   accomodationDescription: string;
   accomodationCity: string;
-  accomodationImgSrc: string;
+  accomodationImgSrc?: string;
   changeBooking: Function;
 }
 
@@ -40,7 +40,11 @@ function AccomodationCard(props: AccomodationCardProps) {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="card-title">{props.accomodationName}</h4>
 
-                <button className="btn btn-success" onClick={updateHotel}>
+                <button
+                  className="btn btn-success"
+                  role="changeAcc"
+                  onClick={updateHotel}
+                >
                   Choose
                 </button>
               </div>

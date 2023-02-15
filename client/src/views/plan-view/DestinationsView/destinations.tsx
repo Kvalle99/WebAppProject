@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import DestinationCard from "../../../components/DestinationCard/DestinationCard";
 
 interface Destination {
-  city: string;
+  name: string;
   country: string;
 }
 
@@ -23,7 +23,7 @@ function Destinations(props: destProps) {
       {dest?.map((destination) => (
         <div>
           <DestinationCard
-            destinationName={destination.city}
+            destinationName={destination.name}
             destinationDescription={"You should go here"}
             destinationPicture={"./SampleCity.jpg"}
             destinationActivities={[
@@ -40,7 +40,7 @@ function Destinations(props: destProps) {
 
   function getDestinations() {
     const dest = axios
-      .get("http://localhost:8080/destination/getDestinations", {})
+      .get("http://localhost:8080/destination/getDestinations")
       .then((res) => {
         setDest(res.data);
       });

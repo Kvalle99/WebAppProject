@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import CalendarComponent from "../components/Calendar/Calendar";
-import AccomodationView from "./plan-view/AccomodationView";
+import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
 import Destinations from "./plan-view/DestinationsView/destinations";
 
 interface PlannerProps {

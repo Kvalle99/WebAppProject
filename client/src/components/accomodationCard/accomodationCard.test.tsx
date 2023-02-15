@@ -1,20 +1,24 @@
+import { render } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import AccomodationCard from "./accomodationCard";
 
-it("It should mount", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(
+test("When accomodation change, the change booking function should be called", async () => {
+  let newAcc = "";
+  render(
     <AccomodationCard
-      accomodationName="hej"
-      accomodationPriceFrom={1}
+      accomodationName={"test"}
+      accomodationPriceFrom={50}
       accomodationStars={1}
-      accomodationDescription={""}
-      accomodationCity={""}
-      accomodationImgSrc={""}
-      changeBooking={() => {}}
-    />,
-    div
+      accomodationDescription={"Test description"}
+      accomodationCity={"Gothenburg"}
+      accomodationImgSrc={"hotel1.jpg"}
+      changeBooking={(name: string) => {
+        newAcc = name;
+      }}
+    />
   );
-  ReactDOM.unmountComponentAtNode(div);
+
+  expect(newAcc == "test");
 });
