@@ -2,11 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap.js";
+import Popper from "popper.js";
 
 import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
 import Destinations from "./views/plan-view/DestinationsView/destinations";
-import AccomodationView from "./views/plan-view/AccomodationView";
+import AccomodationView from "./views/plan-view/AccomodationView/AccomodationView";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 

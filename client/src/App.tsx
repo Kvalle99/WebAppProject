@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Destinations from "./views/plan-view/DestinationsView/destinations";
-import CalendarComponent from "./components/Calendar/Calendar";
-import Navbar from "./components/Navbar/Navbar";
+import NavbarComponent from "./components/Navbar/Navbar";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
@@ -12,9 +10,17 @@ function App() {
   //var myTrip: any;
   //const [testHook, changeHook] = useState(0);
   const [currentView, setView] = useState("Destination");
+  const [myTrips, setTrips] = useState<string[]>([]);
+
+  const userId = 11; //to be set at log-in wit token later on
+
+  useEffect(() => {
+    getMyTrips(userId);
+  }, []);
+
   return (
     <div className="App">
-      <Navbar />
+      <NavbarComponent trips={myTrips} />
       <div
         className="container-fluid"
         style={{ maxWidth: "1080 ", margin: "0 auto" }}
@@ -39,6 +45,19 @@ function App() {
   function changeView(view: string) {
     //console.log("new view: ", view);
     setView(view);
+  }
+
+  function addTrips(trips: string[]) {
+    setTrips(trips);
+  }
+
+  function getMyTrips(myId: number) {
+    const res = axios
+      .post("http://localhost:8080/trip/getMyTrips", { id: myId })
+      .then((res) => {
+        console.log("got Trips: ", res.data);
+        setTrips(res.data);
+      });
   }
 }
 

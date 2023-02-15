@@ -9,7 +9,9 @@ export class TripService implements ITripService {
     new Trip(
       "6845198231",
       [],
+      11,
       "new york",
+
       new Date(2023, 11, 11),
       new Date(2023, 11, 19),
       "testHotel"
@@ -17,6 +19,7 @@ export class TripService implements ITripService {
     new Trip(
       "6845191",
       [],
+      11,
       "Chiang Mai",
       new Date(2023, 10, 24),
       new Date(2023, 11, 5),
@@ -25,6 +28,7 @@ export class TripService implements ITripService {
     new Trip(
       "11111111",
       [],
+      11,
       "Paris",
       new Date(2024, 1, 7),
       new Date(2024, 2, 5),
@@ -49,8 +53,26 @@ export class TripService implements ITripService {
     throw new Error("No such trip");
   }
 
-  async getMyTrip(myId: string) {
-    return this.findTrip(myId);
+  findAllTrips(userId: number) {
+    var toReturn: string[] = [];
+    for (let i: number = 0; i < this.tripList.length; i++) {
+      if (userId == this.tripList[i].user) {
+        toReturn.push(this.tripList[i].id);
+      }
+    }
+    return toReturn;
+  }
+
+  async getMyTrips(myId: number) {
+    return this.findAllTrips(myId);
+  }
+
+  async getMyTrip(myId: number, tripId: string) {
+    const trip = this.findTrip(tripId);
+    if (trip.user == myId) {
+      return trip;
+    }
+    return;
   }
 
   async changeDestination(id: string, destination: string) {

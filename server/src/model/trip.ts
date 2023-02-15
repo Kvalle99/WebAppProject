@@ -9,10 +9,12 @@ export class Trip {
   endDate?: Date;
   hotel?: string;
   activities: Activity[];
+  user: number;
 
   constructor(
     id: string,
     activities: Activity[],
+    user: number,
     destination?: string,
     startDate?: Date,
     endDate?: Date,
@@ -24,6 +26,7 @@ export class Trip {
     this.endDate = endDate;
     this.hotel = hotel;
     this.activities = activities;
+    this.user = user;
   }
 
   removeActivity(activity: Activity) {

@@ -8,9 +8,12 @@ export const TripRouter = express.Router();
 
 TripRouter.post(
   "/getTrip",
-  async (req: Request<{}, {}, { id: string }>, res: Response<Trip>) => {
+  async (
+    req: Request<{}, {}, { myId: number; tripId: string }>,
+    res: Response<Trip>
+  ) => {
     try {
-      const trip = await tripService.getMyTrip(req.body.id);
+      const trip = await tripService.getMyTrip(req.body.myId, req.body.tripId);
       res.status(200).send(trip);
     } catch (e: any) {
       res.status(406).send(e.message);
@@ -64,6 +67,19 @@ TripRouter.post(
       const id: string = req.body.id;
       const success = await tripService.changeDestination(id, dest);
       res.status(200).send(success);
+    } catch (e: any) {
+      res.status(500).send(e.message);
+    }
+  }
+);
+
+TripRouter.post(
+  "/GetMyTrips",
+  async (req: Request<{}, {}, { id: number }>, res: Response<string[]>) => {
+    try {
+      const userId: number = req.body.id;
+      const tripList = await tripService.getMyTrips(userId);
+      res.status(200).send(tripList);
     } catch (e: any) {
       res.status(500).send(e.message);
     }
