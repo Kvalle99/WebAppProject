@@ -34,7 +34,7 @@ function Planner(props: PlannerProps) {
   if (props.viewToShow === "Accomodation") {
     return (
       <AccomodationView
-        tripId={TripId}
+        changeAccomodation={updateAcc}
         //update={updateTrip}
       />
     );
@@ -70,10 +70,26 @@ function Planner(props: PlannerProps) {
   function changeDestination(name: string) {
     const res = axios
       .post("http://localhost:8080/trip/changeDestination", {
-        id: props.currentTrip.id,
+        userId: props.myId,
+        tripId: props.currentTrip.id,
         destinationName: name,
       })
       .then(() => props.updateTrip());
+  }
+  function updateAcc(name: string) {
+    changeAccomodation(name);
+  }
+  function changeAccomodation(name: string) {
+    console.log("change to: ", name);
+    const res = axios
+      .post("http://localhost:8080/trip/changeAccomodations", {
+        userId: props.myId,
+        tripId: props.currentTrip.id,
+        accomodationName: name,
+      })
+      .then((res) => {
+        props.updateTrip();
+      });
   }
 }
 

@@ -20,7 +20,7 @@ test("Should send GET to localhost", async () => {
       },
     ],
   });
-  render(<AccomodationView />);
+  render(<AccomodationView changeAccomodation={() => {}} />);
   expect(mockedAxios.get).toHaveBeenCalledWith(
     "http://localhost:8080/accomodation/getAccomodations"
   );
@@ -46,7 +46,7 @@ test("Accomodation change, the change call to backend should be executed", async
   mockedAxios.post.mockResolvedValue({
     status: 200,
   });
-  render(<AccomodationView />);
+  render(<AccomodationView changeAccomodation={() => {}} />);
   const button = await screen.findByRole("changeAcc");
   act(() => {
     fireEvent.click(button);

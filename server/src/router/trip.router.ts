@@ -48,13 +48,22 @@ TripRouter.post(
 TripRouter.post(
   "/changeAccomodations",
   async (
-    req: Request<{}, {}, { id: string; accomodationName: string }>,
+    req: Request<
+      {},
+      {},
+      { userId: number; tripId: string; accomodationName: string }
+    >,
     res: Response<boolean>
   ) => {
     try {
       const hotel: string = req.body.accomodationName;
-      const id: string = req.body.id;
-      const success = await tripService.changeAccomodation(id, hotel);
+      const tripId: string = req.body.tripId;
+      const userId: number = req.body.userId;
+      const success = await tripService.changeAccomodation(
+        userId,
+        tripId,
+        hotel
+      );
       res.status(200).send(success);
     } catch (e: any) {
       res.status(500).send(e.message);
@@ -64,13 +73,18 @@ TripRouter.post(
 TripRouter.post(
   "/changeDestination",
   async (
-    req: Request<{}, {}, { id: string; destinationName: string }>,
+    req: Request<
+      {},
+      {},
+      { userId: number; tripId: string; destinationName: string }
+    >,
     res: Response<boolean>
   ) => {
     try {
       const dest: string = req.body.destinationName;
-      const id: string = req.body.id;
-      const success = await tripService.changeDestination(id, dest);
+      const tripId: string = req.body.tripId;
+      const userId: number = req.body.userId;
+      const success = await tripService.changeDestination(userId, tripId, dest);
       res.status(200).send(success);
     } catch (e: any) {
       res.status(500).send(e.message);

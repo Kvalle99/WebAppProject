@@ -12,7 +12,7 @@ export interface Accomodation {
   city: string;
 }
 interface accomodationViewProps {
-  tripId?: string;
+  changeAccomodation: Function;
 }
 
 function AccomodationView(props: accomodationViewProps) {
@@ -42,15 +42,7 @@ function AccomodationView(props: accomodationViewProps) {
   );
 
   function changeAccomodation(name: string) {
-    //console.log("change to: ", name);
-    const res = axios
-      .post("http://localhost:8080/trip/changeAccomodations", {
-        id: props.tripId,
-        accomodationName: name,
-      })
-      .then((res) => {
-        console.log(res.status);
-      });
+    props.changeAccomodation(name);
   }
   async function getAccomodations() {
     const res = await axios

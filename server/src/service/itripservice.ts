@@ -3,7 +3,11 @@ import { ourDate } from "../model/date";
 
 export interface ITripService {
   // Adds an activity to the trips activity list
-  changeAccomodation(id: string, hotel: string): Promise<boolean>;
+  changeAccomodation(
+    userId: number,
+    tripId: string,
+    hotel: string
+  ): Promise<boolean>;
 
   // Returns list of all activities planned
 

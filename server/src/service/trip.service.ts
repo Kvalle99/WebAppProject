@@ -75,9 +75,9 @@ export class TripService implements ITripService {
     return;
   }
 
-  async changeDestination(id: string, destination: string) {
-    var myTrip: Trip | null = this.findTrip(id);
-    if (myTrip) {
+  async changeDestination(userId: number, tripId: string, destination: string) {
+    var myTrip: Trip | null = this.findTrip(tripId);
+    if (myTrip && myTrip.user == userId) {
       myTrip.destination = destination;
     }
     return true;
@@ -86,9 +86,13 @@ export class TripService implements ITripService {
     return this.findTrip(id).hotel;
   }
 
-  async changeAccomodation(id: string, accomodation: string) {
-    var myTrip: Trip | null = this.findTrip(id);
-    if (myTrip) {
+  async changeAccomodation(
+    userId: number,
+    tripId: string,
+    accomodation: string
+  ) {
+    var myTrip: Trip | null = this.findTrip(tripId);
+    if (myTrip && myTrip.user == userId) {
       myTrip.hotel = accomodation;
     }
     return true;

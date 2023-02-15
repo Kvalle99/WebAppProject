@@ -11,7 +11,6 @@ function App() {
   //const [testHook, changeHook] = useState(0);
   const [currentView, setView] = useState("Destination");
   const [myTrips, setTrips] = useState<string[]>([]);
-  const [choosenTrip, setChoosenTrip] = useState<string>("");
   const [myTrip, setTrip] = useState<any | null>(null);
 
   const userId = 11; //to be set at log-in wit token later on
