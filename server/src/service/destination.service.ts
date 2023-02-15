@@ -6,6 +6,8 @@ export class DestinationService {
     new Destination("Chiang Mai", "Thailand"),
     new Destination("Paris", "France"),
     new Destination("Gothenburg", "Sweden"),
+    new Destination("Stockholm", "Sweden"),
+    new Destination("Madrid", "Spain"),
   ];
 
   getDestinations() {
