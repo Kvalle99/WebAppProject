@@ -1,10 +1,12 @@
 import React, { FC } from "react";
+import { ListGroupItem } from "react-bootstrap";
 import styles from "./sidenav-listitem.module.css";
 
 interface SidenavListitemProps {
   listText: string;
   lastChild?: Boolean;
   changView: Function;
+  currentPage: string;
 }
 
 /* const SidenavListitem: FC<SidenavListitemProps> = () => (
@@ -16,18 +18,20 @@ interface SidenavListitemProps {
 function SidenavListitem(props: SidenavListitemProps) {
   if (props.lastChild == null) {
     return (
-      <li
-        className="list-group-item"
+      <ListGroupItem
         role="button"
         onClick={() => click(props.listText)}
+        variant={currentChoice() ? "success" : ""}
       >
         {props.listText}
-      </li>
+      </ListGroupItem>
     );
   } else {
     return (
       <li
-        className="list-group-item"
+        className={
+          "list-group-item " + (currentChoice() ? "background-color:green" : "")
+        }
         id="lastChild"
         role="button"
         onClick={props.changView(props.listText)}
@@ -39,6 +43,17 @@ function SidenavListitem(props: SidenavListitemProps) {
 
   function click(s: string) {
     props.changView(s);
+  }
+
+  function currentChoice(): boolean {
+    console.log("chekcing current: ");
+    console.log(props.currentPage);
+    console.log(props.listText);
+    if (props.currentPage == props.listText) {
+      console.log("true");
+      return true;
+    }
+    return false;
   }
 }
 

@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Container, Row } from "react-bootstrap";
 import AccomodationCard from "../../../components/accomodationCard/accomodationCard";
 import "./AccomodationView.css";
 
@@ -13,6 +14,7 @@ export interface Accomodation {
 }
 interface accomodationViewProps {
   changeAccomodation: Function;
+  currentAcc: string;
 }
 
 function AccomodationView(props: accomodationViewProps) {
@@ -24,9 +26,9 @@ function AccomodationView(props: accomodationViewProps) {
     getAccomodations();
   }, []);
   return (
-    <ul>
-      {accomodations?.map((accomodation) => (
-        <li key={accomodation.name}>
+    <Container>
+      <Row xs={1} md={1}>
+        {accomodations?.map((accomodation) => (
           <AccomodationCard
             accomodationName={accomodation.name}
             accomodationStars={accomodation.rating}
@@ -35,10 +37,12 @@ function AccomodationView(props: accomodationViewProps) {
             accomodationDescription={accomodation.description}
             accomodationImgSrc={"hotel1.jpg"}
             changeBooking={changeAccomodation}
+            key={accomodation.name}
+            currentAccomodation={props.currentAcc}
           />
-        </li>
-      ))}
-    </ul>
+        ))}
+      </Row>
+    </Container>
   );
 
   function changeAccomodation(name: string) {

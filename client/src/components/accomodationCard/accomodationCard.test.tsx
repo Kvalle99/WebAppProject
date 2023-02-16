@@ -17,6 +17,7 @@ test("When accomodation change, the change booking function should be called", a
       changeBooking={(name: string) => {
         newAcc = name;
       }}
+      currentAccomodation={""}
     />
   );
 

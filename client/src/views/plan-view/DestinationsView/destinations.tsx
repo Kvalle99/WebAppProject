@@ -16,7 +16,6 @@ interface destProps {
 }
 function Destinations(props: destProps) {
   const [dest, setDest] = useState<Destination[] | null>(null);
-  console.log("current dest in destination: " + props.currentDest);
 
   useEffect(() => {
     getDestinations();
@@ -46,7 +45,6 @@ function Destinations(props: destProps) {
   );
 
   function getDestinations() {
-    console.log("getting dests");
     const dest = axios
       .get("http://localhost:8080/destination/getDestinations")
       .then((res) => {

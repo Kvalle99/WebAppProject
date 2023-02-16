@@ -28,7 +28,7 @@ function App() {
       >
         <div className="row">
           <div className="col-2">
-            <PlanSidenav changeView={changeView} />
+            <PlanSidenav current={currentView} changeView={changeView} />
           </div>
           <div className="col-10">
             <div className="mt-2"></div>

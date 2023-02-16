@@ -11,7 +11,6 @@ interface DestinationCardProps {
 }
 
 function DestinationCard(props: DestinationCardProps) {
-  console.log("card dest: " + props.currentDestination);
   return (
     <Card
       className={"border border-4 " + (currentChoice() ? "border-success" : "")}
