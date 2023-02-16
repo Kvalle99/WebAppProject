@@ -11,41 +11,20 @@ interface Destination {
 
 interface destProps {
   //tripId?: string;
+  currentDest: string;
   changeDest: Function;
 }
-
 function Destinations(props: destProps) {
   const [dest, setDest] = useState<Destination[] | null>(null);
+  console.log("current dest in destination: " + props.currentDest);
 
   useEffect(() => {
     getDestinations();
   }, []);
 
-  const card = (
-    destinationName: string
-    //destinationDescription:string,
-    //destinationPicture:string,
-    //destinationActivities:string[], changeDest:Function
-  ) => {
-    return (
-      <DestinationCard
-        destinationName={destinationName}
-        destinationDescription={"You should go here"}
-        destinationPicture={"./SampleCity.jpg"}
-        destinationActivities={[
-          "One activity",
-          "Another activity",
-          "Boring activity",
-        ]}
-        changeDest={props.changeDest}
-        key={destinationName}
-      />
-    );
-  };
-  console.log(dest);
   return (
     <Container>
-      <Row xs={1} md={4}>
+      <Row xs={1} md={3}>
         {dest?.map((destination) => (
           <div>
             <DestinationCard
@@ -57,6 +36,7 @@ function Destinations(props: destProps) {
                 "Another activity",
                 "Boring activity",
               ]}
+              currentDestination={props.currentDest}
               changeDest={props.changeDest}
             />
           </div>

@@ -27,10 +27,10 @@ function App() {
         style={{ maxWidth: "1080 ", margin: "0 auto" }}
       >
         <div className="row">
-          <div className="col-3">
+          <div className="col-2">
             <PlanSidenav changeView={changeView} />
           </div>
-          <div className="col-9">
+          <div className="col-10">
             <div className="mt-2"></div>
             <Planner
               myId={userId}
@@ -66,6 +66,8 @@ function App() {
       })
       .then((res) => {
         setTrip(res.data);
+        console.log("current: ");
+        console.log(res.data);
       });
   }
 

@@ -7,11 +7,16 @@ interface DestinationCardProps {
   destinationPicture: string;
   destinationActivities: string[];
   changeDest: Function;
+  currentDestination?: string;
 }
 
 function DestinationCard(props: DestinationCardProps) {
+  console.log("card dest: " + props.currentDestination);
   return (
-    <Card style={{ width: "18rem" }}>
+    <Card
+      className={"border border-4 " + (currentChoice() ? "border-success" : "")}
+      style={{ width: "18rem", margin: "5px" }}
+    >
       <Card.Img
         className="img-fluid"
         variant="top"
@@ -41,6 +46,13 @@ function DestinationCard(props: DestinationCardProps) {
 
   function newDestination() {
     props.changeDest(props.destinationName);
+  }
+
+  function currentChoice(): boolean {
+    if (props.destinationName == props.currentDestination) {
+      return true;
+    }
+    return false;
   }
 }
 

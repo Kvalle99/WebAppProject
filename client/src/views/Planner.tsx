@@ -15,10 +15,15 @@ interface PlannerProps {
 const TripId = "6845191";
 
 function Planner(props: PlannerProps) {
-  //const [myTrip, setTrip] = useState<any | null>(null);
-
   if (props.viewToShow === "Destination") {
-    return <Destinations changeDest={updateDest} />;
+    return (
+      <Destinations
+        changeDest={updateDest}
+        currentDest={
+          props.currentTrip?.destination ? props.currentTrip.destination : ""
+        }
+      />
+    );
   }
 
   if (props.viewToShow === "Duration") {
