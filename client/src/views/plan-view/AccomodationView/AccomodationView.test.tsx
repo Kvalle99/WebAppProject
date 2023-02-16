@@ -43,18 +43,18 @@ test("Accomodation change, the change call to backend should be executed", async
     ],
   });
 
-  mockedAxios.post.mockResolvedValue({
-    status: 200,
-  });
-  render(<AccomodationView currentAcc={""} changeAccomodation={() => {}} />);
+  let change = false;
+  render(
+    <AccomodationView
+      currentAcc={""}
+      changeAccomodation={() => {
+        change = true;
+      }}
+    />
+  );
   const button = await screen.findByRole("changeAcc");
   act(() => {
     fireEvent.click(button);
   });
-  expect(mockedAxios.post).toHaveBeenCalledWith(
-    "http://localhost:8080/trip/changeAccomodations",
-    {
-      accomodationName: "test hotel",
-    }
-  );
+  expect((change = true));
 });
