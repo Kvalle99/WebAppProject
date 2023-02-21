@@ -1,14 +1,22 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 import { Button, Card } from 'react-bootstrap';
 
 interface ActivityProps {
     activityName : string;
     activityDesc : string;
     activityAdder : Function;
-    chosenActivities : string[] | null;
+    id : any
+
 }
 
-function activityCard(props: ActivityProps) {
+function ActivityCard(props: ActivityProps) {
+  const [chosenActivs, updateActs] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    getChosenActivitiesNames();
+  }, [props.id]);
+
     return (
         <>
         <Card
@@ -45,11 +53,11 @@ function activityCard(props: ActivityProps) {
     function getActivityChosen() : boolean {
       var tripChosen : boolean = false;
 
-      if (props.chosenActivities == null) {
+      if (chosenActivs == null) {
         return false;
       }
 
-      props.chosenActivities.forEach(function(chosenName) {
+      chosenActivs.forEach(function(chosenName) {
         console.log(chosenName + " and " + props.activityName)
         if (chosenName == props.activityName) {
           tripChosen = true;
@@ -58,7 +66,18 @@ function activityCard(props: ActivityProps) {
     
       return tripChosen;
     }
+
+    function getChosenActivitiesNames() {
+      const res =  axios
+        .post("http://localhost:8080/trip/getActivities", {
+          id : props.id
+        })
+        .then((res) => {
+          updateActs(res.data);
+        })
+      
+    }
 }
 
-export default activityCard;
+export default ActivityCard;
 
