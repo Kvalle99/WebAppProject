@@ -75,7 +75,7 @@ function Planner(props: PlannerProps) {
       .post("http://localhost:8080/trip/handleActivity",
         {
           activity : act,
-          id : props.currentTrip
+          id : props.currentTrip.id
         }
       )
       .then((res) => {

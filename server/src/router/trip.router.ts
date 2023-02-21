@@ -29,6 +29,7 @@ TripRouter.post(
     res: Response
   ) => {
     try {
+      console.log("router " + req.body.activity + " " + req.body.id)
       await tripService.handleActivity(req.body.activity, req.body.id);
       res.status(200);
     } catch (e: any) {

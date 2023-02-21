@@ -30,12 +30,12 @@ export class Trip {
   }
 
   removeActivity(activity: Activity) {
-    var index = this.activities!.indexOf(activity);
-    this.activities!.splice(index, 1);
+    var index = this.activities.indexOf(activity);
+    this.activities.splice(index, 1);
   }
 
   addActivity(activity: Activity) {
-    this.activities!.push(activity);
+    this.activities.push(activity);
   }
 
   getActivitiesByName() : string[] {

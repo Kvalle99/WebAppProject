@@ -129,18 +129,18 @@ export class TripService implements ITripService {
     var activities : Activity[] = await this.getActivities(id);
 
     activities.forEach(function (act) {
+      console.log(act.getName())
       if (act.getName() === activity) {
         activitySelected = act;
       }
     })
 
-    console.log(activity)
-
     if (activitySelected != null) {
       this.removeActivities(id, activitySelected)
+      console.log("activity was prev selected ")
     }
-    if (activitySelected) {
-      this.addActivities(id, activitySelected)
+    if (activitySelected = null) {
+      // TODO: add activity
     }
   }
 
