@@ -10,10 +10,10 @@ interface Destination {
 }
 
 interface destProps {
-  //tripId?: string;
   currentDest: string;
   changeDest: Function;
 }
+
 function Destinations(props: destProps) {
   const [dest, setDest] = useState<Destination[] | null>(null);
 

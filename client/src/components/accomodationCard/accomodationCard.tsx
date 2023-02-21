@@ -67,9 +67,6 @@ function AccomodationCard(props: AccomodationCardProps) {
   }
 
   function currentChoice(): boolean {
-    console.log("current choice: ");
-    console.log(props.accomodationName);
-    console.log(props.currentAccomodation);
     if (props.accomodationName == props.currentAccomodation) {
       return true;
     }

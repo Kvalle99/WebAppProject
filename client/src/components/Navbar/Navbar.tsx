@@ -18,6 +18,8 @@ interface NavbarProps {
 }
 
 function NavbarComponent(props: NavbarProps) {
+  var searchValue: string = "";
+
   return (
     <Navbar bg="success" expand="lg">
       <Navbar.Brand href="/">
@@ -45,17 +47,6 @@ function NavbarComponent(props: NavbarProps) {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Nav className="ms-auto">
-        <Form className="d-flex">
-          <Form.Control
-            type="search"
-            placeholder="Search"
-            className="me-2"
-            aria-label="Search"
-          />
-          <Button variant="light">Search</Button>
-        </Form>
-      </Nav>
       <Nav className="ms-auto">
         <div>
           <a href="#">
