@@ -51,7 +51,12 @@ TripRouter.post(
     req: Request<
       {},
       {},
-      { userId: number; tripId: string; accomodationName: string }
+      {
+        userId: number;
+        tripId: string;
+        accomodationName: string;
+        accomodationCity: string;
+      }
     >,
     res: Response<boolean>
   ) => {
@@ -59,12 +64,15 @@ TripRouter.post(
       const hotel: string = req.body.accomodationName;
       const tripId: string = req.body.tripId;
       const userId: number = req.body.userId;
-      const success = await tripService.changeAccomodation(
+      const accomodationCity: string = req.body.accomodationCity;
+      await tripService.changeAccomodation(
         userId,
         tripId,
-        hotel
+        hotel,
+        accomodationCity
       );
-      res.status(200).send(success);
+      await tripService.changeDestination(userId, tripId, accomodationCity);
+      res.status(200).send();
     } catch (e: any) {
       res.status(500).send(e.message);
     }

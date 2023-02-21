@@ -49,7 +49,6 @@ function Planner(props: PlannerProps) {
   }
   return <></>;
 
-  //this shoudl link upwards
   function updateTrip() {
     props.updateTrip();
   }
@@ -84,16 +83,18 @@ function Planner(props: PlannerProps) {
       })
       .then(() => props.updateTrip());
   }
-  function updateAcc(name: string) {
-    changeAccomodation(name);
+  function updateAcc(name: string, city: string) {
+    changeAccomodation(name, city);
   }
-  function changeAccomodation(name: string) {
+
+  function changeAccomodation(name: string, city: string) {
     console.log("change to: ", name);
     const res = axios
       .post("http://localhost:8080/trip/changeAccomodations", {
         userId: props.myId,
         tripId: props.currentTrip.id,
         accomodationName: name,
+        accomodationCity: city,
       })
       .then((res) => {
         props.updateTrip();

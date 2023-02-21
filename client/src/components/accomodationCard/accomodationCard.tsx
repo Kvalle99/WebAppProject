@@ -63,7 +63,7 @@ function AccomodationCard(props: AccomodationCardProps) {
   );
 
   function updateHotel() {
-    props.changeBooking(props.accomodationName);
+    props.changeBooking(props.accomodationName, props.accomodationCity);
   }
 
   function currentChoice(): boolean {
