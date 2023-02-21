@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { reduceEachTrailingCommentRange } from "typescript";
 import CalendarComponent from "../components/Calendar/Calendar";
 import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
+import ActivityView from "./plan-view/ActivityView/activityView";
 import Destinations from "./plan-view/DestinationsView/destinations";
 
 interface PlannerProps {
@@ -15,6 +17,8 @@ interface PlannerProps {
 const TripId = "6845191";
 
 function Planner(props: PlannerProps) {
+  const [chosenActivs, updateActs] = useState<string[] | null>(null);
+
   if (props.viewToShow === "Destination") {
     return (
       <Destinations
@@ -36,6 +40,16 @@ function Planner(props: PlannerProps) {
     );
   }
 
+  if (props.viewToShow === "Activities") {
+    getChosenActivitiesNames();
+    return (
+      <ActivityView
+        actAdder={addActivity}
+        chosenActs={chosenActivs}
+      />
+    )
+  }
+
   if (props.viewToShow === "Accomodation") {
     return (
       <AccomodationView
@@ -55,6 +69,32 @@ function Planner(props: PlannerProps) {
   function updateDest(name: string) {
     changeDestination(name);
     updateTrip();
+  }
+
+  function addActivity(act : string) {
+    console.log(act)
+    const res = axios
+      .post("http://localhost:8080/trip/handleActivity",
+        {
+          activity : act,
+          id : props.currentTrip
+        }
+      )
+      .then((res) => {
+        updateTrip();
+      })
+  }
+
+  function getChosenActivitiesNames() {
+    const res =  axios
+      .post("http://localhost:8080/trip/getActivities", {
+        id : props.currentTrip.id
+      })
+      .then((res) => {
+        updateActs(res.data);
+        updateTrip();
+      })
+    
   }
 
   function saveDates(newStartDate: Date, newEndDate: Date) {
@@ -82,9 +122,11 @@ function Planner(props: PlannerProps) {
       })
       .then(() => props.updateTrip());
   }
+
   function updateAcc(name: string) {
     changeAccomodation(name);
   }
+
   function changeAccomodation(name: string) {
     console.log("change to: ", name);
     const res = axios

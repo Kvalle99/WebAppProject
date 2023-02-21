@@ -37,4 +37,17 @@ export class Trip {
   addActivity(activity: Activity) {
     this.activities!.push(activity);
   }
+
+  getActivitiesByName() : string[] {
+    var activityNames : string[] = [];
+
+    this.activities.forEach(function(activity) {
+      activityNames.push(activity.getName())
+    })
+    return activityNames;
+  }
+
+  getActivities() : Activity[] {
+    return this.activities;
+  }
 }

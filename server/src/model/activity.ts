@@ -40,4 +40,8 @@ export class Activity {
     }
     return (averageRating ||= 0); //If averageRating is undefined, set it to 0
   }
+
+  getName() : string {
+    return this.name;
+  }
 }

@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import { Activity } from "../model/activity";
 import { Trip } from "../model/trip";
 import { TripService } from "../service/trip.service";
 
@@ -17,6 +18,35 @@ TripRouter.post(
       res.status(200).send(trip);
     } catch (e: any) {
       res.status(406).send(e.message);
+    }
+  }
+);
+
+TripRouter.post(
+  "/handleActivity",
+  async (
+    req: Request<{}, {}, { activity : string, id :string}>,
+    res: Response
+  ) => {
+    try {
+      await tripService.handleActivity(req.body.activity, req.body.id);
+      res.status(200);
+    } catch (e: any) {
+      res.status(406).send(e.message);
+    }
+  }
+);
+
+
+TripRouter.post(
+  "/getActivities",
+  async (req: Request<{}, {}, { id: string }>, res: Response<string[]>) => {
+    try {
+      const userId: string = req.body.id;
+      const actList = await tripService.getActivitiesByName(userId);
+      res.status(200).send(actList);
+    } catch (e: any) {
+      res.status(500).send(e.message);
     }
   }
 );

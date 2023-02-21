@@ -11,6 +11,7 @@ export class ActivityService implements IActivityService {
       "Ok place to go but the shark on the kayak tour is way cooler"
     ),
     new Activity("Liseberg", "Rollercoasters as far as the eye can see!"),
+    new Activity("Din mamma", "I did this last night")
   ];
 
   constructor() {}
