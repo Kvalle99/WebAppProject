@@ -143,3 +143,18 @@ TripRouter.post(
     }
   }
 );
+
+TripRouter.post(
+  "/createTrip",
+  async (
+    req: Request<{}, {}, { userId: number; tripName: string }>,
+    res: Response<Trip>
+  ) => {
+    try {
+      const userId: number = req.body.userId;
+      const tripName: string = req.body.tripName;
+      const trip = await tripService.createTrip(userId, tripName);
+      res.status(200).send(trip);
+    } catch (e: any) {}
+  }
+);

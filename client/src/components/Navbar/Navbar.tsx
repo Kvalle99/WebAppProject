@@ -11,10 +11,13 @@ import {
   Nav,
 } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
+import CreateNewTripBtn from "../CreateNewTripBtn/CreateNewTripBtn";
 
 interface NavbarProps {
   chooseTrip: Function;
   trips: string[];
+  createNewTrip: Function;
+  chosenTrip: string;
 }
 
 function NavbarComponent(props: NavbarProps) {
@@ -39,13 +42,19 @@ function NavbarComponent(props: NavbarProps) {
         <Dropdown.Menu>
           <ul>
             {props.trips.map((trip) => (
-              <Dropdown.Item key={trip} onClick={() => chooseTrip(trip)}>
+              <Dropdown.Item
+                key={trip}
+                onClick={() => chooseTrip(trip)}
+                active={checkActive(trip)}
+              >
                 {trip}
               </Dropdown.Item>
             ))}
           </ul>
         </Dropdown.Menu>
       </Dropdown>
+
+      <CreateNewTripBtn createTrip={createTrip}></CreateNewTripBtn>
 
       <Nav className="ms-auto">
         <div>
@@ -65,6 +74,15 @@ function NavbarComponent(props: NavbarProps) {
 
   function chooseTrip(trip: string) {
     props.chooseTrip(trip);
+  }
+
+  function checkActive(trip: string): boolean {
+    /*     console.log("trip: ", trip, ", chosenTrip: ", props.chosenTrip, ", t/f: ", trip === props.chosenTrip)
+     */ return trip === props.chosenTrip;
+  }
+
+  function createTrip(tripName: string) {
+    props.createNewTrip(tripName);
   }
 }
 

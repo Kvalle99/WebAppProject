@@ -4,6 +4,7 @@ import { ourDate } from "./date";
 export class Trip {
   //TODO: replace hotel with Accomodation object, and destianation with Destinaiton-object
   id: string;
+  name: string;
   destination?: string;
   startDate?: Date;
   endDate?: Date;
@@ -13,6 +14,7 @@ export class Trip {
 
   constructor(
     id: string,
+    name: string,
     activities: Activity[],
     user: number,
     destination?: string,
@@ -21,6 +23,7 @@ export class Trip {
     hotel?: string
   ) {
     this.id = id;
+    this.name = name;
     this.destination = destination;
     this.startDate = startDate;
     this.endDate = endDate;
@@ -28,6 +31,8 @@ export class Trip {
     this.activities = activities;
     this.user = user;
   }
+
+  
 
   removeActivity(activity: Activity) {
     var index = this.activities.indexOf(activity);

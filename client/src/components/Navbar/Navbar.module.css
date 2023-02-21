@@ -36,3 +36,7 @@
 .navBarStyle {
   color: rgb(34, 177, 76);
 }
+
+.createTripBtn {
+  margin-left: 5px;
+}

@@ -12,6 +12,9 @@ function App() {
   const [currentView, setView] = useState("Destination");
   const [myTrips, setTrips] = useState<string[]>([]);
   const [myTrip, setTrip] = useState<any | null>(null);
+  const [chosenTripId, setTripId] = useState<string>("");
+  // should be able to remove chosenTripId if we set a model-class/interface
+  // for the Trip in the frontend or smth
 
   const userId = 11; //to be set at log-in wit token later on
 
@@ -21,7 +24,12 @@ function App() {
 
   return (
     <div className="App">
-      <NavbarComponent chooseTrip={changeTrip} trips={myTrips} />
+      <NavbarComponent
+        chooseTrip={changeTrip}
+        trips={myTrips}
+        createNewTrip={createNewTrip}
+        chosenTrip={chosenTripId}
+      />
       <div
         className="container-fluid"
         style={{ maxWidth: "1080 ", margin: "0 auto" }}
@@ -56,6 +64,22 @@ function App() {
   function changeTrip(trip: string) {
     //setChoosenTrip(trip);
     getTrip(userId, trip);
+    setTripId(trip);
+  }
+
+  function createNewTrip(tripName: string) {
+    const res = axios
+      .post("http://localhost:8080/trip/createTrip", {
+        userId,
+        tripName,
+      })
+      .then((res) => {
+        setTrip(res.data);
+        setTripId(res.data.id);
+      })
+      .then(() => {
+        getMyTrips(userId);
+      });
   }
 
   function getTrip(myId: number, tripId: string) {
@@ -68,6 +92,7 @@ function App() {
         setTrip(res.data);
         console.log("current: ");
         console.log(res.data);
+        setTripId(res.data.id);
       });
   }
 
