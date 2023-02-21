@@ -63,13 +63,10 @@ function AccomodationCard(props: AccomodationCardProps) {
   );
 
   function updateHotel() {
-    props.changeBooking(props.accomodationName);
+    props.changeBooking(props.accomodationName, props.accomodationCity);
   }
 
   function currentChoice(): boolean {
-    console.log("current choice: ");
-    console.log(props.accomodationName);
-    console.log(props.currentAccomodation);
     if (props.accomodationName == props.currentAccomodation) {
       return true;
     }

@@ -6,7 +6,8 @@ export interface ITripService {
   changeAccomodation(
     userId: number,
     tripId: string,
-    hotel: string
+    hotel: string,
+    accomodationCity:string
   ): Promise<boolean>;
 
   // Returns list of all activities planned
