@@ -1,30 +1,30 @@
-import express, {Request,Response} from "express";
+import express, { Request, Response } from "express";
 import { ActivityService } from "../service/activity.service";
 
 const activityService = new ActivityService();
 
 export const ActivityRouter = express.Router();
 
-ActivityRouter.get("/getDescription", async (
-    req: Request<{}, {}, {}>,
-    res: Response<string>
-) => {
+ActivityRouter.get(
+  "/getDescription",
+  async (req: Request<{}, {}, {}>, res: Response<string>) => {
     try {
-        const description = await activityService.getDescription();
-        res.status(200).send(description);
+      const description = await activityService.getDescription();
+      res.status(200).send(description);
     } catch (e: any) {
-        res.status(500).send(e.message);
+      res.status(500).send(e.message);
     }
-});
+  }
+);
 
-ActivityRouter.get("/getRating", async (
-    req: Request<{},{},{}>,
-    res: Response<string>
-) => {
+ActivityRouter.get(
+  "/getRating",
+  async (req: Request<{}, {}, {}>, res: Response<string>) => {
     try {
-        const rating = await activityService.getRating();
-        res.status(200).send(rating.toLocaleString());
+      const rating = await activityService.getRating();
+      res.status(200).send(rating.toLocaleString());
     } catch (e: any) {
-        res.status(500).send(e.message)
+      res.status(500).send(e.message);
     }
-});
+  }
+);

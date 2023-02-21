@@ -41,7 +41,9 @@ function Planner(props: PlannerProps) {
       <AccomodationView
         changeAccomodation={updateAcc}
         currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
-        //update={updateTrip}
+        currentDest={
+          props.currentTrip?.destination ? props.currentTrip.destination : ""
+        }
       />
     );
   }

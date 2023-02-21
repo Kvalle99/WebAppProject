@@ -10,11 +10,12 @@ export interface Accomodation {
   price: number;
   description: string;
   //TODO: add Destination object as city, instead of "City" (city),
-  city: string;
+  city: { city: string; country: string };
 }
 interface accomodationViewProps {
   changeAccomodation: Function;
   currentAcc: string;
+  currentDest: string;
 }
 
 function AccomodationView(props: accomodationViewProps) {
@@ -33,7 +34,7 @@ function AccomodationView(props: accomodationViewProps) {
             accomodationName={accomodation.name}
             accomodationStars={accomodation.rating}
             accomodationPriceFrom={accomodation.price}
-            accomodationCity={accomodation.city}
+            accomodationCity={accomodation.city.city}
             accomodationDescription={accomodation.description}
             accomodationImgSrc={"hotel1.jpg"}
             changeBooking={changeAccomodation}
@@ -50,8 +51,11 @@ function AccomodationView(props: accomodationViewProps) {
   }
   async function getAccomodations() {
     const res = await axios
-      .get("http://localhost:8080/accomodation/getAccomodations")
+      .post("http://localhost:8080/accomodation/getAccomodations", {
+        destination: props.currentDest,
+      })
       .then((res) => {
+        console.log(res.data);
         setAccomodations(res.data);
       });
     return;
