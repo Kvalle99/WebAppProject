@@ -5,7 +5,6 @@ interface ActivityProps {
     activityName : string;
     activityDesc : string;
     activityAdder : Function;
-    chosenActivities : string[] | null;
 }
 
 function activityCard(props: ActivityProps) {

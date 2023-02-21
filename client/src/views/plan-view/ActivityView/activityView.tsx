@@ -11,7 +11,6 @@ interface Activity {
 
 interface ActivityProps {
     actAdder : Function;
-    chosenActs : string[] | null;
 }
 
 function ActivityView(props : ActivityProps) {
@@ -31,7 +30,6 @@ function ActivityView(props : ActivityProps) {
                 activityName={activity.name}
                 activityDesc={activity.description}
                 activityAdder={props.actAdder}
-                chosenActivities={props.chosenActs}
               />  
             </div>
           ))}

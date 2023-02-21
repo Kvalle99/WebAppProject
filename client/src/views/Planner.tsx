@@ -17,7 +17,6 @@ interface PlannerProps {
 const TripId = "6845191";
 
 function Planner(props: PlannerProps) {
-  const [chosenActivs, updateActs] = useState<string[] | null>(null);
 
   if (props.viewToShow === "Destination") {
     return (
@@ -41,11 +40,9 @@ function Planner(props: PlannerProps) {
   }
 
   if (props.viewToShow === "Activities") {
-    getChosenActivitiesNames();
     return (
       <ActivityView
         actAdder={addActivity}
-        chosenActs={chosenActivs}
       />
     )
   }
@@ -83,18 +80,6 @@ function Planner(props: PlannerProps) {
       .then((res) => {
         updateTrip();
       })
-  }
-
-  function getChosenActivitiesNames() {
-    const res =  axios
-      .post("http://localhost:8080/trip/getActivities", {
-        id : props.currentTrip.id
-      })
-      .then((res) => {
-        updateActs(res.data);
-        updateTrip();
-      })
-    
   }
 
   function saveDates(newStartDate: Date, newEndDate: Date) {
