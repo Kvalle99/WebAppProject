@@ -21,6 +21,7 @@ function AccomodationView(props: accomodationViewProps) {
   const [accomodations, setAccomodations] = useState<Accomodation[] | null>(
     null
   );
+  console.log("current acc" + props.currentAcc);
   useEffect(() => {
     getAccomodations();
   }, []);

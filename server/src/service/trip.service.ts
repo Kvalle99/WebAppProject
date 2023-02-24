@@ -80,7 +80,6 @@ export class TripService implements ITripService {
       //console.log("in list: ", this.tripList[i].id);
       //console.log("myId: ", myId);
       if (myId == this.tripList[i].id) {
-        //console.log("found it!");
         return this.tripList[i];
       }
     }
@@ -104,6 +103,8 @@ export class TripService implements ITripService {
   async getMyTrip(myId: number, tripId: string) {
     const trip = this.findTrip(tripId);
     if (trip.user == myId) {
+      console.log("returning trip:");
+      console.log(trip);
       return trip;
     }
     return;
@@ -111,6 +112,7 @@ export class TripService implements ITripService {
 
   async changeDestination(userId: number, tripId: string, destination: string) {
     var myTrip: Trip | null = this.findTrip(tripId);
+    console.log("changing dest");
     if (myTrip && myTrip.user == userId) {
       myTrip.destination = destination;
       myTrip.hotel = undefined;

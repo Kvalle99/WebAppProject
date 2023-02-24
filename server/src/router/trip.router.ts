@@ -25,11 +25,11 @@ TripRouter.post(
 TripRouter.post(
   "/handleActivity",
   async (
-    req: Request<{}, {}, { activity : string, id :string}>,
+    req: Request<{}, {}, { activity: string; id: string }>,
     res: Response
   ) => {
     try {
-      console.log("router " + req.body.activity + " " + req.body.id)
+      console.log("router " + req.body.activity + " " + req.body.id);
       await tripService.handleActivity(req.body.activity, req.body.id);
       res.status(200);
     } catch (e: any) {
@@ -37,7 +37,6 @@ TripRouter.post(
     }
   }
 );
-
 
 TripRouter.post(
   "/getActivities",
@@ -102,7 +101,6 @@ TripRouter.post(
         hotel,
         accomodationCity
       );
-      await tripService.changeDestination(userId, tripId, accomodationCity);
       res.status(200).send();
     } catch (e: any) {
       res.status(500).send(e.message);
