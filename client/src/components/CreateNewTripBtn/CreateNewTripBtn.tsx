@@ -54,7 +54,10 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
           <Button
             variant="primary"
             role="createTrip"
-            onClick={() => createTrip()}
+            onClick={() => {
+              createTrip();
+              handleClose();
+            }}
           >
             Create Trip
           </Button>

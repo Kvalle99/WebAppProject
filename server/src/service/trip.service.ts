@@ -82,7 +82,6 @@ export class TripService implements ITripService {
       //console.log("in list: ", this.tripList[i].id);
       //console.log("myId: ", myId);
       if (myId == this.tripList[i].id) {
-        //console.log("found it!");
         return this.tripList[i];
       }
     }

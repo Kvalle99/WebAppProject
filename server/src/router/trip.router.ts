@@ -25,7 +25,7 @@ TripRouter.post(
 TripRouter.post(
   "/handleActivity",
   async (
-    req: Request<{}, {}, { activity : string, id :string}>,
+    req: Request<{}, {}, { activity: string; id: string }>,
     res: Response
   ) => {
     try {
@@ -36,7 +36,6 @@ TripRouter.post(
     }
   }
 );
-
 
 TripRouter.post(
   "/getActivities",
@@ -101,7 +100,6 @@ TripRouter.post(
         hotel,
         accomodationCity
       );
-      await tripService.changeDestination(userId, tripId, accomodationCity);
       res.status(200).send();
     } catch (e: any) {
       res.status(500).send(e.message);
