@@ -5,6 +5,7 @@ import NavbarComponent from "./components/Navbar/Navbar";
 import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
+import LogIn from "./components/LoginForm/loginform";
 
 function App() {
   //var myTrip: any;
@@ -22,6 +23,12 @@ function App() {
     getMyTrips(userId);
   }, []);
 
+  return (
+    <div className="App">
+      {" "}
+      <LogIn />
+    </div>
+  );
   return (
     <div className="App">
       <NavbarComponent
