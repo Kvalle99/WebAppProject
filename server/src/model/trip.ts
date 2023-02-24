@@ -34,13 +34,34 @@ export class Trip {
 
   
 
-  removeActivity(activity: Activity) {
-    var index = this.activities.indexOf(activity);
+  removeActivity(activity: string) {
+    console.log("act length before remove: " + this.activities.length)
+
+    console.log("trip model class removing " + activity)
+
+    var index : number = -1;
+
+    //ta bort baserat på namn
+    for (let i = 0; i < this.activities.length; i++) {
+      if (this.activities[i].getName() == activity) {
+        index = i;
+      }
+    }
+
+    if (index === -1) {
+      return;
+    }
+
+    console.log("removing at index " + index)
     this.activities.splice(index, 1);
+
+    console.log("act length after remove: " + this.activities.length)
   }
 
   addActivity(activity: Activity) {
+    console.log("act length before add: " + this.activities.length)
     this.activities.push(activity);
+    console.log("act length after add: " + this.activities.length)
   }
 
   getActivitiesByName() : string[] {

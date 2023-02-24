@@ -1,5 +1,7 @@
+import { type } from "os";
 import { Activity } from "../model/activity";
 import { Trip } from "../model/trip";
+import { ActivityService } from "./activity.service";
 import { ITripService } from "./itripservice";
 
 export class TripService implements ITripService {
@@ -9,7 +11,7 @@ export class TripService implements ITripService {
     new Trip(
       "6845198231",
       "New York-resa",
-      [new Activity("Liseberg", "fuck")],
+      [],
       11,
       "New York",
       new Date(2023, 11, 11),
@@ -19,7 +21,7 @@ export class TripService implements ITripService {
     new Trip(
       "6845191",
       "Bort till värmen",
-      [new Activity("Kayaking", "fuck")],
+      [],
       11,
       "Chiang Mai",
       new Date(2023, 10, 24),
@@ -30,7 +32,7 @@ export class TripService implements ITripService {
       "11111111",
 
       "Un Voyage aux baguettes et aux escargots",
-      [new Activity("Din mamma", "fuck")],
+      [],
       11,
       "Paris",
       new Date(2024, 1, 7),
@@ -164,22 +166,25 @@ export class TripService implements ITripService {
 
   async handleActivity(activity: string, id: string) {
     var activitySelected: Activity | null = null;
+    var actServ = new ActivityService()
+
 
     var activities: Activity[] = await this.getActivities(id);
 
     activities.forEach(function (act) {
-      console.log(act.getName());
       if (act.getName() === activity) {
-        activitySelected = act;
+        activitySelected = actServ.findActivity(activity);
+        console.log(activitySelected)
       }
     });
 
-    if (activitySelected != null) {
-      this.removeActivities(id, activitySelected);
-      console.log("activity was prev selected ");
-    }
-    if ((activitySelected = null)) {
-      // TODO: add activity
+    if (activitySelected) {
+      console.log("trying to remove " + (activitySelected as Activity).getName() + " from " + id)
+      this.removeActivities(id, (activitySelected as Activity).getName());
+    } else {
+      activitySelected = actServ.findActivity(activity)
+      console.log("trying to add " + activitySelected.getName() + " to " + id)
+      this.addActivities(id, activitySelected)
     }
   }
 
@@ -192,7 +197,7 @@ export class TripService implements ITripService {
     return false;
   }
 
-  async removeActivities(myId: string, activity: Activity) {
+  async removeActivities(myId: string, activity: string) {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
       myTrip.removeActivity(activity);

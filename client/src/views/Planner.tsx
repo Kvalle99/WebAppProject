@@ -43,7 +43,7 @@ function Planner(props: PlannerProps) {
     return (
       <ActivityView
         actAdder={addActivity}
-        id={props.currentTrip.id}
+        trip={props.currentTrip}
       />
     )
   }

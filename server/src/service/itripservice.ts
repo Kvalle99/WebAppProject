@@ -23,5 +23,5 @@ export interface ITripService {
 
   addActivities(id: string, ativity: Activity): Promise<boolean>;
 
-  removeActivities(id: string, activity: Activity): Promise<boolean>;
+  removeActivities(id: string, activity: string): Promise<boolean>;
 }

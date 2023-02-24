@@ -6,19 +6,13 @@ interface ActivityProps {
     activityName : string;
     activityDesc : string;
     activityAdder : Function;
-    id : any
+    trip : any
 
 }
 
 function ActivityCard(props: ActivityProps) {
-  const [chosenActivs, updateActs] = useState<string[] | null>(null);
-
-  useEffect(() => {
-    getChosenActivitiesNames();
-  }, [props.id]);
 
     return (
-        <>
         <Card
           className={"border border-4 " + (getActivityChosen() ? "border-success" : "")}
           style={{ width: "18rem", margin: "5px" }}
@@ -43,39 +37,47 @@ function ActivityCard(props: ActivityProps) {
             </Button>
           </Card.Body>
         </Card>
-        </>
     );
 
     function addActivity() {
+      var acts : string[] = []
+
+      for (let act of props.trip.activities) {
+        acts.push(act.name)
+      }
+
+      acts.forEach(function (act) {
+        console.log(act)
+      })
+
       props.activityAdder(props.activityName);
+      
+      var acts1 : string[] = []
+
+      for (let act of props.trip.activities) {
+        acts1.push(act.name)
+      }
+
+      acts1.forEach(function (act) {
+        console.log(act)
+      })
     }
     
     function getActivityChosen() : boolean {
-      var tripChosen : boolean = false;
+      var acts : string[] = []
+      var actChosen : boolean = false
 
-      if (chosenActivs == null) {
-        return false;
+      for (let act of props.trip.activities) {
+        acts.push(act.name)
       }
 
-      chosenActivs.forEach(function(chosenName) {
-        console.log(chosenName + " and " + props.activityName)
-        if (chosenName == props.activityName) {
-          tripChosen = true;
+      acts.forEach(function (act) {
+        if (act == props.activityName) {
+          actChosen = true;
         }
       })
-    
-      return tripChosen;
-    }
 
-    function getChosenActivitiesNames() {
-      const res =  axios
-        .post("http://localhost:8080/trip/getActivities", {
-          id : props.id
-        })
-        .then((res) => {
-          updateActs(res.data);
-        })
-      
+      return actChosen
     }
 }
 
