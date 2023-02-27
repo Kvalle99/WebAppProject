@@ -9,12 +9,6 @@ interface SidenavListitemProps {
   currentPage: string;
 }
 
-/* const SidenavListitem: FC<SidenavListitemProps> = () => (
-  <div className={styles.SidenavListitem}>
-    SidenavListitem Component
-  </div>
-); */
-
 function SidenavListitem(props: SidenavListitemProps) {
   if (props.lastChild == null) {
     return (
@@ -46,9 +40,6 @@ function SidenavListitem(props: SidenavListitemProps) {
   }
 
   function currentChoice(): boolean {
-    console.log("chekcing current: ");
-    console.log(props.currentPage);
-    console.log(props.listText);
     if (props.currentPage == props.listText) {
       console.log("true");
       return true;

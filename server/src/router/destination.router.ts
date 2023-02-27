@@ -9,7 +9,8 @@ DestinationRouter.get(
   "/getDestinations",
   async (req: Request<{}, {}, {}>, res: Response<Destination[]>) => {
     try {
-      const destinations = await destinationService.getDestinations();
+      let searchText: any = req.query.searchText;
+      const destinations = await destinationService.getDestinations(searchText);
       res.status(200).send(destinations);
     } catch (e: any) {
       res.status(500).send(e.message);

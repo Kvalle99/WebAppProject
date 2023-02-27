@@ -12,6 +12,7 @@ interface Destination {
 interface destProps {
   currentDest: string;
   changeDest: Function;
+  searchText: string;
 }
 
 function Destinations(props: destProps) {
@@ -19,7 +20,7 @@ function Destinations(props: destProps) {
 
   useEffect(() => {
     getDestinations();
-  }, []);
+  }, [props.searchText]);
 
   return (
     <Container>
@@ -46,9 +47,12 @@ function Destinations(props: destProps) {
 
   function getDestinations() {
     const dest = axios
-      .get("http://localhost:8080/destination/getDestinations")
+      .get("http://localhost:8080/destination/getDestinations", {
+        params: { searchText: props.searchText },
+      })
       .then((res) => {
-        setDest(res.data);
+        let destinationsArr: Array<Destination> = res.data;
+        setDest(destinationsArr);
       });
     return;
   }

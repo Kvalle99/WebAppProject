@@ -10,7 +10,18 @@ export class DestinationService {
     new Destination("Madrid", "Spain"),
   ];
 
-  getDestinations() {
-    return this.destinations;
+  getDestinations(searchText: string) {
+    let matchingDestinations = this.destinations.filter(
+      (destination: Destination) => {
+        const cityMatch = destination.city
+          .toLowerCase()
+          .includes(searchText.toLowerCase());
+        const countryMatch = destination.country
+          .toLowerCase()
+          .includes(searchText.toLowerCase());
+        return countryMatch || cityMatch;
+      }
+    );
+    return matchingDestinations;
   }
 }

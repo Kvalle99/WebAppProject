@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { reduceEachTrailingCommentRange } from "typescript";
 import CalendarComponent from "../components/Calendar/Calendar";
+import SearchBar from "../components/SearchFunction/SearchBar";
 import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
 import ActivityView from "./plan-view/ActivityView/activityView";
 import Destinations from "./plan-view/DestinationsView/destinations";
@@ -15,14 +16,19 @@ interface PlannerProps {
 }
 
 function Planner(props: PlannerProps) {
+  const [searchText, setSearchText] = useState<string>("");
   if (props.viewToShow === "Destination") {
     return (
-      <Destinations
-        changeDest={updateDest}
-        currentDest={
-          props.currentTrip?.destination ? props.currentTrip.destination : ""
-        }
-      />
+      <>
+        <SearchBar searchUpdate={updatePlannerOnSearch} />
+        <Destinations
+          changeDest={updateDest}
+          currentDest={
+            props.currentTrip?.destination ? props.currentTrip.destination : ""
+          }
+          searchText={searchText}
+        />
+      </>
     );
   }
 
@@ -37,26 +43,29 @@ function Planner(props: PlannerProps) {
   }
 
   if (props.viewToShow === "Activities") {
-    return (
-      <ActivityView
-        actAdder={addActivity}
-        trip={props.currentTrip}
-      />
-    )
+    return <ActivityView actAdder={addActivity} trip={props.currentTrip} />;
   }
 
   if (props.viewToShow === "Accomodation") {
     return (
-      <AccomodationView
-        changeAccomodation={updateAcc}
-        currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
-        currentDest={
-          props.currentTrip?.destination ? props.currentTrip.destination : ""
-        }
-      />
+      <>
+        <SearchBar searchUpdate={updatePlannerOnSearch} />
+        <AccomodationView
+          changeAccomodation={updateAcc}
+          currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
+          currentDest={
+            props.currentTrip?.destination ? props.currentTrip.destination : ""
+          }
+          searchText={searchText}
+        />
+      </>
     );
   }
   return <></>;
+
+  function updatePlannerOnSearch(searchText: string) {
+    setSearchText(searchText);
+  }
 
   function updateTrip() {
     props.updateTrip();
@@ -110,7 +119,6 @@ function Planner(props: PlannerProps) {
   }
 
   function changeAccomodation(name: string, city: string) {
-    console.log("change to: ", name);
     const res = axios
       .post("http://localhost:8080/trip/changeAccomodations", {
         userId: props.myId,

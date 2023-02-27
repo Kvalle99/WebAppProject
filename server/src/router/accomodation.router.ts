@@ -7,15 +7,15 @@ const accomodationService = new AccomodationService();
 const tripService = new TripService();
 export const AccomodationRouter = express.Router();
 
-AccomodationRouter.post(
+AccomodationRouter.get(
   "/getAccomodations",
-  async (
-    req: Request<{}, {}, { destination: string }>,
-    res: Response<Accomodation[]>
-  ) => {
+  async (req: Request<{}, {}, {}>, res: Response<Accomodation[]>) => {
     try {
+      const destination: any = req.query.destination;
+      const searchText: any = req.query.searchText;
       const accomodations = await accomodationService.getAccomodations(
-        req.body.destination
+        destination,
+        searchText
       );
       res.status(200).send(accomodations);
     } catch (e: any) {

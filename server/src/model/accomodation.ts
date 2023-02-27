@@ -2,6 +2,7 @@ import { Destination } from "./destinations";
 
 export class Accomodation {
   name: string;
+  id: number;
   rating: number;
   price: number;
   description: string;
@@ -10,6 +11,7 @@ export class Accomodation {
 
   constructor(
     name: string,
+    id: number,
     rating: number,
     price: number,
     description: string,
@@ -17,6 +19,7 @@ export class Accomodation {
     country: string
   ) {
     this.name = name;
+    this.id = id;
     this.rating = rating;
     this.price = price;
     this.description = description;
@@ -25,6 +28,10 @@ export class Accomodation {
 
   getName() {
     return this.name;
+  }
+
+  getId() {
+    return this.id;
   }
 
   getPrice() {
