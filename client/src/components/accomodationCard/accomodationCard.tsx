@@ -5,6 +5,7 @@ import { Card, Container, Row } from "react-bootstrap";
 
 interface AccomodationCardProps {
   accomodationName: string;
+  accommodationId: number;
   accomodationStars: number;
   accomodationPriceFrom: number;
   accomodationDescription: string;
