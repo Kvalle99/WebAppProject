@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { reduceEachTrailingCommentRange } from "typescript";
 import CalendarComponent from "../components/Calendar/Calendar";
+import { Page } from "../components/plan-sidenav/plan-sidenav";
 import SearchBar from "../components/SearchFunction/SearchBar";
 import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
 import ActivityView from "./plan-view/ActivityView/activityView";
@@ -11,57 +12,58 @@ interface PlannerProps {
   // set to optional so the component doesn´t break if  no trip has been created
   myId: number;
   currentTrip: any;
-  viewToShow: string;
   updateTrip: Function;
+  currentPage: Page;
 }
 
 function Planner(props: PlannerProps) {
   const [searchText, setSearchText] = useState<string>("");
-  if (props.viewToShow === "Destination") {
-    return (
-      <>
-        <SearchBar searchUpdate={updatePlannerOnSearch} />
-        <Destinations
-          changeDest={updateDest}
-          currentDest={
-            props.currentTrip?.destination ? props.currentTrip.destination : ""
-          }
-          searchText={searchText}
+
+  switch (props.currentPage) {
+    case Page.DESTINATION:
+      return (
+        <>
+          <SearchBar searchUpdate={updatePlannerOnSearch} />
+          <Destinations
+            changeDest={updateDest}
+            currentDest={
+              props.currentTrip?.destination
+                ? props.currentTrip.destination
+                : ""
+            }
+            searchText={searchText}
+          />
+        </>
+      );
+    case Page.CALENDAR:
+      return (
+        <CalendarComponent
+          startDate={props.currentTrip.startDate}
+          endDate={props.currentTrip.endDate}
+          saveDates={saveDates}
         />
-      </>
-    );
+      );
+    case Page.ACTIVITY:
+      return <ActivityView actAdder={addActivity} trip={props.currentTrip} />;
+    case Page.ACCOMODATION:
+      return (
+        <>
+          <SearchBar searchUpdate={updatePlannerOnSearch} />
+          <AccomodationView
+            changeAccomodation={updateAcc}
+            currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
+            currentDest={
+              props.currentTrip?.destination
+                ? props.currentTrip.destination
+                : ""
+            }
+            searchText={searchText}
+          />
+        </>
+      );
+    case Page.SUMMARY:
+      return <></>;
   }
-
-  if (props.viewToShow === "Duration") {
-    return (
-      <CalendarComponent
-        startDate={props.currentTrip.startDate}
-        endDate={props.currentTrip.endDate}
-        saveDates={saveDates}
-      />
-    );
-  }
-
-  if (props.viewToShow === "Activities") {
-    return <ActivityView actAdder={addActivity} trip={props.currentTrip} />;
-  }
-
-  if (props.viewToShow === "Accomodation") {
-    return (
-      <>
-        <SearchBar searchUpdate={updatePlannerOnSearch} />
-        <AccomodationView
-          changeAccomodation={updateAcc}
-          currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
-          currentDest={
-            props.currentTrip?.destination ? props.currentTrip.destination : ""
-          }
-          searchText={searchText}
-        />
-      </>
-    );
-  }
-  return <></>;
 
   function updatePlannerOnSearch(searchText: string) {
     setSearchText(searchText);

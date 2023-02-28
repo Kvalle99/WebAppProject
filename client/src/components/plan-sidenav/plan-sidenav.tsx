@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import SidenavListitem from "../sidenav-listitem/sidenav-listitem";
 import "./plan-sidenav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -6,7 +6,15 @@ import { ListGroup } from "react-bootstrap";
 
 interface PlanSidenavProps {
   changeView: Function;
-  current: string;
+  currentPage: Page;
+}
+
+export enum Page {
+  DESTINATION,
+  CALENDAR,
+  ACCOMODATION,
+  ACTIVITY,
+  SUMMARY,
 }
 
 /* const PlanSidenav: FC<PlanSidenavProps> = () => (
@@ -18,28 +26,33 @@ function PlanSidenav(props: PlanSidenavProps) {
     <ListGroup className="list-group list-group-flush">
       <SidenavListitem
         listText="Destination"
-        changView={props.changeView}
-        currentPage={props.current}
+        changeView={props.changeView}
+        active={props.currentPage === Page.DESTINATION}
+        thisPage={Page.DESTINATION}
       ></SidenavListitem>
       <SidenavListitem
         listText="Duration"
-        changView={props.changeView}
-        currentPage={props.current}
+        changeView={props.changeView}
+        active={props.currentPage === Page.CALENDAR}
+        thisPage={Page.CALENDAR}
       ></SidenavListitem>
       <SidenavListitem
         listText="Accomodation"
-        changView={props.changeView}
-        currentPage={props.current}
+        changeView={props.changeView}
+        active={props.currentPage === Page.ACCOMODATION}
+        thisPage={Page.ACCOMODATION}
       ></SidenavListitem>
       <SidenavListitem
         listText="Activities"
-        changView={props.changeView}
-        currentPage={props.current}
+        changeView={props.changeView}
+        active={props.currentPage === Page.ACTIVITY}
+        thisPage={Page.ACTIVITY}
       ></SidenavListitem>
       <SidenavListitem
-        listText="yo"
-        changView={props.changeView}
-        currentPage={props.current}
+        listText="Trip Summary"
+        changeView={props.changeView}
+        active={false}
+        thisPage={Page.SUMMARY}
       ></SidenavListitem>
     </ListGroup>
   );
