@@ -34,7 +34,7 @@ function ActivityCard(props: ActivityProps) {
           role="changeDest"
           onClick={() => addActivity()}
         >
-          Add activity
+          {(getActivityChosen() ? "Remove activity" : "Add activity")}
         </Button>
       </Card.Body>
     </Card>

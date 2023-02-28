@@ -19,7 +19,7 @@ function ActivityView(props : ActivityProps) {
 
     useEffect(() => {
       getActivities();
-    }, []);
+    }, [props.trip]);
 
   
     return (
@@ -40,8 +40,10 @@ function ActivityView(props : ActivityProps) {
     );
   
     function getActivities() {
-      const dest = axios
-        .get("http://localhost:8080/activity/getAllActivites")
+      const res = axios
+        .post("http://localhost:8080/activity/getAllActivites", {
+          dest : props.trip.destination
+        })
         .then((res) => {
           setActivities(res.data);
         });

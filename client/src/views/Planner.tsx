@@ -79,13 +79,13 @@ function Planner(props: PlannerProps) {
   }
 
   function addActivity(act: string) {
-    console.log(act);
     const res = axios
       .post("http://localhost:8080/trip/handleActivity", {
         activity: act,
+        dest: props.currentTrip.destination,
         id: props.currentTrip.id,
       })
-      .then(() => {
+      .then((res) => {
         updateTrip();
       });
   }

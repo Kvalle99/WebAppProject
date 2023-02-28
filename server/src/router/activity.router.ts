@@ -8,12 +8,12 @@ const activityService = new ActivityService();
 export const ActivityRouter = express.Router();
 
 
-ActivityRouter.get("/getAllActivites", async (
-    req: Request<{}, {}, {}>,
+ActivityRouter.post("/getAllActivites", async (
+    req: Request<{}, {}, {dest : string}>,
     res: Response<Activity[]>
 ) => {
     try {
-        const activities = await activityService.getAllActivities();
+        const activities = await activityService.getAllActivities(req.body.dest);
         res.status(200).send(activities);
     } catch (e: any) {
         res.status(500).send(e.message);

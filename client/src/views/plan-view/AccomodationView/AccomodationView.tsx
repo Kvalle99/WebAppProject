@@ -26,7 +26,7 @@ function AccomodationView(props: accomodationViewProps) {
   console.log("current acc" + props.currentAcc);
   useEffect(() => {
     getAccomodations();
-  }, [props.searchText]);
+  }, [props.searchText, props.currentDest]);
 
   return (
     <Container>

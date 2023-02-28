@@ -2,12 +2,14 @@ import { ourDate } from "./date";
 export class Activity {
   name: string;
   description: string;
+  inDestination : string;
   ratings: number[] = [];
   startDate?: Date;
   endDate?: Date;
   constructor(
     name: string,
     description: string,
+    inDestination: string,
     startDate?: Date,
     endDate?: Date
   ) {
@@ -15,6 +17,7 @@ export class Activity {
     this.description = description;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.inDestination = inDestination;
   }
 
   getDescription(): string {
@@ -43,5 +46,9 @@ export class Activity {
 
   getName() : string {
     return this.name;
+  }
+
+  getDestination() : string {
+    return this.inDestination;
   }
 }

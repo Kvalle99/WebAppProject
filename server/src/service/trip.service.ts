@@ -163,7 +163,7 @@ export class TripService implements ITripService {
     return false;
   }
 
-  async handleActivity(activity: string, id: string) {
+  async handleActivity(activity: string, destination: string, id: string) {
     var activitySelected: Activity | null = null;
     var actServ = new ActivityService()
 
@@ -172,7 +172,7 @@ export class TripService implements ITripService {
 
     activities.forEach(function (act) {
       if (act.getName() === activity) {
-        activitySelected = actServ.findActivity(activity);
+        activitySelected = actServ.findActivity(activity, destination);
         console.log(activitySelected)
       }
     });
@@ -181,7 +181,7 @@ export class TripService implements ITripService {
       console.log("trying to remove " + (activitySelected as Activity).getName() + " from " + id)
       this.removeActivities(id, (activitySelected as Activity).getName());
     } else {
-      activitySelected = actServ.findActivity(activity)
+      activitySelected = actServ.findActivity(activity, destination)
       console.log("trying to add " + activitySelected.getName() + " to " + id)
       this.addActivities(id, activitySelected)
     }

@@ -25,12 +25,12 @@ TripRouter.post(
 TripRouter.post(
   "/handleActivity",
   async (
-    req: Request<{}, {}, { activity: string; id: string }>,
-    res: Response
+    req: Request<{}, {}, { activity: string; dest: string, id: string }>,
+    res: Response<string>
   ) => {
     try {
-      await tripService.handleActivity(req.body.activity, req.body.id);
-      res.status(200);
+      await tripService.handleActivity(req.body.activity, req.body.dest, req.body.id);
+      res.status(200).send("ok");
     } catch (e: any) {
       res.status(406).send(e.message);
     }
