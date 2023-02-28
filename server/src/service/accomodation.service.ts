@@ -116,7 +116,7 @@ export class AccomodationService {
   isExists(id: number): boolean {
     let res: boolean = false;
     var result = this.hotelList.find((hotel) => {
-      return hotel.id === id;
+      return hotel.getId() === id;
     });
     result === undefined ? (res = false) : (res = true);
     return res;

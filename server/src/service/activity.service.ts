@@ -12,7 +12,11 @@ export class ActivityService implements IActivityService {
       "Ok place to go but the shark on the kayak tour is way cooler",
       "Stockholm"
     ),
-    new Activity("Liseberg", "Rollercoasters as far as the eye can see!", "Gothenburg"),
+    new Activity(
+      "Liseberg",
+      "Rollercoasters as far as the eye can see!",
+      "Gothenburg"
+    ),
     new Activity("Din mamma", "I did this last night", "Gothenburg"),
     new Activity("La Louvre", "Mona lisa is overrated", "Paris"),
     new Activity("Eiffel Tower", "Pretty tall", "Paris"),
@@ -21,31 +25,41 @@ export class ActivityService implements IActivityService {
     new Activity("Statue of Liberty", "Murica!", "New York"),
     new Activity("Pizza", "Italian American style", "New York"),
     new Activity("MOMA", "Cool modern art", "New York"),
-    new Activity("Grand Central Park", "It is a big forest in the city", "New York"),
+    new Activity(
+      "Grand Central Park",
+      "It is a big forest in the city",
+      "New York"
+    ),
     new Activity("Long Island", "Great ice teas!", "New York"),
     new Activity("Eat fresh pepper", "It's very unique", "Chiang Mai"),
-    new Activity("Jungle trek", "Build character", "Chiang Mai")
-
+    new Activity("Jungle trek", "Build character", "Chiang Mai"),
   ];
 
   constructor() {}
 
-  getAllActivities(dest : string): Activity[] {
-    var acts : Activity[] = []
-
-    for (let act of this.activities) {
-      if (act.getDestination() == dest) {
-        acts.push(act)
-      }
-    }
-
+  getAllActivities(dest: string, searchText: string): Activity[] {
+    let acts = this.activities.filter((activity: Activity) => {
+      const cityMatch =
+        activity.getDestination().toLowerCase() == dest.toLowerCase() ||
+        dest === "";
+      const searchMatch =
+        activity
+          .getDestination()
+          .toLowerCase()
+          .includes(searchText.toLowerCase()) ||
+        activity.getName().toLowerCase().includes(searchText.toLowerCase());
+      return cityMatch && searchMatch;
+    });
     return acts;
   }
 
   //to find aa specified activity
-  findActivity(activityName: string, inDestination : string) {
+  findActivity(activityName: string, inDestination: string) {
     for (let i: number = 0; i < this.activities.length; i++) {
-      if (activityName == this.activities[i].name && inDestination == this.activities[i].inDestination) {
+      if (
+        activityName == this.activities[i].getName() &&
+        inDestination == this.activities[i].getDestination()
+      ) {
         //console.log("found it!");
         return this.activities[i];
       }
@@ -57,7 +71,11 @@ export class ActivityService implements IActivityService {
     return this.findActivity(name, destination).getDescription();
   }
 
-  async changeDescription(name: string, description: string, destination: string) {
+  async changeDescription(
+    name: string,
+    description: string,
+    destination: string
+  ) {
     var activity = this.findActivity(name, destination);
     activity.changeDescription(description);
     return true;

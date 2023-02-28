@@ -23,7 +23,7 @@ function Planner(props: PlannerProps) {
     case Page.DESTINATION:
       return (
         <>
-          <SearchBar searchUpdate={updatePlannerOnSearch} />
+          <SearchBar searchUpdate={setSearchText} />
           <Destinations
             changeDest={updateDest}
             currentDest={
@@ -44,11 +44,20 @@ function Planner(props: PlannerProps) {
         />
       );
     case Page.ACTIVITY:
-      return <ActivityView actAdder={addActivity} trip={props.currentTrip} />;
+      return (
+        <>
+          <SearchBar searchUpdate={setSearchText} />
+          <ActivityView
+            actAdder={addActivity}
+            trip={props.currentTrip}
+            searchText={searchText}
+          />
+        </>
+      );
     case Page.ACCOMODATION:
       return (
         <>
-          <SearchBar searchUpdate={updatePlannerOnSearch} />
+          <SearchBar searchUpdate={setSearchText} />
           <AccomodationView
             changeAccomodation={updateAcc}
             currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
@@ -65,14 +74,9 @@ function Planner(props: PlannerProps) {
       return <></>;
   }
 
-  function updatePlannerOnSearch(searchText: string) {
-    setSearchText(searchText);
-  }
-
   function updateTrip() {
     props.updateTrip();
-    console.log("trying to update trip")
-
+    console.log("trying to update trip");
   }
 
   function updateDest(name: string) {

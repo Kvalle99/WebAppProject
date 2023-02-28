@@ -1,8 +1,8 @@
-//class not used in current version, uses built in Date instead
+/* //class not used in current version, uses built in Date instead
 export class ourDate {
-  year!: number;
-  month!: number;
-  day!: number;
+  private year!: number;
+  private month!: number;
+  private day!: number;
 
   constructor(year: number, month: number, day: number) {
     try {
@@ -40,3 +40,4 @@ export class ourDate {
     return this.day;
   }
 }
+ */

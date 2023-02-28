@@ -1,13 +1,13 @@
 import { Destination } from "./destinations";
 
 export class Accomodation {
-  name: string;
-  id: number;
-  rating: number;
-  price: number;
-  description: string;
+  private name: string;
+  private id: number;
+  private rating: number;
+  private price: number;
+  private description: string;
   //TODO: add Destination object as city, instead of "City" (city),
-  city: Destination;
+  private city: Destination;
 
   constructor(
     name: string,
@@ -26,25 +26,28 @@ export class Accomodation {
     this.city = new Destination(city, country);
   }
 
-  getName() {
+  getName(): string {
     return this.name;
   }
 
-  getId() {
+  getId(): number {
     return this.id;
   }
 
-  getPrice() {
+  getPrice(): number {
     return this.price;
   }
 
-  getRating() {
+  getRating(): number {
     return this.rating;
   }
-  getDescription() {
+  getDescription(): string {
     return this.description;
   }
-  getCity() {
-    return this.city.city;
+  getCity(): string {
+    return this.city.getCity();
+  }
+  getCountry(): string {
+    return this.city.getCountry();
   }
 }
