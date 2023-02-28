@@ -11,6 +11,7 @@ interface ActivityProps {
 }
 
 function ActivityCard(props: ActivityProps) {
+  const [activityChosen, setActivityChosen] = useState<boolean>(false)
 
     return (
         <Card
@@ -40,27 +41,10 @@ function ActivityCard(props: ActivityProps) {
     );
 
     function addActivity() {
-      var acts : string[] = []
-
-      for (let act of props.trip.activities) {
-        acts.push(act.name)
-      }
-
-      acts.forEach(function (act) {
-        console.log(act)
-      })
 
       props.activityAdder(props.activityName);
+      setActivityChosen(!activityChosen)
       
-      var acts1 : string[] = []
-
-      for (let act of props.trip.activities) {
-        acts1.push(act.name)
-      }
-
-      acts1.forEach(function (act) {
-        console.log(act)
-      })
     }
     
     function getActivityChosen() : boolean {

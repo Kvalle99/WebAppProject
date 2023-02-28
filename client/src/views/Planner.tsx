@@ -60,6 +60,8 @@ function Planner(props: PlannerProps) {
 
   function updateTrip() {
     props.updateTrip();
+    console.log("trying to update trip")
+
   }
 
   function updateDest(name: string) {
@@ -74,7 +76,7 @@ function Planner(props: PlannerProps) {
         activity: act,
         id: props.currentTrip.id,
       })
-      .then((res) => {
+      .then(() => {
         updateTrip();
       });
   }
