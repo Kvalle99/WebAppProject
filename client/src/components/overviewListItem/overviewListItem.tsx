@@ -16,13 +16,17 @@ export default function OverviewListItem(props : OverivewProps) {
         }
     }
 
+    var fixedStartDate : string = trimDate((props.trip?.startDate ? props.trip.startDate : ""))
+    var fixedEndDate : string = trimDate((props.trip?.endDate ? props.trip.endDate : ""))
+
+
   return (
-    <ListGroupItem>
+    <ListGroupItem className="overflow-auto">
         <h4>Overview:</h4>
         <ul>
-            <li> Destination: {props.trip?.destination ? props.trip.destination : ""}</li>
-            <li> Start Date: {props.trip?.startDate ? props.trip.startDate : ""}</li>
-            <li> End Date: {props.trip?.endDate ? props.trip.endDate : ""}</li>
+            <li> Destination: <br/>{props.trip?.destination ? props.trip.destination : ""}</li>
+            <li> Start Date: <br/>{fixedStartDate}</li>
+            <li> End Date: <br/>{fixedEndDate}</li>
             <li> Accomodation: {props.trip?.hotel ? props.trip.hotel : ""}</li>
             <li> Activities: 
                 <ul>
@@ -36,4 +40,15 @@ export default function OverviewListItem(props : OverivewProps) {
         </ul>
     </ListGroupItem>
   )
+}
+
+function trimDate(date : string) : string {
+    var trimmedDate : string = date
+
+    if (date.length > 10) {
+        trimmedDate = date.split("T")[0]
+
+    }
+
+    return (trimmedDate)
 }

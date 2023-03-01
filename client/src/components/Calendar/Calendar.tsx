@@ -74,8 +74,8 @@ function CalendarComponent(props: calProps) {
     var eDate: Date = new Date(selectedEndDate!);
 
     //to revert the zero indeation of date-picker
-    sDate.setMonth(sDate.getMonth() + 1);
-    eDate.setMonth(eDate.getMonth() + 1);
+    sDate.setMonth(sDate.getMonth());
+    eDate.setMonth(eDate.getMonth());
     props.saveDates(sDate, eDate);
   }
 }
