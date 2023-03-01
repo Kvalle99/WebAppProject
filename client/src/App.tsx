@@ -25,12 +25,6 @@ function App() {
 
   return (
     <div className="App">
-      {" "}
-      <LogIn />
-    </div>
-  );
-  return (
-    <div className="App">
       <NavbarComponent
         chooseTrip={changeTrip}
         trips={myTrips}
