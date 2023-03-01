@@ -8,27 +8,31 @@ interface OverivewProps {
 export default function OverviewListItem(props : OverivewProps) {
     var acts : string[] = []
 
-    for (let act of props.trip?.activities ?? [""]) {
+    for (let act of props.trip?.activities ?? ["Not selected"]) {
         if (act?.name) {
           acts.push(act.name);
         } else {
-          acts.push("");
+          acts.push("Not selected");
         }
     }
 
-    var fixedStartDate : string = trimDate((props.trip?.startDate ? props.trip.startDate : ""))
-    var fixedEndDate : string = trimDate((props.trip?.endDate ? props.trip.endDate : ""))
+    if (acts.length == 0) {
+        acts.push("None selected")
+    }
+
+    var fixedStartDate : string = trimDate((props.trip?.startDate ? props.trip.startDate : "Not selected"))
+    var fixedEndDate : string = trimDate((props.trip?.endDate ? props.trip.endDate : "Not selected"))
 
 
   return (
     <ListGroupItem className="overflow-auto">
         <h4>Overview:</h4>
         <ul>
-            <li> Destination: <br/>{props.trip?.destination ? props.trip.destination : ""}</li>
-            <li> Start Date: <br/>{fixedStartDate}</li>
-            <li> End Date: <br/>{fixedEndDate}</li>
-            <li> Accomodation: {props.trip?.hotel ? props.trip.hotel : ""}</li>
-            <li> Activities: 
+            <li> <b>Destination:</b> <br/>{props.trip?.destination ? props.trip.destination : "Not selected"}</li>
+            <li> <b>Start Date:</b> <br/>{fixedStartDate}</li>
+            <li> <b>End Date:</b> <br/>{fixedEndDate}</li>
+            <li> <b>Accomodation:</b> <br/>{props.trip?.hotel ? props.trip.hotel : "Not selected"}</li>
+            <li> <b>Activities: </b>
                 <ul>
                     {acts.map((act) => (
                         <li>
