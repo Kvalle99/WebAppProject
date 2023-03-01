@@ -41,6 +41,8 @@ function DestinationCard(props: DestinationCardProps) {
           <Card.Title>{props.destinationName}</Card.Title>
           <Card.Text>
             {props.destinationDescription}
+            <br/>
+            Sample activities:
             <ul>
               {activites?.map((act) => (
               <li>
@@ -109,8 +111,8 @@ function DestinationCard(props: DestinationCardProps) {
           acts.push(act.name)
         }
 
-        if (acts.length > 3) {
-          acts.splice(2, acts.length - 3)
+        if (acts.length > 2) {
+          acts.splice(2, acts.length - 2)
         }
 
         setActivities(acts)

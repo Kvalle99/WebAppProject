@@ -15,4 +15,7 @@ export class Destination {
   getCountry(): string {
     return this.country;
   }
+  getDescription(): string {
+    return this.description;
+  }
 }
