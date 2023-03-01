@@ -33,9 +33,7 @@ function DestinationCard(props: DestinationCardProps) {
         style={{ width: "18rem", margin: "5px" }}
       >
         <Card.Img
-          className="img-fluid"
           variant="top"
-          width="200"
           src={props.destinationPicture}
         />
         <Card.Body>

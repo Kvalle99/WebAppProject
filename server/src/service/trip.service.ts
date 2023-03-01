@@ -16,7 +16,6 @@ export class TripService implements ITripService {
       "New York",
       new Date(2023, 11, 11),
       new Date(2023, 11, 19),
-      "testHotel"
     ),
     new Trip(
       6845191,
@@ -26,7 +25,6 @@ export class TripService implements ITripService {
       "Chiang Mai",
       new Date(2023, 10, 24),
       new Date(2023, 11, 5),
-      "kvalles place"
     ),
     new Trip(
       11111111,
@@ -36,7 +34,6 @@ export class TripService implements ITripService {
       "Paris",
       new Date(2024, 1, 7),
       new Date(2024, 2, 5),
-      "OuiOui hotel"
     ),
   ];
 
