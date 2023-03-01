@@ -7,6 +7,7 @@ import DestinationCard from "../../../components/DestinationCard/DestinationCard
 interface Destination {
   city: string;
   country: string;
+  description : string
 }
 
 interface destProps {
@@ -29,7 +30,7 @@ function Destinations(props: destProps) {
           <div>
             <DestinationCard
               destinationName={destination.city}
-              destinationDescription={"You should go here"}
+              destinationDescription={destination.description}
               destinationPicture={"./SampleCity.jpg"}
               currentDestination={props.currentDest}
               changeDest={props.changeDest}
