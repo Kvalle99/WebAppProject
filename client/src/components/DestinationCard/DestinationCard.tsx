@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -7,16 +8,20 @@ interface DestinationCardProps {
   destinationName: string;
   destinationDescription: string;
   destinationPicture: string;
-  destinationActivities: string[];
   changeDest: Function;
   currentDestination?: string;
 }
 
 function DestinationCard(props: DestinationCardProps) {
   const [show, setShow] = useState(false);
+  const [activites, setActivities] = useState<string[]>([])
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  useEffect(() => {
+    getActivities();
+  }, []);
 
   return (
     <>
@@ -37,9 +42,11 @@ function DestinationCard(props: DestinationCardProps) {
           <Card.Text>
             {props.destinationDescription}
             <ul>
-              <li>{props.destinationActivities[0]}</li>
-              <li>{props.destinationActivities[1]}</li>
-              <li>{props.destinationActivities[2]}</li>
+              {activites?.map((act) => (
+              <li>
+                {act}
+              </li>
+              ))}
             </ul>
           </Card.Text>
           <Button
@@ -88,6 +95,27 @@ function DestinationCard(props: DestinationCardProps) {
       return true;
     }
     return false;
+  }
+
+  function getActivities() {
+    const res = axios
+      .get("http://localhost:8080/activity/getAllActivites", {
+        params: { dest: props.destinationName, searchText: "" },
+      })
+      .then((res) => {
+        var acts : string[] = []
+
+        for (let act of res.data) {
+          acts.push(act.name)
+        }
+
+        if (acts.length > 3) {
+          acts.splice(2, acts.length - 3)
+        }
+
+        setActivities(acts)
+      });
+    return;
   }
 }
 

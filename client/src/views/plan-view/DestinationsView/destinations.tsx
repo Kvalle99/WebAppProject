@@ -31,11 +31,6 @@ function Destinations(props: destProps) {
               destinationName={destination.city}
               destinationDescription={"You should go here"}
               destinationPicture={"./SampleCity.jpg"}
-              destinationActivities={[
-                "One activity",
-                "Another activity",
-                "Boring activity",
-              ]}
               currentDestination={props.currentDest}
               changeDest={props.changeDest}
             />
