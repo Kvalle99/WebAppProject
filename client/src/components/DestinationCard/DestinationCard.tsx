@@ -45,11 +45,8 @@ function DestinationCard(props: DestinationCardProps) {
             <br/>
             Sample activities:
             <ul>
-              {activites?.map((act) => (
-              <li>
-                {act}
-              </li>
-              ))}
+              <li>{activites[0]}</li>
+              <li>{activites[1]}</li>
             </ul>
           </Card.Text>
           <Button
@@ -70,9 +67,20 @@ function DestinationCard(props: DestinationCardProps) {
       </Card>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{props.destinationName}</Modal.Title>
+          <Modal.Title>{props.destinationName}, {props.destinationCountry}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{props.destinationDescription}</Modal.Body>
+        <Modal.Body>
+          {props.destinationDescription}
+          <br/>
+          Available activities:
+          <ul>
+          {activites?.map((act) => (
+          <li>
+            {act}
+          </li>
+        ))}
+        </ul>
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -110,10 +118,6 @@ function DestinationCard(props: DestinationCardProps) {
 
         for (let act of res.data) {
           acts.push(act.name)
-        }
-
-        if (acts.length > 2) {
-          acts.splice(2, acts.length - 2)
         }
 
         setActivities(acts)
