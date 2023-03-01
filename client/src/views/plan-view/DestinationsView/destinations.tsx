@@ -8,6 +8,7 @@ interface Destination {
   city: string;
   country: string;
   description : string
+  image : string
 }
 
 interface destProps {
@@ -32,7 +33,7 @@ function Destinations(props: destProps) {
               destinationName={destination.city}
               destinationDescription={destination.description}
               destinationCountry={destination.country}
-              destinationPicture={"./SampleCity.jpg"}
+              destinationPicture={destination.image}
               currentDestination={props.currentDest}
               changeDest={props.changeDest}
             />

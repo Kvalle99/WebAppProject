@@ -36,7 +36,7 @@ function DestinationCard(props: DestinationCardProps) {
           className="img-fluid"
           variant="top"
           width="200"
-          src={require("./SampleCity.jpg")}
+          src={props.destinationPicture}
         />
         <Card.Body>
           <Card.Title>{props.destinationName}, {props.destinationCountry}</Card.Title>

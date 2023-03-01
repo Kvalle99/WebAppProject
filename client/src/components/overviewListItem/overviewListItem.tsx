@@ -27,6 +27,7 @@ export default function OverviewListItem(props : OverivewProps) {
   return (
     <ListGroupItem className="overflow-auto">
         <h4>Overview:</h4>
+        <img src="" alt="bajs"/>
         <ul>
             <li> <b>Destination:</b> <br/>{props.trip?.destination ? props.trip.destination : "Not selected"}</li>
             <li> <b>Start Date:</b> <br/>{fixedStartDate}</li>
