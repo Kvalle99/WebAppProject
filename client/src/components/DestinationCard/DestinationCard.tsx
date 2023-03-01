@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 interface DestinationCardProps {
   destinationName: string;
   destinationDescription: string;
+  destinationCountry: string;
   destinationPicture: string;
   changeDest: Function;
   currentDestination?: string;
@@ -38,7 +39,7 @@ function DestinationCard(props: DestinationCardProps) {
           src={require("./SampleCity.jpg")}
         />
         <Card.Body>
-          <Card.Title>{props.destinationName}</Card.Title>
+          <Card.Title>{props.destinationName}, {props.destinationCountry}</Card.Title>
           <Card.Text>
             {props.destinationDescription}
             <br/>

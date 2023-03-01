@@ -31,6 +31,7 @@ function Destinations(props: destProps) {
             <DestinationCard
               destinationName={destination.city}
               destinationDescription={destination.description}
+              destinationCountry={destination.country}
               destinationPicture={"./SampleCity.jpg"}
               currentDestination={props.currentDest}
               changeDest={props.changeDest}

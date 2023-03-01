@@ -10,6 +10,7 @@ test("When destination change, the change booking function should be called", as
     <DestinationCard
       destinationName={"test dest"}
       destinationDescription={"test desc"}
+      destinationCountry={"asdf"}
       destinationPicture={"./SampleCity.jpg"}
       changeDest={(newD: string) => {
         newDest = newD;
