@@ -3,10 +3,12 @@ import SidenavListitem from "../sidenav-listitem/sidenav-listitem";
 import "./plan-sidenav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ListGroup } from "react-bootstrap";
+import OverviewListItem from "../overviewListItem/overviewListItem";
 
 interface PlanSidenavProps {
   changeView: Function;
   currentPage: Page;
+  trip : any
 }
 
 export enum Page {
@@ -48,12 +50,9 @@ function PlanSidenav(props: PlanSidenavProps) {
         active={props.currentPage === Page.ACTIVITY}
         thisPage={Page.ACTIVITY}
       ></SidenavListitem>
-      <SidenavListitem
-        listText="Trip Summary"
-        changeView={props.changeView}
-        active={false}
-        thisPage={Page.SUMMARY}
-      ></SidenavListitem>
+      <OverviewListItem
+        trip={props.trip}
+      ></OverviewListItem>
     </ListGroup>
   );
 }

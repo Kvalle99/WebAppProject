@@ -37,7 +37,7 @@ function App() {
       >
         <div className="row">
           <div className="col-2">
-            <PlanSidenav currentPage={page} changeView={changeView} />
+            <PlanSidenav currentPage={page} changeView={changeView} trip={myTrip}/>
           </div>
           <div className="col-10">
             <div className="mt-2"></div>
@@ -91,7 +91,7 @@ function App() {
       })
       .then((res) => {
         setTrip(res.data);
-        console.log("current: ");
+        console.log("current: " + res.data.destination);
         console.log(res.data);
         setTripId(res.data.id);
       });
