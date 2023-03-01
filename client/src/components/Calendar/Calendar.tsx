@@ -50,13 +50,16 @@ function CalendarComponent(props: calProps) {
               onChange={(date) => date && setSelectedStartDate(date)}
             />
           </div>
-          <div className="col-2 test">
-            <h5>Enter Date</h5>
+          <div className="col-2 mx-4 test">
+            <h5>Enter End Date</h5>
             <DatePicker
               selected={selectedEndDate}
               onChange={(date) => date && setSelectedEndDate(date)}
             />
           </div>
+        </div>
+        <div>
+          <br/>
         </div>
         <button
           type="button"
@@ -72,6 +75,10 @@ function CalendarComponent(props: calProps) {
   function saveChanges() {
     var sDate: Date = new Date(selectedStartDate!);
     var eDate: Date = new Date(selectedEndDate!);
+
+    if (sDate > eDate) {
+      alert("End date must be after start date!")
+    }
 
     //to revert the zero indeation of date-picker
     sDate.setMonth(sDate.getMonth());
