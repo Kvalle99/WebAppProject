@@ -8,10 +8,12 @@ import {
   Dropdown,
   Form,
   FormControl,
+  Modal,
   Nav,
 } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import CreateNewTripBtn from "../CreateNewTripBtn/CreateNewTripBtn";
+import axios from "axios";
 
 interface NavbarProps {
   chooseTrip: Function;
@@ -21,7 +23,9 @@ interface NavbarProps {
 }
 
 function NavbarComponent(props: NavbarProps) {
-  var searchValue: string = "";
+  const [login, setlogin] = useState<boolean>(false);
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <Navbar bg="success" expand="lg">
@@ -58,7 +62,7 @@ function NavbarComponent(props: NavbarProps) {
 
       <Nav className="ms-auto">
         <div>
-          <a href="#">
+          <a href="#" onClick={showLogIn}>
             <img
               src={require("../../images/accountIcon.png")}
               alt="Account"
@@ -67,10 +71,72 @@ function NavbarComponent(props: NavbarProps) {
               className="justify-content-md-right"
             />
           </a>
+          <Modal
+            className="border border-3 border-dark p-2 rounded"
+            show={login}
+            onHide={hideLogIn}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Log In</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Form className="" onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="Email">
+                  <Form.Label>User Name</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter username"
+                    value={userName}
+                    onChange={(event) => setUserName(event.target.value)}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="Password">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(event) => setPassword(event.target.value)}
+                  />
+                </Form.Group>
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={hideLogIn}>
+                Close
+              </Button>
+              <Button variant="success" onClick={handleSubmit}>
+                Log In
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </div>
       </Nav>
     </Navbar>
   );
+
+  function showLogIn() {
+    setlogin(true);
+  }
+
+  function hideLogIn() {
+    setlogin(false);
+  }
+
+  function handleSubmit() {
+    //here you should hash teh password before sending to backend but we wont do that in this project
+    const res = axios
+      .post("http://localhost:8080/user/login", {
+        userName: userName,
+        password: password,
+      })
+      .then((res) => {
+        //console.log("res" + res.data);
+        console.log(res.data[0]); //set as token and send with backend request
+        console.log(res.data[1]); //set as userId
+      });
+  }
 
   function chooseTrip(trip: string) {
     props.chooseTrip(trip);
