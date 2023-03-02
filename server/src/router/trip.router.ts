@@ -2,20 +2,29 @@ import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { Trip } from "../model/trip";
 import { TripService } from "../service/trip.service";
+import { UserService } from "../service/user.service";
 
 const tripService = new TripService();
+const userService = new UserService();
 
 export const TripRouter = express.Router();
 
 TripRouter.post(
   "/getTrip",
   async (
-    req: Request<{}, {}, { myId: number; tripId: number }>,
+    req: Request<{}, {}, { userToken: string; myId: number; tripId: number }>,
     res: Response<Trip>
   ) => {
     try {
-      const trip = await tripService.getMyTrip(req.body.myId, req.body.tripId);
-      res.status(200).send(trip);
+      const token = req.body.userToken;
+
+      if (userService.checkUser(token) == req.body.myId) {
+        const trip = await tripService.getMyTrip(
+          req.body.myId,
+          req.body.tripId
+        );
+        res.status(200).send(trip);
+      } else res.status(406).send();
     } catch (e: any) {
       res.status(406).send(e.message);
     }
@@ -25,11 +34,15 @@ TripRouter.post(
 TripRouter.post(
   "/handleActivity",
   async (
-    req: Request<{}, {}, { activity: string; dest: string, id: number }>,
+    req: Request<{}, {}, { activity: string; dest: string; id: number }>,
     res: Response<string>
   ) => {
     try {
-      await tripService.handleActivity(req.body.activity, req.body.dest, req.body.id);
+      await tripService.handleActivity(
+        req.body.activity,
+        req.body.dest,
+        req.body.id
+      );
       res.status(200).send("ok");
     } catch (e: any) {
       res.status(406).send(e.message);
@@ -130,11 +143,17 @@ TripRouter.post(
 
 TripRouter.post(
   "/GetMyTrips",
-  async (req: Request<{}, {}, { id: number }>, res: Response<number[]>) => {
+  async (
+    req: Request<{}, {}, { userToken: string; id: number }>,
+    res: Response<number[]>
+  ) => {
     try {
+      const token = req.body.userToken;
       const userId: number = req.body.id;
-      const tripList = await tripService.getMyTrips(userId);
-      res.status(200).send(tripList);
+      if (userService.checkUser(token) == userId) {
+        const tripList = await tripService.getMyTrips(userId);
+        res.status(200).send(tripList);
+      } else res.status(406).send();
     } catch (e: any) {
       res.status(500).send(e.message);
     }
@@ -144,14 +163,21 @@ TripRouter.post(
 TripRouter.post(
   "/createTrip",
   async (
-    req: Request<{}, {}, { userId: number; tripName: string }>,
+    req: Request<
+      {},
+      {},
+      { userToken: string; userId: number; tripName: string }
+    >,
     res: Response<Trip>
   ) => {
     try {
+      const userToken = req.body.userToken;
       const userId: number = req.body.userId;
       const tripName: string = req.body.tripName;
-      const trip = await tripService.createTrip(userId, tripName);
-      res.status(200).send(trip);
+      if (userService.checkUser(userToken) == userId) {
+        const trip = await tripService.createTrip(userId, tripName);
+        res.status(200).send(trip);
+      } else res.status(406).send();
     } catch (e: any) {}
   }
 );

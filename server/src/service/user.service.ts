@@ -14,19 +14,19 @@ export class UserService {
   //this will not be safe just a proof of concept,should be hidden and refreshed from time to time in the real world
   keyString = "6173646667686A6B6CF6706F697579746676626E6D2C6CF6706F6975680A";
 
-  findUser(username: string, password: string): boolean {
+  findUser(username: string, password: string): User | undefined {
     for (var i = 0; i < this.users.length; i++) {
       if (
         this.users[i].username == username &&
         this.users[i].password == password
       ) {
-        return true;
+        return this.users[i];
       }
     }
-    return false;
+    return;
   }
 
-  getID(username: string): number {
+  private getID(username: string): number {
     for (var i = 0; i < this.users.length; i++) {
       if (this.users[i].username == username) {
         return this.users[i].userId;
@@ -36,23 +36,27 @@ export class UserService {
   }
 
   async login(user: string, password: string): Promise<string[]> {
-    if (this.findUser(user, password)) {
-      var userKey = jwt.sign({ User: user }, this.keyString, {
+    const loggedUser = this.findUser(user, password);
+
+    if (loggedUser != undefined) {
+      var userKey = jwt.sign({ User: loggedUser.userId }, this.keyString, {
         expiresIn: "2h",
       });
-      const id = this.getID(user);
+      const id = loggedUser.userId;
       return [userKey, id.toString()];
     }
     throw new Error("Wrong credentials");
   }
 
-  async checkUser(userKey: string): Promise<Boolean> {
-    if (jwt.verify(userKey, this.keyString)) return true;
-    else return false;
+  checkUser(userKey: string): number {
+    if (jwt.verify(userKey, this.keyString)) {
+      return this.getUser(userKey);
+    } else throw new Error("Wrong credentials");
   }
 
-  async getUser(user: string): Promise<string> {
-    var decoded: any = await jwt_decode(user);
+  getUser(token: string) {
+    var decoded: any = jwt_decode(token);
+    console.log("signed user: " + decoded);
     return decoded.User;
   }
 }

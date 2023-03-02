@@ -82,6 +82,7 @@ function App() {
   function createNewTrip(tripName: string) {
     const res = axios
       .post("http://localhost:8080/trip/createTrip", {
+        userToken,
         userId,
         tripName,
       })
@@ -98,6 +99,7 @@ function App() {
     try {
       const res = axios
         .post("http://localhost:8080/trip/getTrip", {
+          userToken: userToken,
           myId: myId,
           tripId: tripId,
         })
@@ -114,7 +116,10 @@ function App() {
 
   function getMyTrips() {
     const res = axios
-      .post("http://localhost:8080/trip/getMyTrips", { id: userId })
+      .post("http://localhost:8080/trip/getMyTrips", {
+        userToken: userToken,
+        id: userId,
+      })
       .then((res) => {
         setTrips(res.data);
         getTrip(userId!, res.data[0]);
