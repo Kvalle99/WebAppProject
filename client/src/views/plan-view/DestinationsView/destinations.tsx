@@ -7,11 +7,14 @@ import DestinationCard from "../../../components/DestinationCard/DestinationCard
 interface Destination {
   city: string;
   country: string;
+  description : string
+  image : string
 }
 
 interface destProps {
   currentDest: string;
   changeDest: Function;
+  searchText: string;
 }
 
 function Destinations(props: destProps) {
@@ -19,7 +22,7 @@ function Destinations(props: destProps) {
 
   useEffect(() => {
     getDestinations();
-  }, []);
+  }, [props.searchText]);
 
   return (
     <Container>
@@ -28,13 +31,9 @@ function Destinations(props: destProps) {
           <div>
             <DestinationCard
               destinationName={destination.city}
-              destinationDescription={"You should go here"}
-              destinationPicture={"./SampleCity.jpg"}
-              destinationActivities={[
-                "One activity",
-                "Another activity",
-                "Boring activity",
-              ]}
+              destinationDescription={destination.description}
+              destinationCountry={destination.country}
+              destinationPicture={destination.image}
               currentDestination={props.currentDest}
               changeDest={props.changeDest}
             />
@@ -46,9 +45,12 @@ function Destinations(props: destProps) {
 
   function getDestinations() {
     const dest = axios
-      .get("http://localhost:8080/destination/getDestinations")
+      .get("http://localhost:8080/destination/getDestinations", {
+        params: { searchText: props.searchText },
+      })
       .then((res) => {
-        setDest(res.data);
+        let destinationsArr: Array<Destination> = res.data;
+        setDest(destinationsArr);
       });
     return;
   }

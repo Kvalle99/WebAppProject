@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { reduceEachTrailingCommentRange } from "typescript";
 import CalendarComponent from "../components/Calendar/Calendar";
+import { Page } from "../components/plan-sidenav/plan-sidenav";
+import SearchBar from "../components/SearchFunction/SearchBar";
 import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
 import ActivityView from "./plan-view/ActivityView/activityView";
 import Destinations from "./plan-view/DestinationsView/destinations";
@@ -10,51 +12,71 @@ interface PlannerProps {
   // set to optional so the component doesn´t break if  no trip has been created
   myId: number;
   currentTrip: any;
-  viewToShow: string;
   updateTrip: Function;
+  currentPage: Page;
 }
 
 function Planner(props: PlannerProps) {
-  if (props.viewToShow === "Destination") {
-    return (
-      <Destinations
-        changeDest={updateDest}
-        currentDest={
-          props.currentTrip?.destination ? props.currentTrip.destination : ""
-        }
-      />
-    );
-  }
+  const [searchText, setSearchText] = useState<string>("");
 
-  if (props.viewToShow === "Duration") {
-    return (
-      <CalendarComponent
-        startDate={props.currentTrip.startDate}
-        endDate={props.currentTrip.endDate}
-        saveDates={saveDates}
-      />
-    );
+  switch (props.currentPage) {
+    case Page.DESTINATION:
+      return (
+        <>
+          <SearchBar searchUpdate={setSearchText} />
+          <Destinations
+            changeDest={updateDest}
+            currentDest={
+              props.currentTrip?.destination
+                ? props.currentTrip.destination
+                : ""
+            }
+            searchText={searchText}
+          />
+        </>
+      );
+    case Page.CALENDAR:
+      return (
+        <CalendarComponent
+          startDate={props.currentTrip.startDate}
+          endDate={props.currentTrip.endDate}
+          saveDates={saveDates}
+        />
+      );
+    case Page.ACTIVITY:
+      return (
+        <>
+          <SearchBar searchUpdate={setSearchText} />
+          <ActivityView
+            actAdder={addActivity}
+            trip={props.currentTrip}
+            searchText={searchText}
+          />
+        </>
+      );
+    case Page.ACCOMODATION:
+      return (
+        <>
+          <SearchBar searchUpdate={setSearchText} />
+          <AccomodationView
+            changeAccomodation={updateAcc}
+            currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
+            currentDest={
+              props.currentTrip?.destination
+                ? props.currentTrip.destination
+                : ""
+            }
+            searchText={searchText}
+          />
+        </>
+      );
+    case Page.SUMMARY:
+      return <></>;
   }
-
-  if (props.viewToShow === "Activities") {
-    return <ActivityView actAdder={addActivity} id={props.currentTrip.id} />;
-  }
-
-  if (props.viewToShow === "Accomodation") {
-    return (
-      <AccomodationView
-        changeAccomodation={updateAcc}
-        currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
-        currentDest={
-          props.currentTrip?.destination ? props.currentTrip.destination : ""
-        }
-      />
-    );
-  }
-  return <></>;
 
   function updateTrip() {
     props.updateTrip();
+    console.log("trying to update trip");
   }
 
   function updateDest(name: string) {
@@ -63,10 +85,10 @@ function Planner(props: PlannerProps) {
   }
 
   function addActivity(act: string) {
-    console.log(act);
     const res = axios
       .post("http://localhost:8080/trip/handleActivity", {
         activity: act,
+        dest: props.currentTrip.destination,
         id: props.currentTrip.id,
       })
       .then((res) => {
@@ -105,7 +127,6 @@ function Planner(props: PlannerProps) {
   }
 
   function changeAccomodation(name: string, city: string) {
-    console.log("change to: ", name);
     const res = axios
       .post("http://localhost:8080/trip/changeAccomodations", {
         userId: props.myId,

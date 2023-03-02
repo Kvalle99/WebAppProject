@@ -9,6 +9,7 @@ test("When accomodation change, the change booking function should be called", a
   render(
     <AccomodationCard
       accomodationName={"test"}
+      accommodationId={500}
       accomodationPriceFrom={50}
       accomodationStars={1}
       accomodationDescription={"Test description"}

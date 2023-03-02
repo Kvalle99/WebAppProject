@@ -6,6 +6,7 @@ import "./AccomodationView.css";
 
 export interface Accomodation {
   name: string;
+  id: number;
   rating: number;
   price: number;
   description: string;
@@ -15,6 +16,7 @@ interface accomodationViewProps {
   changeAccomodation: Function;
   currentAcc: string;
   currentDest: string;
+  searchText: string;
 }
 
 function AccomodationView(props: accomodationViewProps) {
@@ -24,13 +26,15 @@ function AccomodationView(props: accomodationViewProps) {
   console.log("current acc" + props.currentAcc);
   useEffect(() => {
     getAccomodations();
-  }, []);
+  }, [props.searchText, props.currentDest]);
+
   return (
     <Container>
       <Row xs={1} md={1}>
         {accomodations?.map((accomodation) => (
           <AccomodationCard
             accomodationName={accomodation.name}
+            accommodationId={accomodation.id}
             accomodationStars={accomodation.rating}
             accomodationPriceFrom={accomodation.price}
             accomodationCity={accomodation.city.city}
@@ -50,11 +54,13 @@ function AccomodationView(props: accomodationViewProps) {
   }
   async function getAccomodations() {
     const res = await axios
-      .post("http://localhost:8080/accomodation/getAccomodations", {
-        destination: props.currentDest,
+      .get("http://localhost:8080/accomodation/getAccomodations", {
+        params: {
+          destination: props.currentDest,
+          searchText: props.searchText,
+        },
       })
       .then((res) => {
-        console.log(res.data);
         setAccomodations(res.data);
       });
     return;

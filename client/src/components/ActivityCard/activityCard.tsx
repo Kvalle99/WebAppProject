@@ -1,83 +1,68 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Button, Card } from "react-bootstrap";
 
 interface ActivityProps {
-    activityName : string;
-    activityDesc : string;
-    activityAdder : Function;
-    id : any
-
+  activityName: string;
+  activityDesc: string;
+  activityAdder: Function;
+  trip: any;
 }
 
 function ActivityCard(props: ActivityProps) {
-  const [chosenActivs, updateActs] = useState<string[] | null>(null);
 
-  useEffect(() => {
-    getChosenActivitiesNames();
-  }, [props.id]);
+  const [activityChosen, setActivityChosen] = useState<boolean>(false)
 
-    return (
-        <>
-        <Card
-          className={"border border-4 " + (getActivityChosen() ? "border-success" : "")}
-          style={{ width: "18rem", margin: "5px" }}
+  return (
+    <Card
+      className={
+        "border border-4 " + (getActivityChosen() ? "border-success" : "")
+      }
+      style={{ width: "18rem", margin: "5px" }}
+    >
+      <Card.Img
+        className="img-fluid"
+        variant="top"
+        width="200"
+        src={require("./SampleActivity.png")}
+      />
+      <Card.Body>
+        <Card.Title>{props.activityName}</Card.Title>
+        <Card.Text>{props.activityDesc}</Card.Text>
+        <Button
+          variant="primary"
+          role="changeDest"
+          onClick={() => addActivity()}
         >
-          <Card.Img
-            className="img-fluid"
-            variant="top"
-            width="200"
-            src={require("./SampleActivity.png")}
-          />
-          <Card.Body>
-            <Card.Title>{props.activityName}</Card.Title>
-            <Card.Text>
-              {props.activityDesc}
-            </Card.Text>
-            <Button
-              variant="primary"
-              role="changeDest"
-              onClick={() => addActivity()}
-            >
-              Add activity
-            </Button>
-          </Card.Body>
-        </Card>
-        </>
-    );
+          {(getActivityChosen() ? "Remove activity" : "Add activity")}
+        </Button>
+      </Card.Body>
+    </Card>
+  );
 
     function addActivity() {
+
       props.activityAdder(props.activityName);
-    }
-    
-    function getActivityChosen() : boolean {
-      var tripChosen : boolean = false;
+      setActivityChosen(!activityChosen)
 
-      if (chosenActivs == null) {
-        return false;
+  }
+
+  function getActivityChosen(): boolean {
+    var acts: string[] = [];
+    var actChosen: boolean = false;
+
+    for (let act of props.trip.activities) {
+      acts.push(act.name);
+    }
+
+    acts.forEach(function (act) {
+      if (act == props.activityName) {
+        actChosen = true;
       }
+    });
 
-      chosenActivs.forEach(function(chosenName) {
-        console.log(chosenName + " and " + props.activityName)
-        if (chosenName == props.activityName) {
-          tripChosen = true;
-        }
-      })
-    
-      return tripChosen;
-    }
-
-    function getChosenActivitiesNames() {
-      const res =  axios
-        .post("http://localhost:8080/trip/getActivities", {
-          id : props.id
-        })
-        .then((res) => {
-          updateActs(res.data);
-        })
-      
-    }
+    return actChosen;
+  }
 }
 
 export default ActivityCard;
-

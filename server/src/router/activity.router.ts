@@ -1,5 +1,4 @@
-
-import express, {Request,Response} from "express";
+import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { ActivityService } from "../service/activity.service";
 
@@ -7,19 +6,22 @@ const activityService = new ActivityService();
 
 export const ActivityRouter = express.Router();
 
-
-ActivityRouter.get("/getAllActivites", async (
-    req: Request<{}, {}, {}>,
-    res: Response<Activity[]>
-) => {
+ActivityRouter.get(
+  "/getAllActivites",
+  async (req: Request<{}, {}, {}>, res: Response<Activity[]>) => {
     try {
-        const activities = await activityService.getAllActivities();
-        res.status(200).send(activities);
+      const destination: any = req.query.dest;
+      const searchText: any = req.query.searchText;
+      const activities = await activityService.getAllActivities(
+        destination,
+        searchText
+      );
+      res.status(200).send(activities);
     } catch (e: any) {
-        res.status(500).send(e.message);
+      res.status(500).send(e.message);
     }
-});
-
+  }
+);
 
 /*
 ActivityRouter.get(
@@ -45,4 +47,3 @@ ActivityRouter.get(
     }
 });
 */
-

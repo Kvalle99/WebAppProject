@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarComponent from "./components/Navbar/Navbar";
-import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
+import PlanSidenav, { Page } from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
 
@@ -13,6 +13,7 @@ function App() {
   const [myTrips, setTrips] = useState<string[]>([]);
   const [myTrip, setTrip] = useState<any | null>(null);
   const [chosenTripId, setTripId] = useState<string>("");
+  const [page, setPage] = useState<Page>(Page.DESTINATION);
   // should be able to remove chosenTripId if we set a model-class/interface
   // for the Trip in the frontend or smth
 
@@ -46,15 +47,15 @@ function App() {
       >
         <div className="row">
           <div className="col-2">
-            <PlanSidenav current={currentView} changeView={changeView} />
+            <PlanSidenav currentPage={page} changeView={changeView} trip={myTrip}/>
           </div>
           <div className="col-10">
             <div className="mt-2"></div>
             <Planner
               myId={userId}
               currentTrip={myTrip}
-              viewToShow={currentView}
               updateTrip={updateTrip}
+              currentPage={page}
             />
           </div>
         </div>
@@ -66,9 +67,9 @@ function App() {
     </div>
   );
 
-  function changeView(view: string) {
+  function changeView(newPage: Page) {
     //console.log("new view: ", view);
-    setView(view);
+    setPage(newPage);
   }
 
   function changeTrip(trip: string) {
@@ -100,7 +101,7 @@ function App() {
       })
       .then((res) => {
         setTrip(res.data);
-        console.log("current: ");
+        console.log("current: " + res.data.destination);
         console.log(res.data);
         setTripId(res.data.id);
       });

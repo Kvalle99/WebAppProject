@@ -10,7 +10,7 @@ export const TripRouter = express.Router();
 TripRouter.post(
   "/getTrip",
   async (
-    req: Request<{}, {}, { myId: number; tripId: string }>,
+    req: Request<{}, {}, { myId: number; tripId: number }>,
     res: Response<Trip>
   ) => {
     try {
@@ -25,13 +25,12 @@ TripRouter.post(
 TripRouter.post(
   "/handleActivity",
   async (
-    req: Request<{}, {}, { activity: string; id: string }>,
-    res: Response
+    req: Request<{}, {}, { activity: string; dest: string, id: number }>,
+    res: Response<string>
   ) => {
     try {
-      console.log("router " + req.body.activity + " " + req.body.id);
-      await tripService.handleActivity(req.body.activity, req.body.id);
-      res.status(200);
+      await tripService.handleActivity(req.body.activity, req.body.dest, req.body.id);
+      res.status(200).send("ok");
     } catch (e: any) {
       res.status(406).send(e.message);
     }
@@ -40,9 +39,9 @@ TripRouter.post(
 
 TripRouter.post(
   "/getActivities",
-  async (req: Request<{}, {}, { id: string }>, res: Response<string[]>) => {
+  async (req: Request<{}, {}, { id: number }>, res: Response<string[]>) => {
     try {
-      const userId: string = req.body.id;
+      const userId: number = req.body.id;
       const actList = await tripService.getActivitiesByName(userId);
       res.status(200).send(actList);
     } catch (e: any) {
@@ -57,7 +56,7 @@ TripRouter.post(
     req: Request<
       {},
       {},
-      { userId: number; tripId: string; startDate: number; endDate: number }
+      { userId: number; tripId: number; startDate: number; endDate: number }
     >,
     res: Response
   ) => {
@@ -83,7 +82,7 @@ TripRouter.post(
       {},
       {
         userId: number;
-        tripId: string;
+        tripId: number;
         accomodationName: string;
         accomodationCity: string;
       }
@@ -92,7 +91,7 @@ TripRouter.post(
   ) => {
     try {
       const hotel: string = req.body.accomodationName;
-      const tripId: string = req.body.tripId;
+      const tripId: number = req.body.tripId;
       const userId: number = req.body.userId;
       const accomodationCity: string = req.body.accomodationCity;
       await tripService.changeAccomodation(
@@ -113,13 +112,13 @@ TripRouter.post(
     req: Request<
       {},
       {},
-      { userId: number; tripId: string; destinationName: string }
+      { userId: number; tripId: number; destinationName: string }
     >,
     res: Response<boolean>
   ) => {
     try {
       const dest: string = req.body.destinationName;
-      const tripId: string = req.body.tripId;
+      const tripId: number = req.body.tripId;
       const userId: number = req.body.userId;
       const success = await tripService.changeDestination(userId, tripId, dest);
       res.status(200).send(success);
@@ -131,7 +130,7 @@ TripRouter.post(
 
 TripRouter.post(
   "/GetMyTrips",
-  async (req: Request<{}, {}, { id: number }>, res: Response<string[]>) => {
+  async (req: Request<{}, {}, { id: number }>, res: Response<number[]>) => {
     try {
       const userId: number = req.body.id;
       const tripList = await tripService.getMyTrips(userId);

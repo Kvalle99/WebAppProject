@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
@@ -6,76 +7,93 @@ import Card from "react-bootstrap/Card";
 interface DestinationCardProps {
   destinationName: string;
   destinationDescription: string;
+  destinationCountry: string;
   destinationPicture: string;
-  destinationActivities: string[];
   changeDest: Function;
   currentDestination?: string;
 }
 
 function DestinationCard(props: DestinationCardProps) {
   const [show, setShow] = useState(false);
-  
+  const [activites, setActivities] = useState<string[]>([])
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
-  
+
+  useEffect(() => {
+    getActivities();
+  }, []);
+
   return (
     <>
-    <Card
-      className={"border border-4 " + (currentChoice() ? "border-success" : "")}
-      style={{ width: "18rem", margin: "5px" }}
-    >
-      <Card.Img
-        className="img-fluid"
-        variant="top"
-        width="200"
-        src={require("./SampleCity.jpg")}
-      />
-      <Card.Body>
-        <Card.Title>{props.destinationName}</Card.Title>
-        <Card.Text>
+      <Card
+        className={
+          "border border-4 " + (currentChoice() ? "border-success" : "")
+        }
+        style={{ width: "18rem", margin: "5px" }}
+      >
+        <Card.Img
+          variant="top"
+          src={props.destinationPicture}
+        />
+        <Card.Body>
+          <Card.Title>{props.destinationName}, {props.destinationCountry}</Card.Title>
+          <Card.Text>
+            {props.destinationDescription}
+            <br/>
+            Sample activities:
+            <ul>
+              <li>{activites[0]}</li>
+              <li>{activites[1]}</li>
+            </ul>
+          </Card.Text>
+          <Button
+            variant="primary"
+            role="changeDest"
+            onClick={() => newDestination()}
+          >
+            Go here
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={handleShow}
+            style={{ margin: "10px" }}
+          >
+            More info
+          </Button>
+        </Card.Body>
+      </Card>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>{props.destinationName}, {props.destinationCountry}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
           {props.destinationDescription}
+          <br/>
+          Available activities:
           <ul>
-            <li>{props.destinationActivities[0]}</li>
-            <li>{props.destinationActivities[1]}</li>
-            <li>{props.destinationActivities[2]}</li>
-          </ul>
-        </Card.Text>
-        <Button
-          variant="primary"
-          role="changeDest"
-          onClick={() => newDestination()}
-        >
-          Go here
-        </Button>
-        <Button variant="secondary" onClick={handleShow} style={{margin: "10px"}}>
-          More info
-        </Button>
-      </Card.Body>
-    </Card>
-    <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>{props.destinationName}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>{props.destinationDescription}</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button
-          variant="primary"
-          role="changeDest"
-          onClick={() => newDestination()}
-        >
-          Go here
-        </Button>
-          </Modal.Footer>
-        </Modal>
+          {activites?.map((act) => (
+          <li>
+            {act}
+          </li>
+        ))}
+        </ul>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            role="changeDest"
+            onClick={() => newDestination()}
+          >
+            Go here
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
-
-    
   );
-
 
   function newDestination() {
     props.changeDest(props.destinationName);
@@ -86,6 +104,23 @@ function DestinationCard(props: DestinationCardProps) {
       return true;
     }
     return false;
+  }
+
+  function getActivities() {
+    const res = axios
+      .get("http://localhost:8080/activity/getAllActivites", {
+        params: { dest: props.destinationName, searchText: "" },
+      })
+      .then((res) => {
+        var acts : string[] = []
+
+        for (let act of res.data) {
+          acts.push(act.name)
+        }
+
+        setActivities(acts)
+      });
+    return;
   }
 }
 

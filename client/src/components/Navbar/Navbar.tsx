@@ -58,10 +58,12 @@ function NavbarComponent(props: NavbarProps) {
         </Dropdown.Menu>
       </Dropdown>
 
-      <CreateNewTripBtn createTrip={createTrip}></CreateNewTripBtn>
+      <div className="mx-2">
+        <CreateNewTripBtn createTrip={createTrip}></CreateNewTripBtn>
+      </div>
 
       <Nav className="ms-auto">
-        <div>
+        <div className="mx-2">
           <a href="#" onClick={showLogIn}>
             <img
               src={require("../../images/accountIcon.png")}
