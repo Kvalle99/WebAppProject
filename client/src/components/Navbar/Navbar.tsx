@@ -20,6 +20,7 @@ interface NavbarProps {
   trips: string[];
   createNewTrip: Function;
   chosenTrip: string;
+  setUser: Function;
 }
 
 function NavbarComponent(props: NavbarProps) {
@@ -137,6 +138,7 @@ function NavbarComponent(props: NavbarProps) {
         //console.log("res" + res.data);
         console.log(res.data[0]); //set as token and send with backend request
         console.log(res.data[1]); //set as userId
+        props.setUser(res.data[0], res.data[1]);
       });
   }
 

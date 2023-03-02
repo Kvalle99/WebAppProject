@@ -14,14 +14,16 @@ function App() {
   const [myTrip, setTrip] = useState<any | null>(null);
   const [chosenTripId, setTripId] = useState<string>("");
   const [page, setPage] = useState<Page>(Page.DESTINATION);
+  const [userId, setId] = useState<number | undefined>();
+  const [userToken, setToken] = useState<string>("");
   // should be able to remove chosenTripId if we set a model-class/interface
   // for the Trip in the frontend or smth
 
-  const userId = 11; //to be set at log-in wit token later on
+  //const userId = 11; //to be set at log-in wit token later on
 
   useEffect(() => {
-    getMyTrips(userId);
-  }, []);
+    getMyTrips();
+  }, [userId]);
 
   return (
     <div className="App">
@@ -30,6 +32,7 @@ function App() {
         trips={myTrips}
         createNewTrip={createNewTrip}
         chosenTrip={chosenTripId}
+        setUser={setUser}
       />
     </div>
   );
@@ -40,6 +43,7 @@ function App() {
         trips={myTrips}
         createNewTrip={createNewTrip}
         chosenTrip={chosenTripId}
+        setUser={setUser}
       />
       <div
         className="container-fluid"
@@ -47,7 +51,11 @@ function App() {
       >
         <div className="row">
           <div className="col-2">
-            <PlanSidenav currentPage={page} changeView={changeView} trip={myTrip}/>
+            <PlanSidenav
+              currentPage={page}
+              changeView={changeView}
+              trip={myTrip}
+            />
           </div>
           <div className="col-10">
             <div className="mt-2"></div>
@@ -74,8 +82,12 @@ function App() {
 
   function changeTrip(trip: string) {
     //setChoosenTrip(trip);
-    getTrip(userId, trip);
+    getTrip(userId!, trip);
     setTripId(trip);
+  }
+  function setUser(token: string, id: number) {
+    setId(id);
+    setToken(token);
   }
 
   function createNewTrip(tripName: string) {
@@ -89,34 +101,38 @@ function App() {
         setTripId(res.data.id);
       })
       .then(() => {
-        getMyTrips(userId);
+        getMyTrips();
       });
   }
 
   function getTrip(myId: number, tripId: string) {
-    const res = axios
-      .post("http://localhost:8080/trip/getTrip", {
-        myId: myId,
-        tripId: tripId,
-      })
-      .then((res) => {
-        setTrip(res.data);
-        console.log("current: " + res.data.destination);
-        console.log(res.data);
-        setTripId(res.data.id);
-      });
+    try {
+      const res = axios
+        .post("http://localhost:8080/trip/getTrip", {
+          myId: myId,
+          tripId: tripId,
+        })
+        .then((res) => {
+          setTrip(res.data);
+          console.log("current: " + res.data.destination);
+          console.log(res.data);
+          setTripId(res.data.id);
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
-  function getMyTrips(myId: number) {
+  function getMyTrips() {
     const res = axios
-      .post("http://localhost:8080/trip/getMyTrips", { id: myId })
+      .post("http://localhost:8080/trip/getMyTrips", { id: userId })
       .then((res) => {
         setTrips(res.data);
-        getTrip(userId, res.data[0]);
+        getTrip(userId!, res.data[0]);
       });
   }
   function updateTrip() {
-    getTrip(userId, myTrip.id);
+    getTrip(userId!, myTrip.id);
   }
 }
 
