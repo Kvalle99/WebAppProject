@@ -34,17 +34,6 @@ function App() {
         chosenTrip={chosenTripId}
         setUser={setUser}
       />
-    </div>
-  );
-  return (
-    <div className="App">
-      <NavbarComponent
-        chooseTrip={changeTrip}
-        trips={myTrips}
-        createNewTrip={createNewTrip}
-        chosenTrip={chosenTripId}
-        setUser={setUser}
-      />
       <div
         className="container-fluid"
         style={{ maxWidth: "1080 ", margin: "0 auto" }}
