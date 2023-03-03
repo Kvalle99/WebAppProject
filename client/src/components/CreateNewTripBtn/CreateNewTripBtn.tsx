@@ -13,8 +13,6 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
   const [name, setName] = useState("");
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   const handleChange = (event: any) => {
     setName(event.target.value);
   };
@@ -65,6 +63,12 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
     </>
   );
 
+  function handleClose() {
+    setShow(false);
+  }
+  function handleShow() {
+    setShow(true);
+  }
   function createTrip() {
     console.log(name);
     props.createTrip(name);
