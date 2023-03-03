@@ -38,6 +38,11 @@ export class ActivityService implements IActivityService {
   constructor() {}
 
   getAllActivities(dest: string, searchText: string): Activity[] {
+    if (dest == undefined) return this.searchActivityWithoutDest(searchText);
+    else return this.searchActivityWithDest(dest, searchText);
+  }
+
+  searchActivityWithDest(dest: string, searchText: string): Activity[] {
     let acts = this.activities.filter((activity: Activity) => {
       const cityMatch =
         activity.getDestination().toLowerCase() == dest.toLowerCase() ||
@@ -53,8 +58,21 @@ export class ActivityService implements IActivityService {
     return acts;
   }
 
+  searchActivityWithoutDest(searchText: string): Activity[] {
+    let acts = this.activities.filter((activity: Activity) => {
+      const searchMatch =
+        activity
+          .getDestination()
+          .toLowerCase()
+          .includes(searchText.toLowerCase()) ||
+        activity.getName().toLowerCase().includes(searchText.toLowerCase());
+      return searchMatch;
+    });
+    return acts;
+  }
+
   //to find aa specified activity
-  findActivity(activityName: string, inDestination: string) : Activity {
+  findActivity(activityName: string, inDestination: string): Activity {
     for (let i: number = 0; i < this.activities.length; i++) {
       if (
         activityName == this.activities[i].getName() &&
@@ -74,7 +92,7 @@ export class ActivityService implements IActivityService {
     name: string,
     description: string,
     destination: string
-  ) : Promise<boolean> {
+  ): Promise<boolean> {
     var activity = this.findActivity(name, destination);
     activity.changeDescription(description);
     return true;

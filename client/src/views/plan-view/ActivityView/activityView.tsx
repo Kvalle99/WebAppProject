@@ -40,11 +40,13 @@ function ActivityView(props: ActivityProps) {
   );
 
   function getActivities() {
+    console.log("getting from:" + props.trip?.destination);
     const res = axios
       .get("http://localhost:8080/activity/getAllActivites", {
-        params: { dest: props.trip.destination, searchText: props.searchText },
+        params: { dest: props.trip?.destination, searchText: props.searchText },
       })
       .then((res) => {
+        console.log(res.data);
         setActivities(res.data);
       });
     return;
