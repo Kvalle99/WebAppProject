@@ -18,7 +18,7 @@ UserRouter.post(
       );
       res.status(200).send(token);
     } catch (e: any) {
-      res.status(500).send(e.message);
+      res.status(401).send(e.message);
     }
   }
 );

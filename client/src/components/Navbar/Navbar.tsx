@@ -13,7 +13,7 @@ import {
 } from "react-bootstrap";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import CreateNewTripBtn from "../CreateNewTripBtn/CreateNewTripBtn";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 interface NavbarProps {
   chooseTrip: Function;
@@ -27,6 +27,7 @@ function NavbarComponent(props: NavbarProps) {
   const [login, setlogin] = useState<boolean>(false);
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [failedLogIn, setFail] = useState<boolean>(false);
 
   return (
     <Navbar bg="success" expand="lg">
@@ -104,6 +105,9 @@ function NavbarComponent(props: NavbarProps) {
                   />
                 </Form.Group>
               </Form>
+              <p style={{ color: "red" }}>
+                {failedLogIn ? "Wrong Credentials!" : ""}
+              </p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={hideLogIn}>
@@ -135,11 +139,27 @@ function NavbarComponent(props: NavbarProps) {
         password: password,
       })
       .then((res) => {
-        //console.log("res" + res.data);
-        console.log(res.data[0]); //set as token and send with backend request
-        console.log(res.data[1]); //set as userId
-        props.setUser(res.data[0], res.data[1]);
+        try {
+          props.setUser(res.data[0], res.data[1]);
+          hideLogIn();
+          hideErrorMessage();
+        } catch {
+          console.log("in catch1");
+          showErrorMessage();
+        }
+      })
+      .catch((reason: AxiosError) => {
+        console.log("in catch2");
+        showErrorMessage();
+        console.log(failedLogIn);
       });
+  }
+
+  function showErrorMessage() {
+    setFail(true);
+  }
+  function hideErrorMessage() {
+    setFail(false);
   }
 
   function chooseTrip(trip: string) {
