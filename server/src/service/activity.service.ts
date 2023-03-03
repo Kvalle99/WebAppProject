@@ -54,7 +54,7 @@ export class ActivityService implements IActivityService {
   }
 
   //to find aa specified activity
-  findActivity(activityName: string, inDestination: string) {
+  findActivity(activityName: string, inDestination: string) : Activity {
     for (let i: number = 0; i < this.activities.length; i++) {
       if (
         activityName == this.activities[i].getName() &&
@@ -75,20 +75,9 @@ export class ActivityService implements IActivityService {
     name: string,
     description: string,
     destination: string
-  ) {
+  ) : Promise<boolean> {
     var activity = this.findActivity(name, destination);
     activity.changeDescription(description);
     return true;
-  }
-
-  async addNewRating(name: string, rating: number, destination: string) {
-    var activity = this.findActivity(name, destination);
-    activity.addNewRating(rating);
-    return true;
-  }
-
-  async getRating(name: string, destination: string): Promise<number> {
-    var activity = this.findActivity(name, destination);
-    return activity.getAverageRating();
   }
 }

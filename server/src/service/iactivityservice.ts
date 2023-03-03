@@ -1,3 +1,5 @@
+import { Activity } from "../model/activity";
+
 export interface IActivityService {
   // Changes the description of an activity
   changeDescription(name: string, description: string, destination: string): Promise<boolean>;
@@ -5,7 +7,9 @@ export interface IActivityService {
   // Returns the description of an activity
   getDescription(name: string, destination: string): Promise<string>;
 
-  addNewRating(name: string, rating: number, destination: string): Promise<boolean>;
+  //Returns specific activity in cestination based on activity name
+  findActivity(activityName: string, inDestination: string) : Activity;
 
-  getRating(name: string, destination: string): Promise<number>;
+  // Returns all activities in durrent destination matching search string
+  getAllActivities(dest: string, searchText: string): Activity[];
 }

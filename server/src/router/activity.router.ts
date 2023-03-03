@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { ActivityService } from "../service/activity.service";
+import { IActivityService } from "../service/iactivityservice";
 
-const activityService = new ActivityService();
+const activityService : IActivityService = new ActivityService();
 
 export const ActivityRouter = express.Router();
 
@@ -22,28 +23,3 @@ ActivityRouter.get(
     }
   }
 );
-
-/*
-ActivityRouter.get(
-  "/getDescription",
-  async (req: Request<{}, {}, {}>, res: Response<string>) => {
-    try {
-      const description = await activityService.getDescription();
-      res.status(200).send(description);
-    } catch (e: any) {
-      res.status(500).send(e.message);
-    }
-  }
-);
-
-ActivityRouter.get(
-  "/getRating",
-  async (req: Request<{}, {}, {}>, res: Response<string>) => {
-    try {
-      const rating = await activityService.getRating();
-      res.status(200).send(rating.toLocaleString());
-    } catch (e: any) {
-      res.status(500).send(e.message);
-    }
-});
-*/
