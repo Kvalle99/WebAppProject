@@ -8,17 +8,30 @@ interface SidenavListitemProps {
   changeView: Function;
   active: Boolean;
   thisPage: Page;
+  enabled: boolean;
 }
 
 function SidenavListitem(props: SidenavListitemProps) {
   return (
-    <ListGroupItem
-      role="button"
-      onClick={() => click(props.thisPage)}
-      variant={props.active ? "success" : ""}
-    >
-      {props.listText}
-    </ListGroupItem>
+    <>
+      {props.enabled ? (
+        <ListGroupItem
+          role="button"
+          onClick={() => click(props.thisPage)}
+          variant={props.active ? "success" : ""}
+        >
+          {props.listText}
+        </ListGroupItem>
+      ) : (
+        <ListGroupItem
+          role="button"
+          variant="disabled"
+          style={{ backgroundColor: "rgb(230, 230, 230)" }}
+        >
+          {props.listText}
+        </ListGroupItem>
+      )}
+    </>
   );
 
   function click(s: Page) {
