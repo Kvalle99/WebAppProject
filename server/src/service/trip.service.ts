@@ -1,12 +1,9 @@
-import { type } from "os";
 import { Activity } from "../model/activity";
 import { Trip } from "../model/trip";
 import { ActivityService } from "./activity.service";
 import { ITripService } from "./itripservice";
 
 export class TripService implements ITripService {
-  //will be collected from database later
-
   tripList = [
     new Trip(
       6845198231,
@@ -37,9 +34,7 @@ export class TripService implements ITripService {
     ),
   ];
 
-  constructor() {}
-
-  generateID() {
+  generateID() : number {
     const id = Math.floor(Math.random() * 100000);
     if (this.isExists(id)) {
       this.generateID();
@@ -73,7 +68,7 @@ export class TripService implements ITripService {
     return newTrip;
   }
 
-  findTrip(myId: number) {
+  findTrip(myId: number) : Trip {
     for (let i: number = 0; i < this.tripList.length; i++) {
       //console.log("in list: ", this.tripList[i].id);
       //console.log("myId: ", myId);
@@ -84,7 +79,7 @@ export class TripService implements ITripService {
     throw new Error("No such trip");
   }
 
-  findAllTrips(userId: number) {
+  findAllTrips(userId: number) : number[] {
     var toReturn: number[] = [];
     for (let i: number = 0; i < this.tripList.length; i++) {
       if (userId == this.tripList[i].getUserId()) {
@@ -94,19 +89,20 @@ export class TripService implements ITripService {
     return toReturn;
   }
 
-  async getMyTrips(myId: number) {
+  async getMyTrips(myId: number) : Promise<number[]> {
     return this.findAllTrips(myId);
   }
 
-  async getMyTrip(myId: number, tripId: number) {
+  async getMyTrip(myId: number, tripId: number) : Promise<Trip> {
     const trip = this.findTrip(tripId);
     if (trip.getUserId() == myId) {
       return trip;
+    } else {
+      throw new Error("Error getting trip")
     }
-    return;
   }
 
-  async changeDestination(userId: number, tripId: number, destination: string) {
+  async changeDestination(userId: number, tripId: number, destination: string) : Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(tripId);
     if (myTrip && myTrip.getUserId() == userId) {
       myTrip.updateDestination(destination);
@@ -114,7 +110,7 @@ export class TripService implements ITripService {
     return true;
   }
 
-  async getAccomodation(id: number) {
+  async getAccomodation(id: number) : Promise<string> {
     return this.findTrip(id).getHotel();
   }
 
@@ -123,7 +119,7 @@ export class TripService implements ITripService {
     tripId: number,
     accomodation: string,
     city: string
-  ) {
+  ) : Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(tripId);
     if (
       myTrip &&
@@ -140,7 +136,7 @@ export class TripService implements ITripService {
     tripId: number,
     startDate: Date,
     endDate: Date
-  ) {
+  ) : Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(tripId);
     if (myTrip && myTrip.getUserId() == userId) {
       myTrip.updateDates(startDate, endDate);
@@ -158,7 +154,7 @@ export class TripService implements ITripService {
     return false;
   } */
 
-  async handleActivity(activity: string, destination: string, id: number) {
+  async handleActivity(activity: string, destination: string, id: number) : Promise<void> {
     var activitySelected: Activity | null = null;
     var actServ = new ActivityService();
 
@@ -186,7 +182,7 @@ export class TripService implements ITripService {
     }
   }
 
-  async addActivities(myId: number, activity: Activity) {
+  async addActivities(myId: number, activity: Activity) : Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
       myTrip.addActivity(activity);
@@ -195,7 +191,7 @@ export class TripService implements ITripService {
     return false;
   }
 
-  async removeActivities(myId: number, activity: string) {
+  async removeActivities(myId: number, activity: string) : Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
       myTrip.removeActivity(activity);

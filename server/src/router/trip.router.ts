@@ -1,10 +1,11 @@
 import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { Trip } from "../model/trip";
+import { ITripService } from "../service/itripservice";
 import { TripService } from "../service/trip.service";
 import { UserService } from "../service/user.service";
 
-const tripService = new TripService();
+const tripService : ITripService = new TripService();
 const userService = new UserService();
 
 export const TripRouter = express.Router();
