@@ -37,11 +37,13 @@ function Planner(props: PlannerProps) {
       );
     case Page.CALENDAR:
       return (
-        <CalendarComponent
-          startDate={props.currentTrip.startDate}
-          endDate={props.currentTrip.endDate}
-          saveDates={saveDates}
-        />
+        <>
+          <CalendarComponent
+            startDate={props.currentTrip.startDate}
+            endDate={props.currentTrip.endDate}
+            saveDates={saveDates}
+          />
+        </>
       );
     case Page.ACTIVITY:
       return (

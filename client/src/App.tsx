@@ -18,6 +18,7 @@ function App() {
   const [userToken, setToken] = useState<string>("");
   // should be able to remove chosenTripId if we set a model-class/interface
   // for the Trip in the frontend or smth
+  // div className="overflow-auto vh-100"
 
   //const userId = 11; //to be set at log-in wit token later on
 
@@ -36,7 +37,7 @@ function App() {
       />
       <div
         className="container-fluid"
-        style={{ maxWidth: "1080 ", margin: "0 auto" }}
+        style={{ maxWidth: "1080 ", margin: "0 auto"}}
       >
         <div className="row">
           <div className="col-2">
@@ -46,8 +47,7 @@ function App() {
               trip={myTrip}
             />
           </div>
-          <div className="col-10">
-            <div className="mt-2"></div>
+          <div className="col-10 mt-2 overflow-auto" style={{ height: "calc(100vh - 100px)" }}>
             <Planner
               myId={userId}
               currentTrip={myTrip}
