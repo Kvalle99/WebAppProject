@@ -1,7 +1,8 @@
 import { Accomodation } from "../model/accomodation";
+import { IAccomodationService } from "./iaccomodation.service";
 
 //TODO: add interface
-export class AccomodationService {
+export class AccomodationService implements IAccomodationService{
   hotelList = [
     new Accomodation(
       "Hotel 1",
