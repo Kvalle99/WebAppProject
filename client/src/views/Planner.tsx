@@ -9,7 +9,6 @@ import ActivityView from "./plan-view/ActivityView/activityView";
 import Destinations from "./plan-view/DestinationsView/destinations";
 
 interface PlannerProps {
-  // set to optional so the component doesn´t break if  no trip has been created
   myId: number | undefined;
   currentTrip: any;
   updateTrip: Function;
@@ -39,8 +38,8 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <CalendarComponent
-            startDate={props.currentTrip.startDate}
-            endDate={props.currentTrip.endDate}
+            startDate={props.currentTrip?.startDate}
+            endDate={props.currentTrip?.endDate}
             saveDates={saveDates}
           />
         </>

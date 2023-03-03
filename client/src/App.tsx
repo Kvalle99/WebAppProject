@@ -23,7 +23,7 @@ function App() {
   //const userId = 11; //to be set at log-in wit token later on
 
   useEffect(() => {
-    getMyTrips();
+    getMyTrips(true);
   }, [userId]);
 
   return (
@@ -37,7 +37,7 @@ function App() {
       />
       <div
         className="container-fluid"
-        style={{ maxWidth: "1080 ", margin: "0 auto"}}
+        style={{ maxWidth: "1080 ", margin: "0 auto" }}
       >
         <div className="row">
           <div className="col-2">
@@ -47,7 +47,10 @@ function App() {
               trip={myTrip}
             />
           </div>
-          <div className="col-10 overflow-auto" style={{ height: "calc(100vh - 100px)" }}>
+          <div
+            className="col-10 overflow-auto"
+            style={{ height: "calc(100vh - 100px)" }}
+          >
             <Planner
               myId={userId}
               currentTrip={myTrip}
@@ -86,11 +89,8 @@ function App() {
         tripName,
       })
       .then((res) => {
-        setTrip(res.data);
-        setTripId(res.data.id);
-      })
-      .then(() => {
-        getMyTrips();
+        getMyTrips(false);
+        changeTrip(res.data.id);
       });
   }
 
@@ -111,7 +111,7 @@ function App() {
     }
   }
 
-  function getMyTrips() {
+  function getMyTrips(updateCurrentTrip: boolean) {
     const res = axios
       .post("http://localhost:8080/trip/getMyTrips", {
         userToken: userToken,
@@ -119,10 +119,8 @@ function App() {
       })
       .then((res) => {
         setTrips(res.data);
-        if (res.data[0] != undefined) {
+        if (updateCurrentTrip && res.data[0] != undefined) {
           getTrip(userId!, res.data[0]);
-        } else {
-          setTrip(null);
         }
       });
   }

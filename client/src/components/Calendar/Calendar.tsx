@@ -19,6 +19,8 @@ interface calProps {
 function CalendarComponent(props: calProps) {
   var startDate: Date = new Date();
   var endDate: Date = new Date();
+  console.log(startDate);
+  console.log(endDate);
 
   if (props.startDate) {
     startDate = new Date(props.startDate);
@@ -59,7 +61,7 @@ function CalendarComponent(props: calProps) {
           </div>
         </div>
         <div>
-          <br/>
+          <br />
         </div>
         <button
           type="button"
@@ -77,7 +79,7 @@ function CalendarComponent(props: calProps) {
     var eDate: Date = new Date(selectedEndDate!);
 
     if (sDate > eDate) {
-      alert("End date must be after start date!")
+      alert("End date must be after start date!");
     }
 
     //to revert the zero indeation of date-picker
