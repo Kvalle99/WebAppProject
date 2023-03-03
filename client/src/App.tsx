@@ -122,7 +122,11 @@ function App() {
       })
       .then((res) => {
         setTrips(res.data);
-        getTrip(userId!, res.data[0]);
+        if (res.data[0] != undefined) {
+          getTrip(userId!, res.data[0]);
+        } else {
+          setTrip(null);
+        }
       });
   }
   function updateTrip() {
