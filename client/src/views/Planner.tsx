@@ -38,8 +38,8 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <CalendarComponent
-            startDate={props.currentTrip.startDate}
-            endDate={props.currentTrip.endDate}
+            startDate={props.currentTrip?.startDate}
+            endDate={props.currentTrip?.endDate}
             saveDates={saveDates}
           />
         </>
