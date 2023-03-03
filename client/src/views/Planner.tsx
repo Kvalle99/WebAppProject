@@ -78,7 +78,6 @@ function Planner(props: PlannerProps) {
 
   function updateTrip() {
     props.updateTrip();
-    console.log("trying to update trip");
   }
 
   function updateDest(name: string) {

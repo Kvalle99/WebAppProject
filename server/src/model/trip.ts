@@ -32,9 +32,7 @@ export class Trip {
   }
 
   removeActivity(activity: string) {
-    console.log("act length before remove: " + this.activities.length);
 
-    console.log("trip model class removing " + activity);
 
     var index: number = -1;
 
@@ -49,16 +47,12 @@ export class Trip {
       return;
     }
 
-    console.log("removing at index " + index);
     this.activities.splice(index, 1);
 
-    console.log("act length after remove: " + this.activities.length);
   }
 
   addActivity(activity: Activity) {
-    console.log("act length before add: " + this.activities.length);
     this.activities.push(activity);
-    console.log("act length after add: " + this.activities.length);
   }
 
   getActivitiesByName(): string[] {

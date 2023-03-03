@@ -12,7 +12,6 @@ UserRouter.post(
     res: Response<string[]>
   ) => {
     try {
-      console.log("in backend");
       const token: string[] = await userService.login(
         req.body.userName,
         req.body.password

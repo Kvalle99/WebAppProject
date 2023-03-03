@@ -57,7 +57,6 @@ export class UserService implements IUserService{
 
   getUser(token: string) : number {
     var decoded: any = jwt_decode(token);
-    console.log("signed user: " + decoded);
     return decoded.User;
   }
 }

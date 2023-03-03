@@ -22,8 +22,6 @@ interface AccomodationCardProps {
 ); */
 
 function AccomodationCard(props: AccomodationCardProps) {
-  /* let img_src =  */
-  /* console.log(img_src); */
   return (
     <div className="col-12 mt-3">
       <Card

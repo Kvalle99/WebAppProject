@@ -65,7 +65,6 @@ function App() {
   );
 
   function changeView(newPage: Page) {
-    //console.log("new view: ", view);
     setPage(newPage);
   }
 
@@ -105,8 +104,6 @@ function App() {
         })
         .then((res) => {
           setTrip(res.data);
-          console.log("current: " + res.data.destination);
-          console.log(res.data);
           setTripId(res.data.id);
         });
     } catch (e) {

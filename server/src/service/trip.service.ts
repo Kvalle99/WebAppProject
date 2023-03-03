@@ -52,7 +52,6 @@ export class TripService implements ITripService {
   }
 
   async createTrip(userId: number, tripName: string): Promise<Trip> {
-    console.log(tripName);
     let newTrip: Trip = new Trip(
       this.generateID(),
       tripName,
@@ -64,14 +63,11 @@ export class TripService implements ITripService {
       undefined
     );
     this.tripList.push(newTrip);
-    console.log(newTrip);
     return newTrip;
   }
 
   findTrip(myId: number) : Trip {
     for (let i: number = 0; i < this.tripList.length; i++) {
-      //console.log("in list: ", this.tripList[i].id);
-      //console.log("myId: ", myId);
       if (myId == this.tripList[i].getId()) {
         return this.tripList[i];
       }
@@ -163,21 +159,13 @@ export class TripService implements ITripService {
     activities.forEach(function (act) {
       if (act.getName() === activity) {
         activitySelected = actServ.findActivity(activity, destination);
-        console.log(activitySelected);
       }
     });
 
     if (activitySelected) {
-      console.log(
-        "trying to remove " +
-          (activitySelected as Activity).getName() +
-          " from " +
-          id
-      );
       this.removeActivities(id, (activitySelected as Activity).getName());
     } else {
       activitySelected = actServ.findActivity(activity, destination);
-      console.log("trying to add " + activitySelected.getName() + " to " + id);
       this.addActivities(id, activitySelected);
     }
   }

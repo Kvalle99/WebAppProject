@@ -154,14 +154,11 @@ function NavbarComponent(props: NavbarProps) {
           hideLogIn();
           hideErrorMessage();
         } catch {
-          console.log("in catch1");
           showErrorMessage();
         }
       })
       .catch((reason: AxiosError) => {
-        console.log("in catch2");
         showErrorMessage();
-        console.log(failedLogIn);
       });
   }
 
@@ -177,8 +174,7 @@ function NavbarComponent(props: NavbarProps) {
   }
 
   function checkActive(trip: string): boolean {
-    /*     console.log("trip: ", trip, ", chosenTrip: ", props.chosenTrip, ", t/f: ", trip === props.chosenTrip)
-     */ return trip === props.chosenTrip;
+     return trip === props.chosenTrip;
   }
 
   function createTrip(tripName: string) {

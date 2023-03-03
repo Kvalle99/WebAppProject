@@ -60,7 +60,6 @@ export class ActivityService implements IActivityService {
         activityName == this.activities[i].getName() &&
         inDestination == this.activities[i].getDestination()
       ) {
-        //console.log("found it!");
         return this.activities[i];
       }
     }

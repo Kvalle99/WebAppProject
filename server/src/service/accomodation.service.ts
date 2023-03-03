@@ -89,7 +89,6 @@ export class AccomodationService implements IAccomodationService{
 
   getAccomodations(destination: string, searchText: string) : Accomodation[] {
     var toReturn: Accomodation[] = [];
-    console.log("destination: " + destination);
 
     toReturn = this.hotelList.filter((accomodation: Accomodation) => {
       const cityMatch =

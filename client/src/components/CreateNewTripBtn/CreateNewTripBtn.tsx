@@ -67,7 +67,6 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
   );
 
   function createTrip() {
-    console.log(name);
     props.createTrip(name);
   }
 }
