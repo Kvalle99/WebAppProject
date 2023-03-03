@@ -53,14 +53,13 @@ export class ActivityService implements IActivityService {
     return acts;
   }
 
-  //to find aa specified activity
+  //to find a specified activity
   findActivity(activityName: string, inDestination: string) {
     for (let i: number = 0; i < this.activities.length; i++) {
       if (
         activityName == this.activities[i].getName() &&
         inDestination == this.activities[i].getDestination()
       ) {
-        //console.log("found it!");
         return this.activities[i];
       }
     }

@@ -19,6 +19,11 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
     setName(event.target.value);
   };
 
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === "Enter") {
+      createTrip();
+    }
+  };
   return (
     <>
       <Button variant="light" onClick={handleShow}>
@@ -30,18 +35,19 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
           <Modal.Title>Create new Trip</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={createTrip}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <FloatingLabel
                 controlId="floatingInput"
                 label="Trip Name"
                 className="mb-3"
-                onChange={handleChange}
               >
                 <Form.Control
                   type="input"
                   placeholder="TripName"
                   name="tripName"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
                 />
               </FloatingLabel>
             </Form.Group>
@@ -51,14 +57,7 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button
-            variant="primary"
-            role="createTrip"
-            onClick={() => {
-              createTrip();
-              handleClose();
-            }}
-          >
+          <Button variant="primary" role="createTrip" onClick={createTrip}>
             Create Trip
           </Button>
         </Modal.Footer>
@@ -69,6 +68,7 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
   function createTrip() {
     console.log(name);
     props.createTrip(name);
+    handleClose();
   }
 }
 export default CreateNewTripBtn;

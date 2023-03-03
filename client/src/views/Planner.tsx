@@ -9,7 +9,6 @@ import ActivityView from "./plan-view/ActivityView/activityView";
 import Destinations from "./plan-view/DestinationsView/destinations";
 
 interface PlannerProps {
-  // set to optional so the component doesn´t break if  no trip has been created
   myId: number | undefined;
   currentTrip: any;
   updateTrip: Function;
