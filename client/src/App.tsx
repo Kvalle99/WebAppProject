@@ -68,6 +68,7 @@ function App() {
   );
 
   function changeView(newPage: Page) {
+    //console.log("new view: ", view);
     setPage(newPage);
   }
 
@@ -104,6 +105,8 @@ function App() {
         })
         .then((res) => {
           setTrip(res.data);
+          console.log("current: " + res.data.destination);
+          console.log(res.data);
           setTripId(res.data.id);
         });
     } catch (e) {
@@ -119,8 +122,14 @@ function App() {
       })
       .then((res) => {
         setTrips(res.data);
-        if (updateCurrentTrip && res.data[0] != undefined) {
-          getTrip(userId!, res.data[0]);
+        if (updateCurrentTrip) {
+          console.log("in if");
+          if (res.data[0] != undefined) {
+            getTrip(userId!, res.data[0]);
+          } else {
+            setTrip(null);
+            setTripId("");
+          }
         }
       });
   }
