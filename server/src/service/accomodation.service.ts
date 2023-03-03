@@ -87,7 +87,7 @@ export class AccomodationService implements IAccomodationService{
     ),
   ];
 
-  getAccomodations(destination: string, searchText: string) {
+  getAccomodations(destination: string, searchText: string) : Accomodation[] {
     var toReturn: Accomodation[] = [];
     console.log("destination: " + destination);
 
@@ -106,7 +106,7 @@ export class AccomodationService implements IAccomodationService{
 
     return toReturn;
   }
-  generateID() {
+  generateID() : number {
     const id = Math.floor(Math.random() * 100000);
     if (this.isExists(id)) {
       this.generateID();
