@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
 import { Destination } from "../model/destinations";
 import { DestinationService } from "../service/destination.service";
+import { IDestinationService } from "../service/idestination.service";
 
-const destinationService = new DestinationService();
+const destinationService : IDestinationService = new DestinationService();
 export const DestinationRouter = express.Router();
 
 DestinationRouter.get(
