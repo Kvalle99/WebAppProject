@@ -178,6 +178,8 @@ TripRouter.post(
         const trip = await tripService.createTrip(userId, tripName);
         res.status(200).send(trip);
       } else res.status(406).send();
-    } catch (e: any) {}
+    } catch (e: any) {
+      res.status(406).send();
+    }
   }
 );
