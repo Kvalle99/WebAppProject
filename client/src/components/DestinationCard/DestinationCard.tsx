@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import styles from "./destinationCard.module.css";
 
 interface DestinationCardProps {
   destinationName: string;
@@ -15,7 +16,7 @@ interface DestinationCardProps {
 
 function DestinationCard(props: DestinationCardProps) {
   const [show, setShow] = useState(false);
-  const [activites, setActivities] = useState<string[]>([])
+  const [activites, setActivities] = useState<string[]>([]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -35,12 +36,15 @@ function DestinationCard(props: DestinationCardProps) {
         <Card.Img
           variant="top"
           src={props.destinationPicture}
+          className={styles.cardImg}
         />
         <Card.Body>
-          <Card.Title>{props.destinationName}, {props.destinationCountry}</Card.Title>
+          <Card.Title>
+            {props.destinationName}, {props.destinationCountry}
+          </Card.Title>
           <Card.Text>
             {props.destinationDescription}
-            <br/>
+            <br />
             Sample activities:
             <ul>
               <li>{activites[0]}</li>
@@ -65,19 +69,19 @@ function DestinationCard(props: DestinationCardProps) {
       </Card>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>{props.destinationName}, {props.destinationCountry}</Modal.Title>
+          <Modal.Title>
+            {props.destinationName}, {props.destinationCountry}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {props.destinationDescription}
-          <br/>
+          <br />
           Available activities:
           <ul>
-          {activites?.map((act) => (
-          <li>
-            {act}
-          </li>
-        ))}
-        </ul>
+            {activites?.map((act) => (
+              <li>{act}</li>
+            ))}
+          </ul>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -112,13 +116,13 @@ function DestinationCard(props: DestinationCardProps) {
         params: { dest: props.destinationName, searchText: "" },
       })
       .then((res) => {
-        var acts : string[] = []
+        var acts: string[] = [];
 
         for (let act of res.data) {
-          acts.push(act.name)
+          acts.push(act.name);
         }
 
-        setActivities(acts)
+        setActivities(acts);
       });
     return;
   }
