@@ -2,8 +2,9 @@ import { User } from "../model/user";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
 import jwt_decode from "jwt-decode";
+import { IUserService } from "./iuser.service";
 
-export class UserService {
+export class UserService implements IUserService{
   users: User[] = [
     new User("eimer", "eimer", 1),
     new User("sebastian", "sebastian", 11),
@@ -54,7 +55,7 @@ export class UserService {
     } else throw new Error("Wrong credentials");
   }
 
-  getUser(token: string) {
+  getUser(token: string) : number {
     var decoded: any = jwt_decode(token);
     console.log("signed user: " + decoded);
     return decoded.User;

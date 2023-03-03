@@ -1,7 +1,8 @@
 import express, { Request, Response } from "express";
+import { IUserService } from "../service/iuser.service";
 import { UserService } from "../service/user.service";
 
-const userService = new UserService();
+const userService : IUserService = new UserService();
 export const UserRouter = express.Router();
 
 UserRouter.post(
