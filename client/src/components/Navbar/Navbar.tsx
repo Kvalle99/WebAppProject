@@ -21,6 +21,7 @@ interface NavbarProps {
   createNewTrip: Function;
   chosenTrip: string;
   setUser: Function;
+  loggedIn: boolean;
 }
 
 function NavbarComponent(props: NavbarProps) {
@@ -28,6 +29,15 @@ function NavbarComponent(props: NavbarProps) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [failedLogIn, setFail] = useState<boolean>(false);
+
+  useEffect(() => {
+    setlogin(props.loggedIn);
+    if (!props.loggedIn) {
+      showLogIn();
+    } else {
+      hideLogIn();
+    }
+  }, [props.loggedIn]);
 
   const handleKeyPress = (e: { key: string }) => {
     if (e.key === "Enter") {
@@ -52,22 +62,29 @@ function NavbarComponent(props: NavbarProps) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <ul>
-            {props.trips.map((trip) => (
-              <Dropdown.Item
-                key={trip}
-                onClick={() => chooseTrip(trip)}
-                active={checkActive(trip)}
-              >
-                {trip}
-              </Dropdown.Item>
-            ))}
-          </ul>
+          {props.loggedIn ? (
+            <ul>
+              {props.trips.map((trip) => (
+                <Dropdown.Item
+                  key={trip}
+                  onClick={() => chooseTrip(trip)}
+                  active={checkActive(trip)}
+                >
+                  {trip}
+                </Dropdown.Item>
+              ))}
+            </ul>
+          ) : (
+            <h3>Log in to start planning!</h3>
+          )}
         </Dropdown.Menu>
       </Dropdown>
 
       <div className="mx-2">
-        <CreateNewTripBtn createTrip={createTrip}></CreateNewTripBtn>
+        <CreateNewTripBtn
+          loggedIn={props.loggedIn}
+          createTrip={createTrip}
+        ></CreateNewTripBtn>
       </div>
 
       <Nav className="ms-auto">
@@ -87,7 +104,7 @@ function NavbarComponent(props: NavbarProps) {
             onHide={hideLogIn}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Log In</Modal.Title>
+              <Modal.Title>Log In to start planning your trip!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form
@@ -121,7 +138,7 @@ function NavbarComponent(props: NavbarProps) {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={hideLogIn}>
-                Close
+                Keep Browsing
               </Button>
               <Button variant="success" onClick={handleSubmit}>
                 Log In

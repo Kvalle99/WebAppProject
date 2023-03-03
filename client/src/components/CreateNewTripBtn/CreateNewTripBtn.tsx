@@ -7,6 +7,7 @@ import { FloatingLabel, FormLabel } from "react-bootstrap";
 
 interface CreateNewTripBtnProps {
   createTrip: Function;
+  loggedIn: boolean;
 }
 
 function CreateNewTripBtn(props: CreateNewTripBtnProps) {
@@ -19,9 +20,13 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
 
   return (
     <>
-      <Button variant="light" onClick={handleShow}>
-        Start new trip
-      </Button>
+      {props.loggedIn ? (
+        <Button variant="light" onClick={handleShow}>
+          Start new trip
+        </Button>
+      ) : (
+        <Button variant="light disabled">Start new trip</Button>
+      )}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

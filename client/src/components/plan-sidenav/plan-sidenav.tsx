@@ -8,7 +8,8 @@ import OverviewListItem from "../overviewListItem/overviewListItem";
 interface PlanSidenavProps {
   changeView: Function;
   currentPage: Page;
-  trip : any
+  trip: any;
+  loggedIn: boolean;
 }
 
 export enum Page {
@@ -31,28 +32,30 @@ function PlanSidenav(props: PlanSidenavProps) {
         changeView={props.changeView}
         active={props.currentPage === Page.DESTINATION}
         thisPage={Page.DESTINATION}
+        enabled={true}
       ></SidenavListitem>
       <SidenavListitem
         listText="Duration"
         changeView={props.changeView}
         active={props.currentPage === Page.CALENDAR}
         thisPage={Page.CALENDAR}
+        enabled={props.loggedIn}
       ></SidenavListitem>
       <SidenavListitem
         listText="Accomodation"
         changeView={props.changeView}
         active={props.currentPage === Page.ACCOMODATION}
         thisPage={Page.ACCOMODATION}
+        enabled={true}
       ></SidenavListitem>
       <SidenavListitem
         listText="Activities"
         changeView={props.changeView}
         active={props.currentPage === Page.ACTIVITY}
         thisPage={Page.ACTIVITY}
+        enabled={true}
       ></SidenavListitem>
-      <OverviewListItem
-        trip={props.trip}
-      ></OverviewListItem>
+      <OverviewListItem trip={props.trip}></OverviewListItem>
     </ListGroup>
   );
 }

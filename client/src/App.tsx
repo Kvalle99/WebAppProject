@@ -23,7 +23,9 @@ function App() {
   //const userId = 11; //to be set at log-in wit token later on
 
   useEffect(() => {
-    getMyTrips(true);
+    if (userId) {
+      getMyTrips(true);
+    }
   }, [userId]);
 
   return (
@@ -34,6 +36,7 @@ function App() {
         createNewTrip={createNewTrip}
         chosenTrip={chosenTripId}
         setUser={setUser}
+        loggedIn={userId !== undefined}
       />
       <div
         className="container-fluid"
@@ -45,6 +48,7 @@ function App() {
               currentPage={page}
               changeView={changeView}
               trip={myTrip}
+              loggedIn={userId !== undefined}
             />
           </div>
           <div
