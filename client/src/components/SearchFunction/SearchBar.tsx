@@ -14,7 +14,7 @@ function SearchBar(props: SearchBarProps) {
   };
 
   return (
-    <Form className="d-flex">
+    <Form className="d-flex mt-2">
       <Form.Control
         type="search"
         placeholder="Search"

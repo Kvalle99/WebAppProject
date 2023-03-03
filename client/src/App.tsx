@@ -47,7 +47,7 @@ function App() {
               trip={myTrip}
             />
           </div>
-          <div className="col-10 mt-2 overflow-auto" style={{ height: "calc(100vh - 100px)" }}>
+          <div className="col-10 overflow-auto" style={{ height: "calc(100vh - 100px)" }}>
             <Planner
               myId={userId}
               currentTrip={myTrip}
