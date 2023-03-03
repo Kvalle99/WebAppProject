@@ -29,6 +29,12 @@ function NavbarComponent(props: NavbarProps) {
   const [password, setPassword] = useState("");
   const [failedLogIn, setFail] = useState<boolean>(false);
 
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
     <Navbar bg="success" expand="lg">
       <Navbar.Brand href="/">
@@ -84,7 +90,11 @@ function NavbarComponent(props: NavbarProps) {
               <Modal.Title>Log In</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <Form className="" onSubmit={handleSubmit}>
+              <Form
+                className=""
+                onSubmit={handleSubmit}
+                onKeyPress={handleKeyPress}
+              >
                 <Form.Group className="mb-3" controlId="Email">
                   <Form.Label>User Name</Form.Label>
                   <Form.Control
