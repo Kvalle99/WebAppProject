@@ -3,51 +3,45 @@ import styles from "./CreateNewTripBtn.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { FloatingLabel } from "react-bootstrap";
+import { FloatingLabel, FormLabel } from "react-bootstrap";
 
 interface CreateNewTripBtnProps {
   createTrip: Function;
+  loggedIn: boolean;
 }
 
 function CreateNewTripBtn(props: CreateNewTripBtnProps) {
   const [name, setName] = useState("");
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState<boolean>(false);
 
   const handleChange = (event: any) => {
     setName(event.target.value);
   };
 
-  const handleKeyPress = (e: { key: string }) => {
-    if (e.key === "Enter") {
-      createTrip();
-    }
-  };
   return (
     <>
-      <Button variant="light" onClick={handleShow}>
-        Start new trip
-      </Button>
+      {props.loggedIn ? (
+        <Button variant="light" onClick={handleShow}>
+          Start new trip
+        </Button>
+      ) : (
+        <Button variant="light disabled">Start new trip</Button>
+      )}
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Create new Trip</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={createTrip}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <FloatingLabel
-                controlId="floatingInput"
-                label="Trip Name"
-                className="mb-3"
-              >
+          <Form onSubmit={(e) => createTrip(e)}>
+            <Form.Group className="mb-3">
+              <Form.Label label="Trip Name" className="mb-3">
                 <Form.Control
-                  type="input"
                   placeholder="TripName"
-                  name="tripName"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                 />
-              </FloatingLabel>
+              </Form.Label>
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -55,7 +49,11 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" role="createTrip" onClick={createTrip}>
+          <Button
+            variant="primary"
+            role="createTrip"
+            onClick={(e) => createTrip(e)}
+          >
             Create Trip
           </Button>
         </Modal.Footer>
@@ -69,8 +67,14 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
   function handleShow() {
     setShow(true);
   }
-  function createTrip() {
+  function createTrip(
+    event:
+      | React.FormEvent<HTMLFormElement>
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) {
+    event.preventDefault();
     props.createTrip(name);
+    setName("");
     handleClose();
   }
 }

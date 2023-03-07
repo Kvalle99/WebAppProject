@@ -154,9 +154,9 @@ TripRouter.post(
       if (userService.checkUser(token) == userId) {
         const tripList = await tripService.getMyTrips(userId);
         res.status(200).send(tripList);
-      } else res.status(406).send();
+      } else res.status(401).send();
     } catch (e: any) {
-      res.status(500).send(e.message);
+      res.status(401).send(e.message);
     }
   }
 );

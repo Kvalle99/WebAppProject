@@ -14,6 +14,7 @@ import {
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import CreateNewTripBtn from "../CreateNewTripBtn/CreateNewTripBtn";
 import axios, { AxiosError } from "axios";
+import { createLogicalAnd } from "typescript";
 
 interface NavbarProps {
   chooseTrip: Function;
@@ -21,6 +22,7 @@ interface NavbarProps {
   createNewTrip: Function;
   chosenTrip: string;
   setUser: Function;
+  loggedIn: boolean;
 }
 
 function NavbarComponent(props: NavbarProps) {
@@ -28,6 +30,15 @@ function NavbarComponent(props: NavbarProps) {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [failedLogIn, setFail] = useState<boolean>(false);
+
+  useEffect(() => {
+    setlogin(props.loggedIn);
+    if (!props.loggedIn) {
+      showLogIn();
+    } else {
+      hideLogIn();
+    }
+  }, [props.loggedIn]);
 
   const handleKeyPress = (e: { key: string }) => {
     if (e.key === "Enter") {
@@ -52,22 +63,29 @@ function NavbarComponent(props: NavbarProps) {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <ul>
-            {props.trips.map((trip) => (
-              <Dropdown.Item
-                key={trip}
-                onClick={() => chooseTrip(trip)}
-                active={checkActive(trip)}
-              >
-                {trip}
-              </Dropdown.Item>
-            ))}
-          </ul>
+          {props.loggedIn ? (
+            <ul>
+              {props.trips.map((trip) => (
+                <Dropdown.Item
+                  key={trip}
+                  onClick={() => chooseTrip(trip)}
+                  active={checkActive(trip)}
+                >
+                  {trip}
+                </Dropdown.Item>
+              ))}
+            </ul>
+          ) : (
+            <h3>Log in to start planning!</h3>
+          )}
         </Dropdown.Menu>
       </Dropdown>
 
       <div className="mx-2">
-        <CreateNewTripBtn createTrip={createTrip}></CreateNewTripBtn>
+        <CreateNewTripBtn
+          loggedIn={props.loggedIn}
+          createTrip={createTrip}
+        ></CreateNewTripBtn>
       </div>
 
       <Nav className="ms-auto">
@@ -87,7 +105,7 @@ function NavbarComponent(props: NavbarProps) {
             onHide={hideLogIn}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Log In</Modal.Title>
+              <Modal.Title>Log In to start planning your trip!</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Form
@@ -121,10 +139,10 @@ function NavbarComponent(props: NavbarProps) {
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={hideLogIn}>
-                Close
+                Keep Browsing
               </Button>
               <Button variant="success" onClick={handleSubmit}>
-                Log In
+                {props.loggedIn ? "Log Out" : "Log In"}
               </Button>
             </Modal.Footer>
           </Modal>
@@ -142,24 +160,29 @@ function NavbarComponent(props: NavbarProps) {
   }
 
   function handleSubmit() {
-    //here you should hash teh password before sending to backend but we wont do that in this project
-    const res = axios
-      .post("http://localhost:8080/user/login", {
-        userName: userName,
-        password: password,
-      })
-      .then((res) => {
-        try {
-          props.setUser(res.data[0], res.data[1]);
-          hideLogIn();
-          hideErrorMessage();
-        } catch {
+    //here you should hash the password before sending to backend but we wont do that in this project
+
+    if (props.loggedIn) {
+      props.setUser("");
+    } else {
+      const res = axios
+        .post("http://localhost:8080/user/login", {
+          userName: userName,
+          password: password,
+        })
+        .then((res) => {
+          try {
+            props.setUser(res.data[0], res.data[1]);
+            hideLogIn();
+            hideErrorMessage();
+          } catch {
+            showErrorMessage();
+          }
+        })
+        .catch((reason: AxiosError) => {
           showErrorMessage();
-        }
-      })
-      .catch((reason: AxiosError) => {
-        showErrorMessage();
-      });
+        });
+    }
   }
 
   function showErrorMessage() {
@@ -174,7 +197,7 @@ function NavbarComponent(props: NavbarProps) {
   }
 
   function checkActive(trip: string): boolean {
-     return trip === props.chosenTrip;
+    return trip === props.chosenTrip;
   }
 
   function createTrip(tripName: string) {

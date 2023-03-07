@@ -23,7 +23,12 @@ function App() {
   //const userId = 11; //to be set at log-in wit token later on
 
   useEffect(() => {
-    getMyTrips(true);
+    if (userId) {
+      getMyTrips(true);
+    } else {
+      setTrips([]);
+      setTrip(null);
+    }
   }, [userId]);
 
   return (
@@ -34,6 +39,7 @@ function App() {
         createNewTrip={createNewTrip}
         chosenTrip={chosenTripId}
         setUser={setUser}
+        loggedIn={userId !== undefined}
       />
       <div
         className="container-fluid"
@@ -45,6 +51,7 @@ function App() {
               currentPage={page}
               changeView={changeView}
               trip={myTrip}
+              loggedIn={userId !== undefined}
             />
           </div>
           <div
@@ -68,6 +75,7 @@ function App() {
   );
 
   function changeView(newPage: Page) {
+    //console.log("new view: ", view);
     setPage(newPage);
   }
 
@@ -76,7 +84,7 @@ function App() {
     getTrip(userId!, trip);
     setTripId(trip);
   }
-  function setUser(token: string, id: number) {
+  function setUser(token: string, id?: number) {
     setId(id);
     setToken(token);
   }
@@ -104,6 +112,8 @@ function App() {
         })
         .then((res) => {
           setTrip(res.data);
+          console.log("current: " + res.data.destination);
+          console.log(res.data);
           setTripId(res.data.id);
         });
     } catch (e) {
@@ -119,8 +129,14 @@ function App() {
       })
       .then((res) => {
         setTrips(res.data);
-        if (updateCurrentTrip && res.data[0] != undefined) {
-          getTrip(userId!, res.data[0]);
+        if (updateCurrentTrip) {
+          console.log("in if");
+          if (res.data[0] != undefined) {
+            getTrip(userId!, res.data[0]);
+          } else {
+            setTrip(null);
+            setTripId("");
+          }
         }
       });
   }

@@ -11,6 +11,7 @@ it("It should mount", () => {
       listText={""}
       changeView={changeView}
       active={false}
+      enabled={false}
     />,
     div
   );

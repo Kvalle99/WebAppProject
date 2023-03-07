@@ -10,8 +10,7 @@ interface ActivityProps {
 }
 
 function ActivityCard(props: ActivityProps) {
-
-  const [activityChosen, setActivityChosen] = useState<boolean>(false)
+  const [activityChosen, setActivityChosen] = useState<boolean>(false);
 
   return (
     <Card
@@ -30,24 +29,23 @@ function ActivityCard(props: ActivityProps) {
         <Card.Title>{props.activityName}</Card.Title>
         <Card.Text>{props.activityDesc}</Card.Text>
         <Button
-          variant="primary"
+          variant={props.trip == null ? "primary disabled" : "primary"}
           role="changeDest"
           onClick={() => addActivity()}
         >
-          {(getActivityChosen() ? "Remove activity" : "Add activity")}
+          {getActivityChosen() ? "Remove activity" : "Add activity"}
         </Button>
       </Card.Body>
     </Card>
   );
 
-    function addActivity() {
-
-      props.activityAdder(props.activityName);
-      setActivityChosen(!activityChosen)
-
+  function addActivity() {
+    props.activityAdder(props.activityName);
+    setActivityChosen(!activityChosen);
   }
 
   function getActivityChosen(): boolean {
+    if (props.trip == null) return false;
     var acts: string[] = [];
     var actChosen: boolean = false;
 
