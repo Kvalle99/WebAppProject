@@ -17,7 +17,6 @@ export enum Page {
   CALENDAR,
   ACCOMODATION,
   ACTIVITY,
-  SUMMARY,
 }
 
 /* const PlanSidenav: FC<PlanSidenavProps> = () => (

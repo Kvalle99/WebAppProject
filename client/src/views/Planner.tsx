@@ -71,8 +71,6 @@ function Planner(props: PlannerProps) {
           />
         </>
       );
-    case Page.SUMMARY:
-      return <></>;
   }
 
   function updateTrip() {
