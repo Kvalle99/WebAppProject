@@ -29,7 +29,7 @@ function ActivityCard(props: ActivityProps) {
         <Card.Title>{props.activityName}</Card.Title>
         <Card.Text>{props.activityDesc}</Card.Text>
         <Button
-          variant="primary"
+          variant={props.trip == null ? "primary disabled" : "primary"}
           role="changeDest"
           onClick={() => addActivity()}
         >
