@@ -23,15 +23,17 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <SearchBar searchUpdate={setSearchText} />
-          <Destinations
-            changeDest={updateDest}
-            currentDest={
-              props.currentTrip?.destination
-                ? props.currentTrip.destination
-                : ""
-            }
-            searchText={searchText}
-          />
+          <div className="overflow-auto"  style={{ height: "calc(100vh - 150px)" }}>
+            <Destinations
+              changeDest={updateDest}
+              currentDest={
+                props.currentTrip?.destination
+                  ? props.currentTrip.destination
+                  : ""
+              }
+              searchText={searchText}
+            />
+          </div>
         </>
       );
     case Page.CALENDAR:
@@ -48,27 +50,31 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <SearchBar searchUpdate={setSearchText} />
-          <ActivityView
-            actAdder={addActivity}
-            trip={props.currentTrip}
-            searchText={searchText}
-          />
+          <div className="overflow-auto"  style={{ height: "calc(100vh - 150px)" }}>
+            <ActivityView
+              actAdder={addActivity}
+              trip={props.currentTrip}
+              searchText={searchText}
+            />
+          </div>
         </>
       );
     case Page.ACCOMODATION:
       return (
         <>
           <SearchBar searchUpdate={setSearchText} />
-          <AccomodationView
-            changeAccomodation={updateAcc}
-            currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
-            currentDest={
-              props.currentTrip?.destination
-                ? props.currentTrip.destination
-                : ""
-            }
-            searchText={searchText}
-          />
+          <div className="overflow-auto"  style={{ height: "calc(100vh - 150px)" }}>
+            <AccomodationView
+              changeAccomodation={updateAcc}
+              currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
+              currentDest={
+                props.currentTrip?.destination
+                  ? props.currentTrip.destination
+                  : ""
+              }
+              searchText={searchText}
+            />
+          </div>
         </>
       );
   }

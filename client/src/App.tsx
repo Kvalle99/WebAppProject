@@ -55,8 +55,8 @@ function App() {
             />
           </div>
           <div
-            className="col-10 overflow-auto"
-            style={{ height: "calc(100vh - 100px)" }}
+            className="col-10 overflow-hidden"
+            style={{ height: "calc(100vh - 91px)" }}
           >
             <Planner
               myId={userId}
