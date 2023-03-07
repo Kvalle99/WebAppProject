@@ -14,6 +14,7 @@ import {
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import CreateNewTripBtn from "../CreateNewTripBtn/CreateNewTripBtn";
 import axios, { AxiosError } from "axios";
+import { createLogicalAnd } from "typescript";
 
 interface NavbarProps {
   chooseTrip: Function;
@@ -141,7 +142,7 @@ function NavbarComponent(props: NavbarProps) {
                 Keep Browsing
               </Button>
               <Button variant="success" onClick={handleSubmit}>
-                Log In
+                {props.loggedIn ? "Log Out" : "Log In"}
               </Button>
             </Modal.Footer>
           </Modal>
@@ -159,24 +160,29 @@ function NavbarComponent(props: NavbarProps) {
   }
 
   function handleSubmit() {
-    //here you should hash teh password before sending to backend but we wont do that in this project
-    const res = axios
-      .post("http://localhost:8080/user/login", {
-        userName: userName,
-        password: password,
-      })
-      .then((res) => {
-        try {
-          props.setUser(res.data[0], res.data[1]);
-          hideLogIn();
-          hideErrorMessage();
-        } catch {
+    //here you should hash the password before sending to backend but we wont do that in this project
+
+    if (props.loggedIn) {
+      props.setUser("");
+    } else {
+      const res = axios
+        .post("http://localhost:8080/user/login", {
+          userName: userName,
+          password: password,
+        })
+        .then((res) => {
+          try {
+            props.setUser(res.data[0], res.data[1]);
+            hideLogIn();
+            hideErrorMessage();
+          } catch {
+            showErrorMessage();
+          }
+        })
+        .catch((reason: AxiosError) => {
           showErrorMessage();
-        }
-      })
-      .catch((reason: AxiosError) => {
-        showErrorMessage();
-      });
+        });
+    }
   }
 
   function showErrorMessage() {
@@ -191,7 +197,7 @@ function NavbarComponent(props: NavbarProps) {
   }
 
   function checkActive(trip: string): boolean {
-     return trip === props.chosenTrip;
+    return trip === props.chosenTrip;
   }
 
   function createTrip(tripName: string) {

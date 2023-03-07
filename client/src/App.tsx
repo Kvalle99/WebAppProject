@@ -25,6 +25,9 @@ function App() {
   useEffect(() => {
     if (userId) {
       getMyTrips(true);
+    } else {
+      setTrips([]);
+      setTrip(null);
     }
   }, [userId]);
 
@@ -81,7 +84,7 @@ function App() {
     getTrip(userId!, trip);
     setTripId(trip);
   }
-  function setUser(token: string, id: number) {
+  function setUser(token: string, id?: number) {
     setId(id);
     setToken(token);
   }
