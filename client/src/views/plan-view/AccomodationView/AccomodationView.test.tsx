@@ -9,14 +9,14 @@ jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<AxiosStatic>;
 
 test("Should send GET to localhost", async () => {
-  mockedAxios.post.mockResolvedValue({
+  mockedAxios.get.mockResolvedValue({
     data: [
       {
         name: "test hotel",
         rating: 3,
         price: 500,
         description: "test desc",
-        city: { city: "gothenburg", country: "Sweden" },
+        city: { city: "Gothenburg", country: "Sweden" },
       },
     ],
   });
@@ -28,9 +28,9 @@ test("Should send GET to localhost", async () => {
       searchText={""}
     />
   );
-  expect(mockedAxios.post).toHaveBeenCalledWith(
+  expect(mockedAxios.get).toHaveBeenCalledWith(
     "http://localhost:8080/accomodation/getAccomodations",
-    { destination: "" }
+    { params: { destination: "", searchText: "" } }
   );
   const acc = await screen.findByText("test hotel");
   const btn = await screen.findByText("Choose");
@@ -39,7 +39,7 @@ test("Should send GET to localhost", async () => {
 });
 
 test("Accomodation change, the change call to backend should be executed", async () => {
-  mockedAxios.post.mockResolvedValue({
+  mockedAxios.get.mockResolvedValue({
     data: [
       {
         name: "test hotel",

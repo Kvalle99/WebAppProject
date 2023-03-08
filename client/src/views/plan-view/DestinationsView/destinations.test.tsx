@@ -22,9 +22,10 @@ test("Should send GET to localhost", async () => {
     <Destinations currentDest={""} changeDest={() => {}} searchText={""} />
   );
   expect(mockedAxios.get).toHaveBeenCalledWith(
-    "http://localhost:8080/destination/getDestinations"
+    "http://localhost:8080/destination/getDestinations",
+    { params: { searchText: "" } }
   );
-  const dest = await screen.findByText("test dest");
+  const dest = await screen.findByText("test dest, Sweden");
 
   expect(dest).toBeInTheDocument();
 });
