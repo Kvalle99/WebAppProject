@@ -12,6 +12,7 @@ interface DestinationCardProps {
   destinationPicture: string;
   changeDest: Function;
   currentDestination?: string;
+  disabled: boolean;
 }
 
 function DestinationCard(props: DestinationCardProps) {
@@ -52,7 +53,7 @@ function DestinationCard(props: DestinationCardProps) {
             </ul>
           </Card.Text>
           <Button
-            variant="primary"
+            variant={props.disabled ? "primary disabled" : "primary"}
             role="changeDest"
             onClick={() => newDestination()}
           >

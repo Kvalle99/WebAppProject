@@ -1,14 +1,14 @@
 export class Destination {
   private city: string;
   private country: string;
-  private description : string
-  private image : string
+  private description: string;
+  private image: string;
 
-  constructor(name: string, country: string, desc : string, img : string) {
+  constructor(name: string, country: string, desc: string, img: string) {
     this.city = name;
     this.country = country;
-    this.description = desc
-    this.image = img
+    this.description = desc;
+    this.image = img;
   }
 
   getCity(): string {
@@ -21,6 +21,6 @@ export class Destination {
     return this.description;
   }
   getImage(): string {
-    return this.image
+    return this.image;
   }
 }

@@ -4,11 +4,6 @@
 }
 
 .accImg {
-  /*   display: block;
-  flex-shrink: 0;
-  min-width: 100%;
-  min-height: 100%;
-  overflow: hidden; */
   width: 100%;
   margin: 0 auto;
   overflow: hidden;
