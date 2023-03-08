@@ -2,10 +2,6 @@ import { Activity } from "../model/activity";
 import { simpleTrip, Trip } from "../model/trip";
 
 export interface ITripService {
-  generateID(): number;
-
-  isExists(id: number): boolean;
-
   createTrip(userId: number, tripName: string): Promise<Trip>;
 
   findTrip(myId: number): Trip;

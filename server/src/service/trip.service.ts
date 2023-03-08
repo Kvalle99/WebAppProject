@@ -2,6 +2,7 @@ import { Activity } from "../model/activity";
 import { simpleTrip, Trip } from "../model/trip";
 import { ActivityService } from "./activity.service";
 import { ITripService } from "./itripservice";
+import { generateID } from "./generator.service";
 
 export class TripService implements ITripService {
   tripList: Trip[] = [
@@ -34,26 +35,9 @@ export class TripService implements ITripService {
     ),
   ];
 
-  generateID(): number {
-    const id = Math.floor(Math.random() * 100000);
-    if (this.isExists(id)) {
-      this.generateID();
-    }
-    return id;
-  }
-
-  isExists(id: number): boolean {
-    let res: boolean = false;
-    var result = this.tripList.find((trip) => {
-      return trip.getId() === id;
-    });
-    result === undefined ? (res = false) : (res = true);
-    return res;
-  }
-
   async createTrip(userId: number, tripName: string): Promise<Trip> {
     let newTrip: Trip = new Trip(
-      this.generateID(),
+      generateID(this.tripList.map((trip) => trip.getId())),
       tripName,
       [],
       userId,

@@ -78,7 +78,7 @@ function NavbarComponent(props: NavbarProps) {
                   <Dropdown.Header className="text-decoration-underline" style={{fontSize: "1.2rem", color: "black"}}>
                     You have no trips
                   </Dropdown.Header>
-                  <h5>Start by creating a new trip!</h5>
+                  <Dropdown.Item>Start by creating a new trip!</Dropdown.Item>
                 </div>
               ) : (
                 <div>
