@@ -11,8 +11,6 @@ export class Accomodation {
   constructor(
     name: string,
     id: number,
-    rating: number,
-    price: number,
     description: string,
     city: string,
     country: string
