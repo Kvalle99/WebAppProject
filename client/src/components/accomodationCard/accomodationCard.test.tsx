@@ -1,7 +1,8 @@
-import { render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
+import { act } from "react-dom/test-utils";
 import AccomodationCard from "./accomodationCard";
 
 test("When accomodation change, the change booking function should be called", async () => {
@@ -22,6 +23,10 @@ test("When accomodation change, the change booking function should be called", a
       disabled={false}
     />
   );
-
-  expect(newAcc == "test");
+  const btn = await screen.findByText("Choose");
+  expect(btn).toBeInTheDocument();
+  act(() => {
+    fireEvent.click(btn);
+  });
+  expect(newAcc).toMatch("test");
 });
