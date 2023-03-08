@@ -3,7 +3,6 @@ import styles from "./CreateNewTripBtn.module.css";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { FloatingLabel, FormLabel } from "react-bootstrap";
 
 interface CreateNewTripBtnProps {
   createTrip: Function;

@@ -26,6 +26,7 @@ test("Should send GET to localhost", async () => {
       currentDest={""}
       changeAccomodation={() => {}}
       searchText={""}
+      trip={undefined}
     />
   );
   expect(mockedAxios.get).toHaveBeenCalledWith(
@@ -60,6 +61,7 @@ test("Accomodation change, the change call to backend should be executed", async
         change = true;
       }}
       searchText={""}
+      trip={undefined}
     />
   );
   const button = await screen.findByRole("changeAcc");

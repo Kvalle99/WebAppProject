@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import styles from "./accomodationCard.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Container, Row } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
 interface AccomodationCardProps {
   accomodationName: string;
@@ -13,6 +14,7 @@ interface AccomodationCardProps {
   accomodationImgSrc?: string;
   changeBooking: Function;
   currentAccomodation: string;
+  disabled: boolean;
 }
 
 /* const AccomodationCard: FC<AccomodationCardProps> = () => (
@@ -45,13 +47,13 @@ function AccomodationCard(props: AccomodationCardProps) {
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h4 className="card-title">{props.accomodationName}</h4>
 
-              <button
-                className="btn btn-success"
+              <Button
+                variant={props.disabled ? "primary disabled" : "primary"}
                 role="changeAcc"
                 onClick={updateHotel}
               >
                 Choose
-              </button>
+              </Button>
             </div>
             <p>{props.accomodationCity}</p>
             <p className="card-text">{props.accomodationDescription}</p>

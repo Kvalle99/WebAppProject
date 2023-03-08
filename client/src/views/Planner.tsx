@@ -23,7 +23,10 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <SearchBar searchUpdate={setSearchText} />
-          <div className="overflow-auto"  style={{ height: "calc(100vh - 150px)" }}>
+          <div
+            className="overflow-auto"
+            style={{ height: "calc(100vh - 150px)" }}
+          >
             <Destinations
               changeDest={updateDest}
               currentDest={
@@ -32,6 +35,7 @@ function Planner(props: PlannerProps) {
                   : ""
               }
               searchText={searchText}
+              trip={props.currentTrip}
             />
           </div>
         </>
@@ -50,7 +54,10 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <SearchBar searchUpdate={setSearchText} />
-          <div className="overflow-auto"  style={{ height: "calc(100vh - 150px)" }}>
+          <div
+            className="overflow-auto"
+            style={{ height: "calc(100vh - 150px)" }}
+          >
             <ActivityView
               actAdder={addActivity}
               trip={props.currentTrip}
@@ -63,16 +70,22 @@ function Planner(props: PlannerProps) {
       return (
         <>
           <SearchBar searchUpdate={setSearchText} />
-          <div className="overflow-auto"  style={{ height: "calc(100vh - 150px)" }}>
+          <div
+            className="overflow-auto"
+            style={{ height: "calc(100vh - 150px)" }}
+          >
             <AccomodationView
               changeAccomodation={updateAcc}
-              currentAcc={props.currentTrip?.hotel ? props.currentTrip.hotel : ""}
+              currentAcc={
+                props.currentTrip?.hotel ? props.currentTrip.hotel : ""
+              }
               currentDest={
                 props.currentTrip?.destination
                   ? props.currentTrip.destination
                   : ""
               }
               searchText={searchText}
+              trip={props.currentTrip}
             />
           </div>
         </>

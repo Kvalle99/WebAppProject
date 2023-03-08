@@ -5,7 +5,8 @@ export class Accomodation {
   private id: number;
   private description: string;
   //TODO: add Destination object as city, instead of "City" (city),
-  private city: Destination;
+  private city: string;
+  private country: string;
 
   constructor(
     name: string,
@@ -17,7 +18,8 @@ export class Accomodation {
     this.name = name;
     this.id = id;
     this.description = description;
-    this.city = new Destination(city, country);
+    this.city = city;
+    this.country = country;
   }
 
   getName(): string {
@@ -30,9 +32,9 @@ export class Accomodation {
     return this.description;
   }
   getCity(): string {
-    return this.city.getCity();
+    return this.city;
   }
   getCountry(): string {
-    return this.city.getCountry();
+    return this.country;
   }
 }

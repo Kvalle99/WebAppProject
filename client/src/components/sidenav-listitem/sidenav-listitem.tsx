@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ListGroupItem } from "react-bootstrap";
+import ListGroupItem from "react-bootstrap/ListGroupItem";
 import { Page } from "../plan-sidenav/plan-sidenav";
 import styles from "./sidenav-listitem.module.css";
 
@@ -8,25 +8,25 @@ interface SidenavListitemProps {
   changeView: Function;
   active: Boolean;
   thisPage: Page;
-  enabled: boolean;
+  disabled: boolean;
 }
 
 function SidenavListitem(props: SidenavListitemProps) {
   return (
     <>
-      {props.enabled ? (
+      {props.disabled ? (
         <ListGroupItem
           role="button"
-          onClick={() => click(props.thisPage)}
-          variant={props.active ? "success" : ""}
+          variant="disabled"
+          style={{ backgroundColor: "rgb(230, 230, 230)" }}
         >
           {props.listText}
         </ListGroupItem>
       ) : (
         <ListGroupItem
           role="button"
-          variant="disabled"
-          style={{ backgroundColor: "rgb(230, 230, 230)" }}
+          onClick={() => click(props.thisPage)}
+          variant={props.active ? "success" : ""}
         >
           {props.listText}
         </ListGroupItem>

@@ -19,6 +19,7 @@ test("When accomodation change, the change booking function should be called", a
         newAcc = name;
       }}
       currentAccomodation={""}
+      disabled={false}
     />
   );
 

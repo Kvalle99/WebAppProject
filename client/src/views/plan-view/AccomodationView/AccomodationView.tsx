@@ -17,6 +17,7 @@ interface accomodationViewProps {
   currentAcc: string;
   currentDest: string;
   searchText: string;
+  trip: any;
 }
 
 function AccomodationView(props: accomodationViewProps) {
@@ -42,6 +43,7 @@ function AccomodationView(props: accomodationViewProps) {
             changeBooking={changeAccomodation}
             key={accomodation.name}
             currentAccomodation={props.currentAcc}
+            disabled={props.trip == null}
           />
         ))}
       </Row>

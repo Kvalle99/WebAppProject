@@ -15,6 +15,7 @@ test("When destination change, the change booking function should be called", as
       changeDest={(newD: string) => {
         newDest = newD;
       }}
+      disabled={false}
     />
   );
 

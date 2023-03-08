@@ -7,14 +7,15 @@ import DestinationCard from "../../../components/DestinationCard/DestinationCard
 interface Destination {
   city: string;
   country: string;
-  description : string
-  image : string
+  description: string;
+  image: string;
 }
 
 interface destProps {
   currentDest: string;
   changeDest: Function;
   searchText: string;
+  trip: any;
 }
 
 function Destinations(props: destProps) {
@@ -36,6 +37,7 @@ function Destinations(props: destProps) {
               destinationPicture={destination.image}
               currentDestination={props.currentDest}
               changeDest={props.changeDest}
+              disabled={props.trip == null}
             />
           </div>
         ))}

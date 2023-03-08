@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import SidenavListitem from "../sidenav-listitem/sidenav-listitem";
 import "./plan-sidenav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ListGroup } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
 import OverviewListItem from "../overviewListItem/overviewListItem";
 
 interface PlanSidenavProps {
@@ -31,28 +31,28 @@ function PlanSidenav(props: PlanSidenavProps) {
         changeView={props.changeView}
         active={props.currentPage === Page.DESTINATION}
         thisPage={Page.DESTINATION}
-        enabled={true}
+        disabled={false}
       ></SidenavListitem>
       <SidenavListitem
         listText="Duration"
         changeView={props.changeView}
         active={props.currentPage === Page.CALENDAR}
         thisPage={Page.CALENDAR}
-        enabled={props.loggedIn}
+        disabled={props.trip == null}
       ></SidenavListitem>
       <SidenavListitem
         listText="Accomodation"
         changeView={props.changeView}
         active={props.currentPage === Page.ACCOMODATION}
         thisPage={Page.ACCOMODATION}
-        enabled={true}
+        disabled={false}
       ></SidenavListitem>
       <SidenavListitem
         listText="Activities"
         changeView={props.changeView}
         active={props.currentPage === Page.ACTIVITY}
         thisPage={Page.ACTIVITY}
-        enabled={true}
+        disabled={false}
       ></SidenavListitem>
       <OverviewListItem trip={props.trip}></OverviewListItem>
     </ListGroup>
