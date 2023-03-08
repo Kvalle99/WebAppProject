@@ -150,15 +150,6 @@ export class TripService implements ITripService {
     return false;
   }
 
-  /*   async changeEndDate(myId: string, newDate: Date) {
-    var myTrip: Trip | null = this.findTrip(myId);
-    if (myTrip) {
-      myTrip.endDate = newDate;
-      return true;
-    }
-    return false;
-  } */
-
   async handleActivity(
     activity: string,
     destination: string,
@@ -215,7 +206,6 @@ export class TripService implements ITripService {
     if (myTrip) {
       return myTrip.getActivitiesByName();
     }
-
     return [];
   }
 }

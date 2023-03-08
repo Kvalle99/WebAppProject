@@ -7,20 +7,12 @@ import axios from "axios";
 import Planner from "./views/Planner";
 
 function App() {
-  //var myTrip: any;
-  //const [testHook, changeHook] = useState(0);
-  const [currentView, setView] = useState("Destination");
   const [myTrips, setTrips] = useState<simpleTripObject[]>([]);
   const [myTrip, setTrip] = useState<any | null>(null);
   const [chosenTripId, setTripId] = useState<number>(-1);
   const [page, setPage] = useState<Page>(Page.DESTINATION);
   const [userId, setId] = useState<number | undefined>();
   const [userToken, setToken] = useState<string>("");
-  // should be able to remove chosenTripId if we set a model-class/interface
-  // for the Trip in the frontend or smth
-  // div className="overflow-auto vh-100"
-
-  //const userId = 11; //to be set at log-in wit token later on
 
   useEffect(() => {
     if (userId) {
@@ -75,12 +67,10 @@ function App() {
   );
 
   function changeView(newPage: Page) {
-    //console.log("new view: ", view);
     setPage(newPage);
   }
 
   function changeTrip(trip: number) {
-    //setChoosenTrip(trip);
     getTrip(userId!, trip);
     setTripId(trip);
   }
