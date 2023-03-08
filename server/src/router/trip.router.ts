@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
-import { Trip } from "../model/trip";
+import { simpleTrip, Trip } from "../model/trip";
 import { ITripService } from "../service/itripservice";
 import { TripService } from "../service/trip.service";
 import { UserService } from "../service/user.service";
 
-const tripService : ITripService = new TripService();
+const tripService: ITripService = new TripService();
 const userService = new UserService();
 
 export const TripRouter = express.Router();
@@ -145,14 +145,21 @@ TripRouter.post(
 TripRouter.post(
   "/GetMyTrips",
   async (
-    req: Request<{}, {}, { userToken: string; id: number }>,
-    res: Response<number[]>
+    req: Request<{}, {}, { userToken: string; uId: number }>,
+    res: Response<simpleTrip[]>
   ) => {
     try {
+      console.log("HÄR");
       const token = req.body.userToken;
-      const userId: number = req.body.id;
+      const userId: number = req.body.uId;
       if (userService.checkUser(token) == userId) {
+        console.log("HÄR NU");
         const tripList = await tripService.getMyTrips(userId);
+        console.log(typeof tripList);
+        /* const trip_response = tripList.map(( id: number, name: string ) => {
+          id: id,
+          name,
+        }); */
         res.status(200).send(tripList);
       } else res.status(401).send();
     } catch (e: any) {

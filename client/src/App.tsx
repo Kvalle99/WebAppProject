@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import NavbarComponent from "./components/Navbar/Navbar";
+import NavbarComponent, { simpleTripObject } from "./components/Navbar/Navbar";
 import PlanSidenav, { Page } from "./components/plan-sidenav/plan-sidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
@@ -10,9 +10,9 @@ function App() {
   //var myTrip: any;
   //const [testHook, changeHook] = useState(0);
   const [currentView, setView] = useState("Destination");
-  const [myTrips, setTrips] = useState<string[]>([]);
+  const [myTrips, setTrips] = useState<simpleTripObject[]>([]);
   const [myTrip, setTrip] = useState<any | null>(null);
-  const [chosenTripId, setTripId] = useState<string>("");
+  const [chosenTripId, setTripId] = useState<number>(-1);
   const [page, setPage] = useState<Page>(Page.DESTINATION);
   const [userId, setId] = useState<number | undefined>();
   const [userToken, setToken] = useState<string>("");
@@ -79,7 +79,7 @@ function App() {
     setPage(newPage);
   }
 
-  function changeTrip(trip: string) {
+  function changeTrip(trip: number) {
     //setChoosenTrip(trip);
     getTrip(userId!, trip);
     setTripId(trip);
@@ -102,7 +102,7 @@ function App() {
       });
   }
 
-  function getTrip(myId: number, tripId: string) {
+  function getTrip(myId: number, tripId: number) {
     try {
       const res = axios
         .post("http://localhost:8080/trip/getTrip", {
@@ -125,17 +125,18 @@ function App() {
     const res = axios
       .post("http://localhost:8080/trip/getMyTrips", {
         userToken: userToken,
-        id: userId,
+        uId: userId,
       })
       .then((res) => {
         setTrips(res.data);
+        console.log(res.data);
         if (updateCurrentTrip) {
           console.log("in if");
           if (res.data[0] != undefined) {
             getTrip(userId!, res.data[0]);
           } else {
             setTrip(null);
-            setTripId("");
+            setTripId(-1);
           }
         }
       });

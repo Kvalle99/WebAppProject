@@ -1,5 +1,14 @@
 import { Activity } from "./activity";
 
+/** An interface for a stripped-down version of the trip, where you only need to know an id and a name.
+ * This interface is made solely for get-request from App, where the backend responds with all the
+ *
+ */
+export interface simpleTrip {
+  id: number;
+  name: string;
+}
+
 export class Trip {
   //TODO: replace hotel with Accomodation object, and destianation with Destinaiton-object
   private id: number;
@@ -31,9 +40,7 @@ export class Trip {
     this.userId = user;
   }
 
-  removeActivity(activity: string) {
-
-
+  removeActivity(activity: string): void {
     var index: number = -1;
 
     //ta bort baserat på namn
@@ -48,10 +55,9 @@ export class Trip {
     }
 
     this.activities.splice(index, 1);
-
   }
 
-  addActivity(activity: Activity) {
+  addActivity(activity: Activity): void {
     this.activities.push(activity);
   }
 
@@ -64,7 +70,7 @@ export class Trip {
     return activityNames;
   }
 
-  updateDestination(destination: string) {
+  updateDestination(destination: string): void {
     this.destination = destination;
     this.hotel = undefined;
     this.startDate = undefined;
@@ -72,7 +78,7 @@ export class Trip {
     this.activities = [];
   }
 
-  updateDates(startDate: Date, endDate: Date) {
+  updateDates(startDate: Date, endDate: Date): void {
     this.startDate = startDate;
     this.endDate = endDate;
   }
@@ -97,7 +103,11 @@ export class Trip {
     return (this.destination ??= "");
   }
 
-  setHotel(hotel: string) {
+  setHotel(hotel: string): void {
     this.hotel = hotel;
+  }
+
+  getName(): string {
+    return this.name;
   }
 }
