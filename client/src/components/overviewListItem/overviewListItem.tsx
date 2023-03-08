@@ -1,5 +1,5 @@
 import React from "react";
-import { ListGroupItem } from "react-bootstrap";
+import ListGroupItem from "react-bootstrap/ListGroupItem";
 
 interface OverivewProps {
   trip: any;

@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ListGroupItem } from "react-bootstrap";
+import ListGroupItem from "react-bootstrap/ListGroupItem";
 import { Page } from "../plan-sidenav/plan-sidenav";
 import styles from "./sidenav-listitem.module.css";
 

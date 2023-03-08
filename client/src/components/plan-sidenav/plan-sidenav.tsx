@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import SidenavListitem from "../sidenav-listitem/sidenav-listitem";
 import "./plan-sidenav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { ListGroup } from "react-bootstrap";
+import ListGroup from "react-bootstrap/ListGroup";
 import OverviewListItem from "../overviewListItem/overviewListItem";
 
 interface PlanSidenavProps {

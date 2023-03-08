@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import styles from "./accomodationCard.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Container, Row } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
 interface AccomodationCardProps {
