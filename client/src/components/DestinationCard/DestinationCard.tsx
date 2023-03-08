@@ -74,6 +74,7 @@ function DestinationCard(props: DestinationCardProps) {
             {props.destinationName}, {props.destinationCountry}
           </Modal.Title>
         </Modal.Header>
+        <img src={props.destinationPicture} className="img-fluid" />
         <Modal.Body>
           {props.destinationDescription}
           <br />
