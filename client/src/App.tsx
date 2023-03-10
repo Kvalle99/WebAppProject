@@ -117,10 +117,9 @@ function App() {
       })
       .then((res) => {
         setTrips(res.data);
-        console.log(res.data);
         if (updateCurrentTrip) {
           if (res.data[0] != undefined) {
-            getTrip(userId!, res.data[0]);
+            getTrip(userId!, res.data[0].id);
           } else {
             setTrip(null);
             setTripId(-1);

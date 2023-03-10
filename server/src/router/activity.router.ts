@@ -17,7 +17,6 @@ ActivityRouter.get(
         destination,
         searchText
       );
-      console.log("res acts: " + activities.length);
       res.status(200).send(activities);
     } catch (e: any) {
       res.status(500).send(e.message);
