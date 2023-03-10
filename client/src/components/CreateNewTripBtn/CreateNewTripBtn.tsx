@@ -34,7 +34,11 @@ function CreateNewTripBtn(props: CreateNewTripBtnProps) {
         <Modal.Body>
           <Form onSubmit={(e) => createTrip(e)}>
             <Form.Group className="mb-3">
-              <Form.Label label="Trip Name" className="mb-3">
+              <Form.Label
+                label="Trip Name"
+                className="mb-3"
+                style={{ width: "100%" }}
+              >
                 <Form.Control
                   placeholder="TripName"
                   value={name}
