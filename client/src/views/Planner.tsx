@@ -25,7 +25,7 @@ function Planner(props: PlannerProps) {
           <SearchBar searchUpdate={setSearchText} />
           <div
             className="overflow-auto"
-            style={{ height: "calc(100vh - 150px)" }}
+            style={{ height: "calc(100vh - 137px)" }}
           >
             <Destinations
               changeDest={updateDest}
