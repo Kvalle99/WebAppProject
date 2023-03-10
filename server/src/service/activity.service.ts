@@ -4,8 +4,8 @@ import { searchArrayOnDestinationAndString } from "./searching.service";
 
 export class ActivityService implements IActivityService {
   activities: Activity[] = [
-    new Activity(0, "Gå på museum", "Shit va mysigt!", "Madrid"),
-    new Activity(1, "Tjurfäktning", "Etiskt tveksamt", "Madrid"),
+    new Activity(0, "Visist a museum", "Everyone needs culture!", "Madrid"),
+    new Activity(1, "Bullfighting", "Morally questionable", "Madrid"),
     new Activity(2, "Kayaking", "Watch out for the shark!", "Stockholm"),
     new Activity(3, "Bird Watching", "Meh...", "Stockholm"),
     new Activity(
@@ -20,7 +20,7 @@ export class ActivityService implements IActivityService {
       "Rollercoasters as far as the eye can see!",
       "Gothenburg"
     ),
-    new Activity(6, "Din mamma", "I did this last night", "Gothenburg"),
+    new Activity(6, "Sjöfartsmuseet", "Newly re-opened! Amazing!", "Gothenburg"),
     new Activity(7, "La Louvre", "Mona lisa is overrated", "Paris"),
     new Activity(8, "Eiffel Tower", "Pretty tall", "Paris"),
     new Activity(9, "Eat croissant", "Yum!", "Paris"),
