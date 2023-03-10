@@ -5,7 +5,7 @@ import { ITripService } from "../service/itripservice";
 import { TripService } from "../service/trip.service";
 import { UserService } from "../service/user.service";
 
-const tripService : ITripService = new TripService();
+const tripService: ITripService = new TripService();
 const userService = new UserService();
 
 export const TripRouter = express.Router();
