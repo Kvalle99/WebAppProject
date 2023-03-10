@@ -14,15 +14,19 @@ import {
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 import CreateNewTripBtn from "../CreateNewTripBtn/CreateNewTripBtn";
 import axios, { AxiosError } from "axios";
-import { createLogicalAnd } from "typescript";
 
 interface NavbarProps {
   chooseTrip: Function;
-  trips: string[];
+  trips: simpleTripObject[];
   createNewTrip: Function;
-  chosenTrip: string;
+  chosenTrip: number;
   setUser: Function;
   loggedIn: boolean;
+}
+
+export interface simpleTripObject {
+  id: number;
+  name: string;
 }
 
 function NavbarComponent(props: NavbarProps) {
@@ -54,30 +58,48 @@ function NavbarComponent(props: NavbarProps) {
           className="rounded-circle ml-0"
           alt="LogoMissing"
           height="65px"
+          style={{ marginLeft: "10px" }}
         />
       </Navbar.Brand>
 
       <Dropdown>
-        <Dropdown.Toggle variant="light" id="dropdown-basic">
+        <Dropdown.Toggle
+          variant={props.loggedIn ? "light" : "light disabled"}
+          id="dropdown-basic"
+        >
           Your trips
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          {props.loggedIn ? (
-            <ul>
-              {props.trips.map((trip) => (
-                <Dropdown.Item
-                  key={trip}
-                  onClick={() => chooseTrip(trip)}
-                  active={checkActive(trip)}
-                >
-                  {trip}
-                </Dropdown.Item>
-              ))}
-            </ul>
-          ) : (
-            <h3>Log in to start planning!</h3>
-          )}
+          <div style={{ width: "350px" }}>
+            <div>
+              {props.trips.length === 0 ? (
+                <div>
+                  <Dropdown.Header className="text-decoration-underline" style={{fontSize: "1.2rem", color: "black"}}>
+                    You have no trips
+                  </Dropdown.Header>
+                  <Dropdown.Item>Start by creating a new trip!</Dropdown.Item>
+                </div>
+              ) : (
+                <div>
+                  <Dropdown.Header className="text-decoration-underline" style={{fontSize: "1.2rem", color: "black"}}>
+                    Your started trips:
+                  </Dropdown.Header>
+                  <ul style={{ padding: "0" }}>
+                    {props.trips.map((trip) => (
+                      <Dropdown.Item
+                        key={trip.id}
+                        onClick={() => chooseTrip(trip.id)}
+                        active={checkActive(trip)}
+                      >
+                        {trip.name}
+                      </Dropdown.Item>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
         </Dropdown.Menu>
       </Dropdown>
 
@@ -192,12 +214,12 @@ function NavbarComponent(props: NavbarProps) {
     setFail(false);
   }
 
-  function chooseTrip(trip: string) {
+  function chooseTrip(trip: number) {
     props.chooseTrip(trip);
   }
 
-  function checkActive(trip: string): boolean {
-    return trip === props.chosenTrip;
+  function checkActive(trip: simpleTripObject): boolean {
+    return trip.id === props.chosenTrip;
   }
 
   function createTrip(tripName: string) {

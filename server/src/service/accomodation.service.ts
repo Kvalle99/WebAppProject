@@ -1,5 +1,6 @@
 import { Accomodation } from "../model/accomodation";
 import { IAccomodationService } from "./iaccomodation.service";
+import { searchArrayOnDestinationAndString } from "./searching.service";
 
 //TODO: add interface
 export class AccomodationService implements IAccomodationService {
@@ -64,37 +65,10 @@ export class AccomodationService implements IAccomodationService {
   ];
 
   getAccomodations(destination: string, searchText: string): Accomodation[] {
-    var toReturn: Accomodation[] = [];
-
-    toReturn = this.hotelList.filter((accomodation: Accomodation) => {
-      const cityMatch =
-        accomodation.getCity().toLowerCase() === destination.toLowerCase() ||
-        destination === "";
-      const searchMatch =
-        accomodation
-          .getName()
-          .toLowerCase()
-          .includes(searchText.toLowerCase()) ||
-        accomodation.getId().toString().includes(searchText);
-      return cityMatch && searchMatch;
-    });
-
-    return toReturn;
-  }
-  generateID(): number {
-    const id = Math.floor(Math.random() * 100000);
-    if (this.isExists(id)) {
-      this.generateID();
-    }
-    return id;
-  }
-
-  isExists(id: number): boolean {
-    let res: boolean = false;
-    var result = this.hotelList.find((hotel) => {
-      return hotel.getId() === id;
-    });
-    result === undefined ? (res = false) : (res = true);
-    return res;
+    return searchArrayOnDestinationAndString(
+      this.hotelList,
+      destination,
+      searchText
+    );
   }
 }

@@ -1,15 +1,18 @@
 export class Activity {
   private name: string;
   private description: string;
-  private inDestination: string;
+  private city: string;
+  private id: number;
   constructor(
+    id: number,
     name: string,
     description: string,
-    inDestination: string,
+    inDestination: string
   ) {
+    this.id = id;
     this.name = name;
     this.description = description;
-    this.inDestination = inDestination;
+    this.city = inDestination;
   }
 
   getDescription(): string {
@@ -24,7 +27,11 @@ export class Activity {
     return this.name;
   }
 
-  getDestination(): string {
-    return this.inDestination;
+  getCity(): string {
+    return this.city;
+  }
+
+  getId(): number {
+    return this.id;
   }
 }

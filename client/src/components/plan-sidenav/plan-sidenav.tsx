@@ -54,7 +54,10 @@ function PlanSidenav(props: PlanSidenavProps) {
         thisPage={Page.ACTIVITY}
         disabled={false}
       ></SidenavListitem>
-      <OverviewListItem trip={props.trip}></OverviewListItem>
+      <OverviewListItem
+        trip={props.trip}
+        loggedIn={props.loggedIn}
+      ></OverviewListItem>
     </ListGroup>
   );
 }
