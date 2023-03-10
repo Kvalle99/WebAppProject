@@ -41,7 +41,7 @@ function PlanSidenav(props: PlanSidenavProps) {
         disabled={props.trip == null}
       ></SidenavListitem>
       <SidenavListitem
-        listText="Accomodation"
+        listText="Accommodation"
         changeView={props.changeView}
         active={props.currentPage === Page.ACCOMODATION}
         thisPage={Page.ACCOMODATION}
