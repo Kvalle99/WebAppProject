@@ -80,6 +80,7 @@ function CalendarComponent(props: calProps) {
 
     if (sDate > eDate) {
       alert("End date must be after start date!");
+      return
     }
 
     //to revert the zero indeation of date-picker
