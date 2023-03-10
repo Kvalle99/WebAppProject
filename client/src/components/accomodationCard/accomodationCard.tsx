@@ -7,8 +7,6 @@ import Button from "react-bootstrap/Button";
 interface AccomodationCardProps {
   accomodationName: string;
   accommodationId: number;
-  accomodationStars: number;
-  accomodationPriceFrom: number;
   accomodationDescription: string;
   accomodationCity: string;
   accomodationImgSrc?: string;
@@ -64,6 +62,7 @@ function AccomodationCard(props: AccomodationCardProps) {
   );
 
   function updateHotel() {
+    console.log(props.accomodationCity);
     props.changeBooking(props.accomodationName, props.accomodationCity);
   }
 

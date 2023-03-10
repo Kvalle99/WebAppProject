@@ -18,7 +18,6 @@ TripRouter.post(
   ) => {
     try {
       const token = req.body.userToken;
-
       if (userService.checkUser(token) == req.body.myId) {
         const trip = await tripService.getMyTrip(
           req.body.myId,
@@ -149,13 +148,10 @@ TripRouter.post(
     res: Response<simpleTrip[]>
   ) => {
     try {
-      console.log("HÄR");
       const token = req.body.userToken;
       const userId: number = req.body.uId;
       if (userService.checkUser(token) == userId) {
-        console.log("HÄR NU");
         const tripList = await tripService.getMyTrips(userId);
-        console.log(typeof tripList);
         /* const trip_response = tripList.map(( id: number, name: string ) => {
           id: id,
           name,

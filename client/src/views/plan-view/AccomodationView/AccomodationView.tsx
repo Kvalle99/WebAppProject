@@ -7,10 +7,9 @@ import "./AccomodationView.css";
 export interface Accomodation {
   name: string;
   id: number;
-  rating: number;
-  price: number;
   description: string;
-  city: { city: string; country: string };
+  city: string;
+  country: string;
 }
 interface accomodationViewProps {
   changeAccomodation: Function;
@@ -35,9 +34,7 @@ function AccomodationView(props: accomodationViewProps) {
           <AccomodationCard
             accomodationName={accomodation.name}
             accommodationId={accomodation.id}
-            accomodationStars={accomodation.rating}
-            accomodationPriceFrom={accomodation.price}
-            accomodationCity={accomodation.city.city}
+            accomodationCity={accomodation.city}
             accomodationDescription={accomodation.description}
             accomodationImgSrc={"hotel1.jpg"}
             changeBooking={changeAccomodation}
@@ -52,6 +49,7 @@ function AccomodationView(props: accomodationViewProps) {
 
   function changeAccomodation(name: string, city: string) {
     props.changeAccomodation(name, city);
+    console.log(city);
   }
   async function getAccomodations() {
     const res = await axios
