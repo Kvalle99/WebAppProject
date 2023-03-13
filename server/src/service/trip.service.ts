@@ -5,36 +5,10 @@ import { ITripService } from "./itrip.service";
 import { generateID } from "./generator.service";
 
 export class TripService implements ITripService {
-  tripList: Trip[] = [
-    new Trip(
-      6845198231,
-      "New York-resa",
-      [],
-      11,
-      "New York",
-      new Date(2023, 11, 11),
-      new Date(2023, 11, 19)
-    ),
-    new Trip(
-      6845191,
-      "Bort till värmen",
-      [],
-      11,
-      "Chiang Mai",
-      new Date(2023, 10, 24),
-      new Date(2023, 11, 5)
-    ),
-    new Trip(
-      11111111,
-      "Un Voyage aux baguettes et aux escargots",
-      [],
-      11,
-      "Paris",
-      new Date(2024, 1, 7),
-      new Date(2024, 2, 5)
-    ),
-  ];
+  // No database = service needs a list of trips
+  tripList: Trip[] = [];
 
+  // Creates empty trip for user with userId called tripName
   async createTrip(userId: number, tripName: string): Promise<Trip> {
     let newTrip: Trip = new Trip(
       generateID(this.tripList.map((trip) => trip.getId())),
@@ -50,7 +24,8 @@ export class TripService implements ITripService {
     return newTrip;
   }
 
-  findTrip(myId: number): Trip {
+  // Internal method, returns trip with id myId
+  private findTrip(myId: number): Trip {
     for (let i: number = 0; i < this.tripList.length; i++) {
       if (myId == this.tripList[i].getId()) {
         return this.tripList[i];
@@ -59,7 +34,8 @@ export class TripService implements ITripService {
     throw new Error("No such trip");
   }
 
-  findAllTrips(userId: number): simpleTrip[] {
+  // Interal method, returns all trips for user with userId
+  private findAllTrips(userId: number): simpleTrip[] {
     let toReturn: Array<simpleTrip> = [];
 
     for (let i: number = 0; i < this.tripList.length; i++) {
@@ -74,10 +50,12 @@ export class TripService implements ITripService {
     return toReturn;
   }
 
+  // Returns all trips for user with userId
   async getMyTrips(myId: number): Promise<Array<simpleTrip>> {
     return this.findAllTrips(myId);
   }
 
+  // Returns specific trip with tripId for user with userId
   async getMyTrip(myId: number, tripId: number): Promise<Trip> {
     const trip = this.findTrip(tripId);
     if (trip.getUserId() == myId) {
@@ -87,6 +65,8 @@ export class TripService implements ITripService {
     }
   }
 
+  // Changes destination of trip with tripId for user with userId to destination
+  // Returns true when done
   async changeDestination(
     userId: number,
     tripId: number,
@@ -99,10 +79,14 @@ export class TripService implements ITripService {
     return true;
   }
 
+
+  // Returns name of accommodation for trip with id
   async getAccomodation(id: number): Promise<string> {
     return this.findTrip(id).getHotel();
   }
 
+  // Changes accommodation of trip with tripId for user with userId to accomodation in city
+  // Returns true when done
   async changeAccomodation(
     userId: number,
     tripId: number,
@@ -120,6 +104,7 @@ export class TripService implements ITripService {
     return true;
   }
 
+  // Changes dates of trip with tripId for user with userId to startDate and endDate
   async changeDates(
     userId: number,
     tripId: number,
@@ -134,6 +119,7 @@ export class TripService implements ITripService {
     return false;
   }
 
+  // Adds activity if it is not already in the trip, else removes it
   async handleActivity(
     activity: string,
     destination: string,
@@ -144,21 +130,26 @@ export class TripService implements ITripService {
 
     var activities: Activity[] = await this.getActivities(id);
 
+    // Since the activity is just a string, we need to find the activity object. Not a clean solution, but it works
+
+    // If the activity is already in the trip, find it
     activities.forEach(function (act) {
       if (act.getName() === activity) {
         activitySelected = actServ.findActivity(activity, destination);
       }
     });
 
+    // If the activity was found, remove it, else add it
     if (activitySelected) {
-      this.removeActivities(id, (activitySelected as Activity).getName());
+      this.removeActivity(id, (activitySelected as Activity).getName());
     } else {
       activitySelected = actServ.findActivity(activity, destination);
-      this.addActivities(id, activitySelected);
+      this.addActivity(id, activitySelected);
     }
   }
 
-  async addActivities(myId: number, activity: Activity): Promise<boolean> {
+  // Adds activity to trip with id, returns true if successful
+  private async addActivity(myId: number, activity: Activity): Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
       myTrip.addActivity(activity);
@@ -167,7 +158,8 @@ export class TripService implements ITripService {
     return false;
   }
 
-  async removeActivities(myId: number, activity: string): Promise<boolean> {
+  // Removes activity from trip with id, returns true if successful
+  private async removeActivity(myId: number, activity: string): Promise<boolean> {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
       myTrip.removeActivity(activity);
@@ -176,6 +168,7 @@ export class TripService implements ITripService {
     return false;
   }
 
+  // Returns all activities for trip with id myId
   async getActivities(myId: number): Promise<Activity[]> {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {
@@ -185,6 +178,7 @@ export class TripService implements ITripService {
     return [];
   }
 
+  // Returns names of all activities for trip with id myId
   async getActivitiesByName(myId: number): Promise<string[]> {
     var myTrip: Trip | null = this.findTrip(myId);
     if (myTrip) {

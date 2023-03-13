@@ -2,11 +2,12 @@ import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { simpleTrip, Trip } from "../model/trip";
 import { ITripService } from "../service/itrip.service";
+import { IUserService } from "../service/iuser.service";
 import { TripService } from "../service/trip.service";
 import { UserService } from "../service/user.service";
 
 const tripService: ITripService = new TripService();
-const userService = new UserService();
+const userService : IUserService = new UserService();
 
 export const TripRouter = express.Router();
 

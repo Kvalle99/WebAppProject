@@ -49,6 +49,7 @@ export class UserService implements IUserService{
     throw new Error("Wrong credentials");
   }
 
+  // Checks if the user is logged in and verified, returns the user id
   checkUser(userKey: string): number {
     if (jwt.verify(userKey, this.keyString)) {
       return this.getUser(userKey);

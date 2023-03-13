@@ -4,6 +4,7 @@ interface onDestAndString {
   getId(): number;
 }
 
+// Used to search for either activities or accomodations in a given destination
 export function searchArrayOnDestinationAndString<T extends onDestAndString>(
   inputArray: Array<T>,
   destination: string,

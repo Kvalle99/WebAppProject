@@ -2,7 +2,9 @@ import { Activity } from "../model/activity";
 import { IActivityService } from "./iactivity.service";
 import { searchArrayOnDestinationAndString } from "./searching.service";
 
+// Service for frontend calls concering activities
 export class ActivityService implements IActivityService {
+  // No database = hardcoded activities
   activities: Activity[] = [
     new Activity(0, "Visist a museum", "Everyone needs culture!", "Madrid"),
     new Activity(1, "Bullfighting", "Morally questionable", "Madrid"),
@@ -39,8 +41,7 @@ export class ActivityService implements IActivityService {
     new Activity(11117, "Jungle trek", "Build character", "Chiang Mai"),
   ];
 
-  constructor() {}
-
+  // Uses search service to find all activities in destination matching search string
   getAllActivities(dest: string, searchText: string): Activity[] {
     return searchArrayOnDestinationAndString(
       this.activities,
@@ -49,7 +50,10 @@ export class ActivityService implements IActivityService {
     );
   }
 
-  //to find aa specified activity
+  /*
+   Finds a specific activity in a destination based on activity name
+   Used by backend since frontend only sends activity name
+   */
   findActivity(activityName: string, inDestination: string): Activity {
     for (let i: number = 0; i < this.activities.length; i++) {
       if (

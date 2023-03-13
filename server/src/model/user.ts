@@ -1,3 +1,4 @@
+// Simple user class
 export class User {
   username: string;
   password: string;
