@@ -9,9 +9,9 @@ import Popper from "popper.js";
 
 import CalendarComponent from "./components/Calendar/Calendar";
 import Navbar from "./components/Navbar/Navbar";
-import Destinations from "./views/plan-view/DestinationsView/destinations";
+import Destinations from "./views/plan-view/DestinationView/DestinationView";
 import AccomodationView from "./views/plan-view/AccomodationView/AccomodationView";
-import PlanSidenav from "./components/plan-sidenav/plan-sidenav";
+import PlanSidenav from "./components/plan-sidenav/PlanSidenav";
 import axios from "axios";
 
 const root = ReactDOM.createRoot(

@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import React from "react";
 import ReactDOM from "react-dom";
 import { act } from "react-dom/test-utils";
-import PlanSidenav, { Page } from "./plan-sidenav";
+import PlanSidenav, { Page } from "./PlanSidenav";
 
 test("Render and press sidenav button", async () => {
   var currentPage = Page.DESTINATION;

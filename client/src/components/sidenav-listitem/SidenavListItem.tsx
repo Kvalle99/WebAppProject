@@ -1,9 +1,9 @@
 import React, { FC } from "react";
 import ListGroupItem from "react-bootstrap/ListGroupItem";
-import { Page } from "../plan-sidenav/plan-sidenav";
+import { Page } from "../plan-sidenav/PlanSidenav";
 import styles from "./sidenav-listitem.module.css";
 
-interface SidenavListitemProps {
+interface SidenavListItemProps {
   listText: string;
   changeView: Function;
   active: Boolean;
@@ -11,7 +11,7 @@ interface SidenavListitemProps {
   disabled: boolean;
 }
 
-function SidenavListitem(props: SidenavListitemProps) {
+function SidenavListItem(props: SidenavListItemProps) {
   return (
     <>
       {props.disabled ? (
@@ -39,4 +39,4 @@ function SidenavListitem(props: SidenavListitemProps) {
   }
 }
 
-export default SidenavListitem;
+export default SidenavListItem;

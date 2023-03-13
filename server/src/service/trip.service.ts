@@ -1,7 +1,7 @@
 import { Activity } from "../model/activity";
 import { simpleTrip, Trip } from "../model/trip";
 import { ActivityService } from "./activity.service";
-import { ITripService } from "./itripservice";
+import { ITripService } from "./itrip.service";
 import { generateID } from "./generator.service";
 
 export class TripService implements ITripService {

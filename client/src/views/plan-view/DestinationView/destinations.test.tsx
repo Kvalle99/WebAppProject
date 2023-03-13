@@ -3,7 +3,7 @@ import axios, { AxiosStatic } from "axios";
 import React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
-import Destinations from "./destinations";
+import Destinations from "./DestinationView";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<AxiosStatic>;

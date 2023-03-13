@@ -1,5 +1,5 @@
 import { Activity } from "../model/activity";
-import { IActivityService } from "./iactivityservice";
+import { IActivityService } from "./iactivity.service";
 import { searchArrayOnDestinationAndString } from "./searching.service";
 
 export class ActivityService implements IActivityService {

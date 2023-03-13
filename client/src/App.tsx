@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import NavbarComponent, { simpleTripObject } from "./components/Navbar/Navbar";
-import PlanSidenav, { Page } from "./components/plan-sidenav/plan-sidenav";
+import PlanSidenav, { Page } from "./components/plan-sidenav/PlanSidenav";
 import axios from "axios";
 import Planner from "./views/Planner";
 

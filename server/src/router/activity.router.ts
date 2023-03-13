@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { ActivityService } from "../service/activity.service";
-import { IActivityService } from "../service/iactivityservice";
+import { IActivityService } from "../service/iactivity.service";
 
 const activityService: IActivityService = new ActivityService();
 

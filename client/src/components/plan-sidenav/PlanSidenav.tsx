@@ -1,9 +1,9 @@
 import React, { FC, useState } from "react";
-import SidenavListitem from "../sidenav-listitem/sidenav-listitem";
+import SidenavListItem from "../sidenav-listitem/SidenavListItem";
 import "./plan-sidenav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListGroup from "react-bootstrap/ListGroup";
-import OverviewListItem from "../overviewListItem/overviewListItem";
+import OverviewListItem from "../OverviewListItem/OverviewListItem";
 
 interface PlanSidenavProps {
   changeView: Function;
@@ -26,34 +26,34 @@ export enum Page {
 function PlanSidenav(props: PlanSidenavProps) {
   return (
     <ListGroup className="list-group list-group-flush">
-      <SidenavListitem
+      <SidenavListItem
         listText="Destination"
         changeView={props.changeView}
         active={props.currentPage === Page.DESTINATION}
         thisPage={Page.DESTINATION}
         disabled={false}
-      ></SidenavListitem>
-      <SidenavListitem
+      ></SidenavListItem>
+      <SidenavListItem
         listText="Duration"
         changeView={props.changeView}
         active={props.currentPage === Page.CALENDAR}
         thisPage={Page.CALENDAR}
         disabled={props.trip == null}
-      ></SidenavListitem>
-      <SidenavListitem
+      ></SidenavListItem>
+      <SidenavListItem
         listText="Accommodation"
         changeView={props.changeView}
         active={props.currentPage === Page.ACCOMODATION}
         thisPage={Page.ACCOMODATION}
         disabled={false}
-      ></SidenavListitem>
-      <SidenavListitem
+      ></SidenavListItem>
+      <SidenavListItem
         listText="Activities"
         changeView={props.changeView}
         active={props.currentPage === Page.ACTIVITY}
         thisPage={Page.ACTIVITY}
         disabled={false}
-      ></SidenavListitem>
+      ></SidenavListItem>
       <OverviewListItem
         trip={props.trip}
         loggedIn={props.loggedIn}

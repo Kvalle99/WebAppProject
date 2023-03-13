@@ -2,11 +2,11 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { reduceEachTrailingCommentRange } from "typescript";
 import CalendarComponent from "../components/Calendar/Calendar";
-import { Page } from "../components/plan-sidenav/plan-sidenav";
+import { Page } from "../components/plan-sidenav/PlanSidenav";
 import SearchBar from "../components/SearchFunction/SearchBar";
 import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
-import ActivityView from "./plan-view/ActivityView/activityView";
-import Destinations from "./plan-view/DestinationsView/destinations";
+import ActivityView from "./plan-view/ActivityView/ActivityView";
+import DestinationView from "./plan-view/DestinationView/DestinationView";
 
 interface PlannerProps {
   myId: number | undefined;
@@ -27,7 +27,7 @@ function Planner(props: PlannerProps) {
             className="overflow-auto"
             style={{ height: "calc(100vh - 137px)" }}
           >
-            <Destinations
+            <DestinationView
               changeDest={updateDest}
               currentDest={
                 props.currentTrip?.destination

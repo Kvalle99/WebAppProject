@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { Activity } from "../model/activity";
 import { simpleTrip, Trip } from "../model/trip";
-import { ITripService } from "../service/itripservice";
+import { ITripService } from "../service/itrip.service";
 import { TripService } from "../service/trip.service";
 import { UserService } from "../service/user.service";
 

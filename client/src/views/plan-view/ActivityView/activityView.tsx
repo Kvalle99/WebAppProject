@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { act } from "react-dom/test-utils";
-import ActivityCard from "../../../components/ActivityCard/activityCard";
+import ActivityCard from "../../../components/ActivityCard/ActivityCard";
 
 interface Activity {
   name: string;

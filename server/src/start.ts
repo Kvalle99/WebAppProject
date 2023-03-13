@@ -4,7 +4,7 @@ import { TripRouter } from "./router/trip.router";
 import cors from "cors";
 import { AccomodationRouter } from "./router/accomodation.router";
 import { DestinationRouter } from "./router/destination.router";
-import { UserRouter } from "./router/userRouter";
+import { UserRouter } from "./router/user.router";
 
 export const app = express();
 
