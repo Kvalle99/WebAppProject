@@ -1,8 +1,8 @@
 import { Activity } from "./activity";
 
 /** An interface for a stripped-down version of the trip, where you only need to know an id and a name.
- * This interface is made solely for get-request from App, where the backend responds with all the
- *
+ * This interface is made solely for get-request from App, where the backend responds with all the trips.
+ * However, as the frontend doesn't need the entire trip, we only return its name and id.
  */
 export interface simpleTrip {
   id: number;
