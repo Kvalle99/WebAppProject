@@ -10,18 +10,16 @@ const userService = new UserService();
 
 export const TripRouter = express.Router();
 
-TripRouter.post(
+TripRouter.get(
+  //changed
   "/getTrip",
-  async (
-    req: Request<{}, {}, { userToken: string; myId: number; tripId: number }>,
-    res: Response<Trip>
-  ) => {
+  async (req: Request<{}, {}, {}>, res: Response<Trip>) => {
     try {
-      const token = req.body.userToken;
-      if (userService.checkUser(token) == req.body.myId) {
+      const token = req.query.userToken;
+      if (userService.checkUser(String(token)!) == Number(req.query.myId)) {
         const trip = await tripService.getMyTrip(
-          req.body.myId,
-          req.body.tripId
+          Number(req.query.myId),
+          Number(req.query.tripId)
         );
         res.status(200).send(trip);
       } else res.status(406).send();
@@ -50,12 +48,13 @@ TripRouter.post(
   }
 );
 
-TripRouter.post(
+TripRouter.get(
+  //changed
   "/getActivities",
-  async (req: Request<{}, {}, { id: number }>, res: Response<string[]>) => {
+  async (req: Request<{}, {}, {}>, res: Response<string[]>) => {
     try {
-      const userId: number = req.body.id;
-      const actList = await tripService.getActivitiesByName(userId);
+      const userId = req.query.id;
+      const actList = await tripService.getActivitiesByName(Number(userId));
       res.status(200).send(actList);
     } catch (e: any) {
       res.status(500).send(e.message);
@@ -141,16 +140,14 @@ TripRouter.post(
   }
 );
 
-TripRouter.post(
-  "/GetMyTrips",
-  async (
-    req: Request<{}, {}, { userToken: string; uId: number }>,
-    res: Response<simpleTrip[]>
-  ) => {
+TripRouter.get(
+  //changed
+  "/getMyTrips",
+  async (req: Request<{}, {}, {}>, res: Response<simpleTrip[]>) => {
     try {
-      const token = req.body.userToken;
-      const userId: number = req.body.uId;
-      if (userService.checkUser(token) == userId) {
+      const token = req.query.userToken;
+      const userId: number = Number(req.query.uId);
+      if (userService.checkUser(String(token)) == userId) {
         const tripList = await tripService.getMyTrips(userId);
         /* const trip_response = tripList.map(( id: number, name: string ) => {
           id: id,

@@ -93,12 +93,11 @@ function App() {
   }
 
   function getTrip(myId: number, tripId: number) {
+    //changed
     try {
       const res = axios
-        .post("http://localhost:8080/trip/getTrip", {
-          userToken: userToken,
-          myId: myId,
-          tripId: tripId,
+        .get("http://localhost:8080/trip/getTrip", {
+          params: { userToken: userToken, myId: myId, tripId: tripId },
         })
         .then((res) => {
           setTrip(res.data);
@@ -110,10 +109,10 @@ function App() {
   }
 
   function getMyTrips(updateCurrentTrip: boolean) {
+    //changed
     const res = axios
-      .post("http://localhost:8080/trip/getMyTrips", {
-        userToken: userToken,
-        uId: userId,
+      .get("http://localhost:8080/trip/getMyTrips", {
+        params: { userToken: userToken, uId: userId },
       })
       .then((res) => {
         setTrips(res.data);

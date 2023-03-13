@@ -14,7 +14,6 @@ test("End-to-end test", async () => {
     accomodationName: "Backpackers paradise",
     accomodationCity: "Chiang Mai",
   });
-  console.log(res2.text);
   expect(res2.text).toBe("");
   expect(res2.statusCode).toBe(200);
 });
