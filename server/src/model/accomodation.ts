@@ -1,10 +1,10 @@
 import { Destination } from "./destinations";
 
+// Represents a hotel in a certain destination
 export class Accomodation {
   private name: string;
   private id: number;
   private description: string;
-  //TODO: add Destination object as city, instead of "City" (city),
   private city: string;
   private country: string;
 

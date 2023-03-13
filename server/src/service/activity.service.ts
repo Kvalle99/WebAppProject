@@ -65,14 +65,4 @@ export class ActivityService implements IActivityService {
   async getDescription(name: string, destination: string): Promise<string> {
     return this.findActivity(name, destination).getDescription();
   }
-
-  async changeDescription(
-    name: string,
-    description: string,
-    destination: string
-  ): Promise<boolean> {
-    var activity = this.findActivity(name, destination);
-    activity.changeDescription(description);
-    return true;
-  }
 }
