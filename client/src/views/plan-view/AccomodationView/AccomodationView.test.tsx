@@ -16,7 +16,8 @@ test("Should send GET to localhost", async () => {
         rating: 3,
         price: 500,
         description: "test desc",
-        city: { city: "Gothenburg", country: "Sweden" },
+        city: "Gothenburg",
+        country: "Sweden",
       },
     ],
   });
@@ -47,7 +48,8 @@ test("Accomodation change, the change call to backend should be executed", async
         rating: 3,
         price: 500,
         description: "test desc",
-        city: { city: "gothenburg", country: "Sweden" },
+        city: "gothenburg",
+        country: "Sweden",
       },
     ],
   });

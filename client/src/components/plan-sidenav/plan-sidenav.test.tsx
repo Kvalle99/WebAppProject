@@ -15,7 +15,7 @@ test("Render and press sidenav button", async () => {
       trip={null}
     />
   );
-  const btn = await screen.findByText("Accomodation");
+  const btn = await screen.findByText("Accommodation");
   expect(btn).toBeInTheDocument();
   act(() => {
     fireEvent.click(btn);
