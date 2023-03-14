@@ -21,7 +21,7 @@ export function filterOnDestNameId<T extends hasDestAndString>(
   return resArray;
 }
 
-export function matchDestination<T extends hasDestAndString>(
+function matchDestination<T extends hasDestAndString>(
   element: T,
   destination: string
 ) {
