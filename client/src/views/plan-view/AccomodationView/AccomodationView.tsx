@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Container, Row } from "react-bootstrap";
-import AccomodationCard from "../../../components/accomodationCard/AccomodationCard";
+import AccomodationCard from "../../../components/accomodationCard/accomodationCard";
 import "./AccomodationView.css";
 
 export interface Accomodation {

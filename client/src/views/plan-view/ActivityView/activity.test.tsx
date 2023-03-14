@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import axios, { AxiosStatic } from "axios";
 import { act } from "react-dom/test-utils";
-import ActivityView from "./ActivityView";
+import ActivityView from "./activityView";
 
 jest.mock("axios");
 const mockedAxios = axios as jest.Mocked<AxiosStatic>;
