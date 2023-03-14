@@ -1,6 +1,6 @@
 import { Activity } from "../model/activity";
 import { IActivityService } from "./iactivity.service";
-import { searchArrayOnDestinationAndString } from "./searching.service";
+import { filterOnDestNameId } from "./searching.service";
 
 // Service for frontend calls concering activities
 export class ActivityService implements IActivityService {
@@ -22,7 +22,12 @@ export class ActivityService implements IActivityService {
       "Rollercoasters as far as the eye can see!",
       "Gothenburg"
     ),
-    new Activity(6, "Sjöfartsmuseet", "Newly re-opened! Amazing!", "Gothenburg"),
+    new Activity(
+      6,
+      "Sjöfartsmuseet",
+      "Newly re-opened! Amazing!",
+      "Gothenburg"
+    ),
     new Activity(7, "La Louvre", "Mona lisa is overrated", "Paris"),
     new Activity(8, "Eiffel Tower", "Pretty tall", "Paris"),
     new Activity(9, "Eat croissant", "Yum!", "Paris"),
@@ -43,11 +48,7 @@ export class ActivityService implements IActivityService {
 
   // Uses search service to find all activities in destination matching search string
   getAllActivities(dest: string, searchText: string): Activity[] {
-    return searchArrayOnDestinationAndString(
-      this.activities,
-      (dest ||= ""),
-      searchText
-    );
+    return filterOnDestNameId(this.activities, (dest ||= ""), searchText);
   }
 
   /*

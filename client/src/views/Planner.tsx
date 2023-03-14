@@ -5,7 +5,7 @@ import CalendarComponent from "../components/Calendar/Calendar";
 import { Page } from "../components/plan-sidenav/PlanSidenav";
 import SearchBar from "../components/SearchFunction/SearchBar";
 import AccomodationView from "./plan-view/AccomodationView/AccomodationView";
-import ActivityView from "./plan-view/ActivityView/ActivityView";
+import ActivityView from "./plan-view/ActivityView/activityView";
 import DestinationView from "./plan-view/DestinationView/DestinationView";
 
 interface PlannerProps {

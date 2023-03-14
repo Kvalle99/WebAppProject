@@ -3,7 +3,7 @@ import SidenavListItem from "../sidenav-listitem/SidenavListItem";
 import "./plan-sidenav.module.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ListGroup from "react-bootstrap/ListGroup";
-import OverviewListItem from "../OverviewListItem/OverviewListItem";
+import OverviewListItem from "../overviewListItem/overviewListItem";
 
 interface PlanSidenavProps {
   changeView: Function;

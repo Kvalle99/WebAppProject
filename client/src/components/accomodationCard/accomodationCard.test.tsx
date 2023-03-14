@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { createRoot } from "react-dom/client";
 import { act } from "react-dom/test-utils";
-import AccomodationCard from "./AccomodationCard";
+import AccomodationCard from "./accomodationCard";
 
 test("When accomodation change, the change booking function should be called", async () => {
   let newAcc = "";

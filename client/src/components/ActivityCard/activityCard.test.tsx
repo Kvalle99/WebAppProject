@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import ActivityCard from "./ActivityCard";
+import ActivityCard from "./activityCard";
 
 test("When activity change, the change booking function should be called", async () => {
   let newActivity = "";
