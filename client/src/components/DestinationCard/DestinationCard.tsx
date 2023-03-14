@@ -131,20 +131,3 @@ function DestinationCard(props: DestinationCardProps) {
 }
 
 export default DestinationCard;
-
-/*
-import React from 'react'
-
-export default function DestinationCard() {
-  return (
-    <div className="card" >
-        <img src="../images/landingBg.jpg" className="card-img-top"/>
-        <div className="card-body">
-            <h1 className="card-title">City Name</h1>
-            <p className="card-text">This is a really great city that you should visit</p>
-            <a href="#" className="btn btn-primary">Go here</a>
-        </div>
-    </div>
-  )
-}
-*/

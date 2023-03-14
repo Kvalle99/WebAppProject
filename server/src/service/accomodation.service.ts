@@ -1,9 +1,10 @@
 import { Accomodation } from "../model/accomodation";
 import { IAccomodationService } from "./iaccomodation.service";
-import { searchArrayOnDestinationAndString } from "./searching.service";
+import { filterOnDestNameId } from "./searching.service";
 
-//TODO: add interface
+// Handles front-end calls concerning accomodation
 export class AccomodationService implements IAccomodationService {
+  // Since we have no database, the service needs a list of accomodations in the code
   hotelList = [
     new Accomodation(
       "Hotel 1",
@@ -64,11 +65,8 @@ export class AccomodationService implements IAccomodationService {
     ),
   ];
 
+  // Uses search service to return all accomodations in destination matching search string
   getAccomodations(destination: string, searchText: string): Accomodation[] {
-    return searchArrayOnDestinationAndString(
-      this.hotelList,
-      destination,
-      searchText
-    );
+    return filterOnDestNameId(this.hotelList, destination, searchText);
   }
 }

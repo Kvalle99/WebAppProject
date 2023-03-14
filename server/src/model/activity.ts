@@ -1,3 +1,5 @@
+
+// Represents an activity in a certain destination
 export class Activity {
   private name: string;
   private description: string;
@@ -17,10 +19,6 @@ export class Activity {
 
   getDescription(): string {
     return this.description;
-  }
-
-  changeDescription(description: string): void {
-    this.description = description;
   }
 
   getName(): string {

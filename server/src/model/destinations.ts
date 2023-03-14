@@ -1,3 +1,4 @@
+// Represents a destination
 export class Destination {
   private city: string;
   private country: string;

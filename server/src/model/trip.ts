@@ -9,8 +9,8 @@ export interface simpleTrip {
   name: string;
 }
 
+// Represents a trip, which is a collection of information about a trip.
 export class Trip {
-  //TODO: replace hotel with Accomodation object, and destianation with Destinaiton-object
   private id: number;
   private name: string;
   private destination?: string;
@@ -40,10 +40,11 @@ export class Trip {
     this.userId = user;
   }
 
+  // Removes an activity from the trip based on the name of the activity.
   removeActivity(activity: string): void {
     var index: number = -1;
 
-    //ta bort baserat på namn
+    // Since the front-end can only send the name of the activity, we have to find the index of the activity in the array
     for (let i = 0; i < this.activities.length; i++) {
       if (this.activities[i].getName() == activity) {
         index = i;
@@ -61,6 +62,7 @@ export class Trip {
     this.activities.push(activity);
   }
 
+  // Returns an array of all the names of the activities in the trip, convient for the front-end
   getActivitiesByName(): string[] {
     var activityNames: string[] = [];
 
@@ -70,6 +72,7 @@ export class Trip {
     return activityNames;
   }
 
+  // Changes the destination of the trip and also resets other info, since it is dependant on destination
   updateDestination(destination: string): void {
     this.destination = destination;
     this.hotel = undefined;
