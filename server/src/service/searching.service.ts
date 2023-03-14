@@ -14,13 +14,17 @@ export function filterOnDestNameId<T extends hasDestAndString>(
 
   resArray = inputArray.filter((element: T) => {
     const cityMatch = matchDestination(element, destination);
-    const searchMatch = matchIdAndName(element, searchText);
+    const searchMatch = matchSearch(element, searchText);
     return cityMatch && searchMatch;
   });
 
   return resArray;
 }
 
+/**
+ * This function takes in a string right now, as the variables in activity and accommodation are strings.
+ * However, those classes should have the destination variable of type Destination in the future.
+ * That means that we could use the same matchDestination in filterOnDestNameId and filterOnSearchCityCountry */
 function matchDestination<T extends hasDestAndString>(
   element: T,
   destination: string
@@ -31,18 +35,18 @@ function matchDestination<T extends hasDestAndString>(
   );
 }
 
-function matchIdAndName<T extends hasDestAndString>(
+function matchSearch<T extends hasDestAndString>(
   element: T,
   searchText: string
 ) {
   return (
     element.getName().toLowerCase().includes(searchText.toLowerCase()) ||
-    element.getId().toString().includes(searchText)
+    element.getId().toString().includes(searchText) ||
+    element.getCity().toLowerCase().includes(searchText.toLowerCase())
   );
 }
 
 /* For filtering destinations depending on the search string, both on country and city */
-
 interface hasCityAndCountry {
   getCity(): string;
   getCountry(): string;
